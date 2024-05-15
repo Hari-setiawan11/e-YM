@@ -12,11 +12,13 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('registration') }}" class="needs-validation" novalidate="">
+                                <form method="POST" action="{{ route('registration') }}" class="needs-validation"
+                                    novalidate="">
                                     @csrf
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input id="email" type="email" class="form-control" name="email" tabindex="3" required>
+                                        <input id="email" type="email" class="form-control" name="email"
+                                            tabindex="3" required>
                                         <div class="invalid-feedback">
                                             Please fill in a valid email address.
                                         </div>
@@ -25,7 +27,8 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="name">Nama</label>
-                                                <input id="name" type="text" class="form-control" name="name" tabindex="1" required autofocus>
+                                                <input id="name" type="text" class="form-control" name="name"
+                                                    tabindex="1" required autofocus>
                                                 <div class="invalid-feedback">
                                                     Please fill in your name.
                                                 </div>
@@ -34,9 +37,32 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="username">Username</label>
-                                                <input id="username" type="text" class="form-control" name="username" tabindex="2" required>
+                                                <input id="username" type="text" class="form-control" name="username"
+                                                    tabindex="2" required>
                                                 <div class="invalid-feedback">
                                                     Please fill in your username.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="alamat">Alamat</label>
+                                                <input id="alamat" type="text" class="form-control" name="alamat"
+                                                    tabindex="1" required autofocus>
+                                                <div class="invalid-feedback">
+                                                    Please fill in your Alamat.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="telephone">Telephone</label>
+                                                <input id="telephone" type="text" class="form-control" name="telephone"
+                                                    tabindex="2" required>
+                                                <div class="invalid-feedback">
+                                                    Please fill in your Telephone.
                                                 </div>
                                             </div>
                                         </div>
@@ -46,7 +72,8 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input id="password" type="password" class="form-control" name="password" tabindex="4" required>
+                                                <input id="password" type="password" class="form-control" name="password"
+                                                    tabindex="4" required>
                                                 <div class="invalid-feedback">
                                                     Please fill in a password.
                                                 </div>
@@ -55,7 +82,8 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="password_confirmation">Konfirmasi Password</label>
-                                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" tabindex="5" required>
+                                                <input id="password_confirmation" type="password" class="form-control"
+                                                    name="password_confirmation" tabindex="5" required>
                                                 <div class="invalid-feedback">
                                                     Please fill in the confirmation password.
                                                 </div>

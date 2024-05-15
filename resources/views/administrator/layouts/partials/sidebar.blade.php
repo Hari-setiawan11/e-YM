@@ -1,52 +1,112 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            {{-- <a href="index.html">e-YM</a> --}}
+            <img src="{{ asset('assets/img/e-ym.png') }}" width="120" class="img-fluid mb-2" alt="">
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">YM</a>
         </div>
         <ul class="sidebar-menu">
             @can('read-dashboard')
-            <li class="menu-header">Hariono</li>
-            <li class="{{ request()->is('apps/dashboard') ? 'active' : '' }}">
-                <a class="nav-link" href="blank.html">
-                    <i class="fas fa-home"></i><span>Hariono</span>
-                </a>
-            </li>
-            @endcan
-            @can('read-users')
-            <li>
-                <a class="nav-link" href="blank.html">
-                    <i class="far fa-square"></i> <span>Hariono</span>
-                </a>
-            </li>
+                <li class="menu-header">Dashboard</li>
+                <li class="{{ \Route::is('apps.dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('apps.dashboard') }}" class="nav-link"><i
+                            class="fas fa-fire"></i><span>Dashboard</span></a>
+                </li>
             @endcan
 
-            @canany(['read-roles', 'read-distribusi', 'read-program',])
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-th"></i><span>Hariono</span>
-                </a>
-                <ul class="dropdown-menu">
-                    @can('read-program')
-                        <li>
-                            <a class="nav-link" href="bootstrap-alert.html">Hariono</a>
+            <li class="menu-header">Kegiatan</li>
+
+            @can('read-form-donasi')
+                <li class="{{ \Route::is('form.view.donasi') ? 'active' : '' }}">
+                    <a href="{{ route('form.view.donasi') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                        <span>Donasi</span></a>
+                </li>
+            @endcan
+
+            @php
+                $activeRoutes = [
+                    'index.view.distribusi',
+                    'index.create.distribusi',
+                    'index.edit.distribusi',
+                    'index.view.distribusibarang',
+                    'index.create.distribusibarang',
+                ];
+                $activeRoutesDropdown = [
+                    'index.view.penyaluran',
+                    'index.view.kprogram',
+                    'index.create.penyaluran',
+                    'index.edit.penyaluran',
+                    'index.create.kprogram',
+                    'index.edit.kprogram',
+                ];
+            @endphp
+            @can('read-distribusi')
+                <li class="{{ in_array(\Route::currentRouteName(), $activeRoutes) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('index.view.distribusi') }}">
+                        <i class="fas fa-box-open"></i>
+                        <span>Distribusi</span>
+                    </a>
+                </li>
+            @endcan
+            @can('read-program')
+                <li
+                    class="{{ \Route::is('index.view.program') || \Route::is('index.create.program') || \Route::is('index.edit.program') ? 'active' : '' }}">
+                    <a href="{{ route('index.view.program') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                        <span>Program</span></a>
+                </li>
+            @endcan
+            @can('read-jenis-arsip')
+                <li
+                    class="{{ \Route::is('index.view') || \Route::is('index.create') || \Route::is('index.edit') ? 'active' : '' }}">
+                    <a href="{{ route('index.view') }}" class="nav-link"><i class="fas fa-folder-open"></i>
+                        <span>Jenis Arsip</span></a>
+                </li>
+            @endcan
+
+            @can('read-arsip')
+                <li
+                    class="{{ \Route::is('index.view.arsip') || \Route::is('index.create.arsip') || \Route::is('index.edit.arsip') ? 'active' : '' }}">
+                    <a href="{{ route('index.view.arsip') }}" class="nav-link"><i class="fas fa-folder"></i></i>
+                        <span>Arsip</span></a>
+                </li>
+            @endcan
+
+            @can('read-data-donasi')
+                <li
+                    class="{{ \Route::is('index.view.datadonasi') || \Route::is('index.create.datadonasi') || \Route::is('index.edit.datadonasi') ? 'active' : '' }}">
+                    <a href="{{ route('index.view.datadonasi') }}" class="nav-link"><i class="fas fa-donate"></i>
+                        <span>Data Donasi</span></a>
+                </li>
+            @endcan
+
+            @can('read-data-barang')
+                <li
+                    class="{{ \Route::is('index.view.databarang') || \Route::is('index.create.databarang') || \Route::is('index.edit.databarang') ? 'active' : '' }}">
+                    <a href="{{ route('index.view.databarang') }}" class="nav-link">
+                        <i class="fas fa-shopping-basket"></i>
+                        <span>Data Barang</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('read-kelola-konten')
+                <li class="dropdown{{ \Route::is(...$activeRoutesDropdown) ? ' active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                        <span>Kelola Konten</span></a>
+                    <ul class="dropdown-menu">
+                        <li
+                            class="{{ \Route::is('index.view.penyaluran') || \Route::is('index.create.penyaluran') || \Route::is('index.edit.penyaluran') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('index.view.penyaluran') }}">Konten Penyaluran</a>
                         </li>
-                    @endcan
-                    @can('read-distribusi')
-                        <li>
-                            <a class="nav-link" href="bootstrap-badge.html">Hariono</a>
+                        <li
+                            class="{{ \Route::is('index.view.kprogram') || \Route::is('index.create.kprogram') || \Route::is('index.edit.kprogram') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('index.view.kprogram') }}">Konten Program</a>
                         </li>
-                    @endcan
-                    @can('read-program')
-                        <li>
-                            <a class="nav-link" href="bootstrap-typography.html">Hariono</a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-            @endcanany
+                    </ul>
+                </li>
+            @endcan
         </ul>
     </aside>
 </div>

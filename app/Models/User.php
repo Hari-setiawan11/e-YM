@@ -20,7 +20,17 @@ class User extends Authenticatable
      */
 
      protected $guarded = [];
-     
+
+    //  protected $fillable = [
+    //     'id',
+    //     'name',
+    //     'email',
+    //     'username',
+    //     'alamat',
+    //     'telephone',
+    //     'password',
+    // ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -39,4 +49,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function dataDonasi()
+    {
+        return $this->hasMany(DataDonasi::class, 'user_id');
+    }
+
+
 }

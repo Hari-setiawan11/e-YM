@@ -17,6 +17,7 @@ class PermissionSeeder extends Seeder
     {
         $permission = collect([
             'read-dashboard',
+            'read-form-donasi',
             'read-roles','create-roles','update-roles','delete-roles',
             'read-users','create-users','update-users','delete-users','activation-users',
             'read-distribusi', 'create-distribusi','update-distribusi','delete-distribusi',

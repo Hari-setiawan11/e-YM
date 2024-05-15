@@ -18,6 +18,8 @@ class UserSeeder extends Seeder
             'name'=> 'admin',
             'email' => 'admin@gmail.com',
             'username' => 'admin',
+            'alamat' => 'yatimmandiri',
+            'telephone' => '0812768915',
             'password' => Hash::make('12345678'),
         ])->assignRole('admin');
 
@@ -25,6 +27,8 @@ class UserSeeder extends Seeder
             'name'=> 'guest',
             'email' => 'guest@gmail.com',
             'username' => 'guest',
+            'alamat' => 'yatimmandiri',
+            'telephone' => '0812768915',
             'password' => Hash::make('12345678'),
         ])->assignRole('guest');
     }
