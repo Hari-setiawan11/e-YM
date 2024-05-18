@@ -30,19 +30,54 @@ return [
 
     'disks' => [
 
+        'programs' => [
+        'driver' => 'local',
+        'root' => storage_path('app/programs'), // Jalur penyimpanan file program
+        'url' => env('APP_URL') . '/storage/programs', // URL (opsional) untuk mengakses file
+        'visibility' => 'public', // Membuat file dapat diakses publik (opsional)
+        ],
+
+        'arsips' => [
+        'driver' => 'local',
+        'root' => storage_path('app/arsips'), // Jalur penyimpanan file program
+        'url' => env('APP_URL') . '/storage/arsips', // URL (opsional) untuk mengakses file
+        'visibility' => 'public', // Membuat file dapat diakses publik (opsional)
+        ],
+
+        'distribusis' => [
+        'driver' => 'local',
+        'root' => storage_path('app/distribusis'), // Jalur penyimpanan file program
+        'url' => env('APP_URL') . '/storage/distribusis', // URL (opsional) untuk mengakses file
+        'visibility' => 'public', // Membuat file dapat diakses publik (opsional)
+        ],
+
+        // 'public' => [
+        // 'driver' => 'local',
+        // 'root' => public_path('uploads'), // Lokasi penyimpanan file di folder public/uploads
+        // 'url' => env('APP_URL').'/uploads', // URL publik untuk akses file
+        // 'visibility' => 'public',
+        // ],
+
+        'public' => [
+        'driver' => 'local',
+        'root' => storage_path('app/public'), // Atur root direktori sesuai dengan kebutuhan
+        'url' => env('APP_URL').'/storage', // URL publik untuk akses file
+        'visibility' => 'public',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
             'throw' => false,
         ],
 
-        'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
+        // 'public' => [
+        //     'driver' => 'local',
+        //     'root' => storage_path('app/public'),
+        //     'url' => env('APP_URL').'/storage',
+        //     'visibility' => 'public',
+        //     'throw' => false,
+        // ],
 
         's3' => [
             'driver' => 's3',

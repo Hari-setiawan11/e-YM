@@ -17,12 +17,14 @@ class PermissionSeeder extends Seeder
     {
         $permission = collect([
             'read-dashboard',
+            'read-form-donasi',
             'read-roles','create-roles','update-roles','delete-roles',
             'read-users','create-users','update-users','delete-users','activation-users',
             'read-distribusi', 'create-distribusi','update-distribusi','delete-distribusi',
             'read-program', 'create-program','update-program','delete-program',
             'read-arsip', 'create-arsip','update-arsip','delete-arsip',
             'read-data-donasi', 'create-data-donasi', 'update-data-donasi', 'delete-data-donasi',
+            'read-data-user',
             'read-jenis-arsip', 'create-jenis-arsip','update-jenis-arsip','delete-jenis-arsip',
             'read-data-barang', 'create-data-barang','update-data-barang','delete-data-barang',
             'read-lpj', 'create-lpj','update-lpj','delete-lpj',
