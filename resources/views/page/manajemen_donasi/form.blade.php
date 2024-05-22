@@ -9,37 +9,44 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Form Donasi</h4>
+                            <h4>Tambah Program</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('index.store') }}">
+                            <form method="POST" action="{{ route('form.store.donasi') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="deskripsi">Deskripsi</label>
                                     <input id="deskripsi" type="text"
                                         class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
-                                        placeholder="Ucapan/Do'a">
+                                        placeholder="Titipan Do'a">
                                     @error('deskripsi')
                                         <div id="deskripsi" class="form-text"></div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="file">Bukti Transfer</label>
-                                    <div class="custom-file">
-                                        <input type="file" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
-                                    </div>
+                                    <label for="nominal">Nominal</label>
+                                    <input id="nominal" type="text"
+                                        class="form-control @error('nominal') is-invalid @enderror" name="nominal"
+                                        placeholder="Nominal">
+                                    @error('nominal')
+                                        <div id="nominal" class="form-text"></div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="file" class="form-label">file</label>
+                                    <input type="file" class="form-control" id="file" name="file">
                                     @error('file')
-                                        <div id="file" class="form-text"></div>
+                                        <div id="file" class="form-file"></div>
                                     @enderror
                                 </div>
 
-
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                        Kirim
+                                    <button type="submit" class="btn btn-primary">
+                                        Tambah Program
                                     </button>
                                 </div>
+
+
                             </form>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class DataUserController extends Controller
 {
@@ -12,10 +13,25 @@ class DataUserController extends Controller
      */
     public function index()
     {
-        $data['users']=User::all();
+        // Mengambil peran "guest"
+        $guestRole = Role::where('name', 'guest')->first();
+
+        // Jika peran "guest" tidak ditemukan, kembalikan tampilan kosong
+        if (!$guestRole) {
+            return view('page.manajemen_data_user.index', ['users' => []]);
+        }
+
+        // Mengambil semua pengguna yang memiliki peran "guest"
+        $users = $guestRole->users;
+
+        // Menyiapkan data untuk dikirim ke tampilan
+        $data = [
+            'users' => $users,
+        ];
+
+        // Mengirim data ke tampilan
         return view('page.manajemen_data_user.index', $data);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -61,6 +77,9 @@ class DataUserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $users = User::findOrFail($id);
+        $users->delete();
+
+        return redirect()->route('index.view.datauser')->with('toast_success', 'Data Barang Berhasil Dihapus');
     }
 }

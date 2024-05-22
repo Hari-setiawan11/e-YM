@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(DataDonasi::class);
     }
+    
+    public function donasi()
+    {
+        return $this->hasMany(Donasi::class);
+    }
 }

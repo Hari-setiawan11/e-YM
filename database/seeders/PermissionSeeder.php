@@ -25,6 +25,7 @@ class PermissionSeeder extends Seeder
             'read-arsip', 'create-arsip','update-arsip','delete-arsip',
             'read-data-donasi', 'create-data-donasi', 'update-data-donasi', 'delete-data-donasi',
             'read-data-user',
+            'read-rekap-donasi',
             'read-jenis-arsip', 'create-jenis-arsip','update-jenis-arsip','delete-jenis-arsip',
             'read-data-barang', 'create-data-barang','update-data-barang','delete-data-barang',
             'read-lpj', 'create-lpj','update-lpj','delete-lpj',

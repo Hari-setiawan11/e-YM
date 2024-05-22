@@ -39,6 +39,7 @@ class RoleSeeder extends Seeder
         $guest->givePermissionTo([
             'read-dashboard',
             'read-form-donasi',
+            'read-rekap-donasi',
         ]);
     }
 }

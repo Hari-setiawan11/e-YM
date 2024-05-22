@@ -1,20 +1,17 @@
 @extends('administrator.layouts.app')
 
+
 @section('title')
-    <title>Data User | e-YM</title>
+    <title>Daftar Donasi | e-YM</title>
 @endsection
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/modules/datatables/datatables.min.css') }} ">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-rHy3mowRf3m1OPbK6UVDu+OIaNRszJ8z7XeR+AhB0mEgwZOVtBijqUMs7Wjg87YQzPKdJU+zjlz4hJOuxYYplg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 
 @section('content')
-
     <!-- Main Content -->
     <div class="main-content">
         <section class="section">
@@ -23,12 +20,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar User</h4>
+                                <h4>Daftar Donasi</h4>
                                 <div class="card-header-form">
-                                    {{-- <div class="ml-auto mb-2">
-                                        <a href="{{ route('index.create') }}" style="float: right;"
-                                            class="btn btn-round btn-primary mb-3">Tambah</a>
-                                    </div> --}}
                                     <form>
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search">
@@ -44,40 +37,42 @@
                                     <table class="table table-striped">
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>Alamat</th>
-                                            <th>No Telephone</th>
-                                            <th>Rekap Donasi</th>
+                                            <th>Tanggal</th>
+                                            <th>Deskripsi</th>
+                                            <th>Nominal</th>
+                                            <th>File</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
-
                                         <tbody>
-                                            @if ($users->count() > 0)
-                                                @foreach ($users as $data)
+                                            @if ($donasi->count() > 0)
+                                                @foreach ($donasi as $data)
                                                     <tr>
                                                         <td class="align-middle">{{ $loop->iteration }}</td>
-                                                        <td class="align-middle">{{ $data->name }}</td>
-                                                        <td class="align-middle">{{ $data->username }}</td>
-                                                        <td class="align-middle">{{ $data->email }}</td>
-                                                        <td class="align-middle">{{ $data->alamat }}</td>
-                                                        <td class="align-middle">{{ $data->telephone }}</td>
+                                                        <td class="align-middle">{{ $data->created_at }}</td>
+                                                        <td class="align-middle">{{ $data->deskripsi }}</td>
+                                                        <td class="align-middle"> Rp.
+                                                            {{ number_format($data->nominal, 0, ',', '.') }}</td>
                                                         <td class="align-middle">
-                                                            <a class="btn btn-primary btn-sm"
-                                                                href="{{ route('form.show.donasi', ['user_id' => $data->id]) }}">
-                                                                Rekap
-                                                            </a>
+                                                        <td class="align-middle">
+                                                            @if ($data->file)
+                                                                <a href="{{ asset('storage/donasis/' . $data->file) }}">
+                                                                    <i class="fas fa-file-alt"
+                                                                        style="font-size:
+                                                                20px;"></i>
+                                                                </a>
+                                                            @else
+                                                                <i>No file uploaded.</i>
+                                                            @endif
                                                         </td>
                                                         <td class="align-middle">
-                                                            <div class="d-flex justify-content-center">
+                                                            <div class="d-flex justify-content-end">
                                                                 <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                                {{-- <a href="{{ route('index.edit.databarang', $data->id) }}"
+                                                                {{-- <a href="{{ route('index.edit.donasi', $data->id) }}"
                                                                     class="btn btn-primary ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>
                                                                 </a> --}}
-                                                                <a href="{{ route('index.destroy.datauser', $data->id) }}"
+                                                                <a href="{{ route('form.destroy.donasi', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-trash-alt"></i>
@@ -86,13 +81,34 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
+                                                {{-- <tr>
+
+                                                <td>1</td>
+                                                <td>Sedekah Pangan</td>
+                                                <td>Langkah terbaik kebaikan untuk yatim, dhuafa, dan keluarga yang
+                                                    membutuhkan. Memberi harapan dan kehangatan dalam setiap pangan yang
+                                                    kita sajikan.</td>
+                                                <td><i class="fas fa-file"></i></td>
+                                                <td class="align-middle">
+                                                    <div class="d-flex justify-content-end">
+                                                        <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
+                                                        <a href="#" class="btn btn-primary ml-2">
+                                                            <!-- Gunakan class ml-2 untuk margin kiri -->
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-danger ml-2">
+                                                            <!-- Gunakan class ml-2 untuk margin kiri -->
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr> --}}
                                             @else
                                                 <tr>
-                                                    <td class="text-center" colspan="8">Data Donatur Belum Ada</td>
+                                                    <td class="text-center" colspan="5">Program Belum Diisi</td>
                                                 </tr>
                                             @endif
                                         </tbody>
-
                                     </table>
                                 </div>
                             </div>
@@ -103,7 +119,6 @@
             </div>
         </section>
     </div>
-
 @endsection
 
 @section('script')

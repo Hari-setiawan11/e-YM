@@ -19,9 +19,16 @@
             <li class="menu-header">Kegiatan</li>
 
             @can('read-form-donasi')
-                <li class="{{ \Route::is('form.view.donasi') ? 'active' : '' }}">
-                    <a href="{{ route('form.view.donasi') }}" class="nav-link"><i class="far fa-file-alt"></i>
-                        <span>Donasi</span></a>
+                <li class="{{ \Route::is('form.create.donasi') ? 'active' : '' }}">
+                    <a href="{{ route('form.create.donasi') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                        <span>Form Donasi</span></a>
+                </li>
+            @endcan
+
+            @can('read-rekap-donasi')
+                <li class="{{ \Route::is('form.index.donasi') ? 'active' : '' }}">
+                    <a href="{{ route('form.index.donasi') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                        <span>Daftar Donasi</span></a>
                 </li>
             @endcan
 
@@ -75,7 +82,7 @@
 
             @can('read-data-donasi')
                 <li
-                    class="{{ \Route::is('index.view.datadonasi') || \Route::is('index.create.datadonasi') || \Route::is('index.edit.datadonasi') ? 'active' : '' }}">
+                    class="{{ \Route::is('form.view.datadonasi') || \Route::is('index.create.datadonasi') || \Route::is('index.edit.datadonasi') ? 'active' : '' }}">
                     <a href="{{ route('index.view.datadonasi') }}" class="nav-link"><i class="fas fa-donate"></i>
                         <span>Data Donasi</span></a>
                 </li>

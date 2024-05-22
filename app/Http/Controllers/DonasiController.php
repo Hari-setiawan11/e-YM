@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Donasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DonasiController extends Controller
 {
@@ -11,9 +15,13 @@ class DonasiController extends Controller
      */
     public function index()
     {
-        $dataDonasis = DataDonasi::with('user')->get();
+        // Ambil user_id dari user yang sedang login
+        $userId = Auth::user()->id;
 
-        return view('page.manajemen_donasi.form', compact('dataDonasis'));
+        // Dapatkan donasi hanya untuk user yang sedang login
+        $data['Donasi'] = Donasi::where('user_id', $userId)->get();
+
+        return view('page.manajemen_donasi.index', $data);
     }
 
     /**
@@ -21,7 +29,7 @@ class DonasiController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.manajemen_donasi.form');
     }
 
     /**
@@ -29,15 +37,52 @@ class DonasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Memvalidasi input dari request
+        $validated = $request->validate([
+            'deskripsi' => 'nullable|string',
+            'nominal' => 'nullable|string',
+            'file' => 'nullable|file|mimes:pdf|max:2048',
+        ]);
+
+        // Mengecek apakah file di-upload dan menyimpannya
+        if ($request->hasFile('file')) {
+            $uploadedFile = $request->file('file');
+            // Menggunakan nama unik untuk file yang di-upload
+            $fileName = time() . '_' . $uploadedFile->getClientOriginalName();
+            $uploadedFile->storeAs('public/donasis', $fileName);
+            $validated['file'] = $fileName;
+        }
+
+        // Mendapatkan user_id dari user yang sedang login
+        $validated['user_id'] = Auth::id();
+
+        // Membuat entri baru pada tabel Donasi
+        Donasi::create($validated);
+
+        // Mengarahkan ke halaman dashboard dengan pesan sukses
+        return redirect()->route('apps.dashboard')->with('toast_success', 'Data dokumen berhasil ditambahkan.');
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($user_id)
     {
-        //
+        // Mencari user berdasarkan user_id, jika tidak ditemukan akan menghasilkan 404
+        $user = User::findOrFail($user_id);
+
+        // Mengambil semua data donasi yang sesuai dengan user_id
+        $donasi = Donasi::where('user_id', $user_id)->get();
+
+        // Menyusun data untuk dikirim ke view
+        $data = [
+            'donasi' => $donasi,
+            'user' => $user,
+        ];
+
+        // Mengirim data ke view
+        return view('page.manajemen_donasi.show', $data);
     }
 
     /**
@@ -61,6 +106,17 @@ class DonasiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+    $donasi = Donasi::findOrFail($id); // Temukan donasi berdasarkan ID
+
+    // Hapus file terkait jika ada
+    if ($donasi->file) {
+        Storage::disk('public')->delete('donasis/' . $donasi->file);
     }
+
+    // Hapus donasi dari database
+    $donasi->delete();
+
+    return redirect()->route('form.index.donasi')->with('toast_success', 'Data dokumen berhasil dihapus.');
+    }
+    
 }

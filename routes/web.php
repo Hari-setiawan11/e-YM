@@ -73,7 +73,11 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('/arsip/{id}/destroy',[ArsipController::class, 'destroy'])->name('index.destroy.arsip');
 
     //form data donasi(guest)
-    Route::get('/donasi/form',[DonasiController::class, 'index'])->name('form.view.donasi');
+    Route::get('/donasi/view',[DonasiController::class, 'index'])->name('form.index.donasi');
+    Route::get('/donasi/{user_id}',[DonasiController::class, 'show'])->name('form.show.donasi');
+    Route::get('/donasi/form/create',[DonasiController::class, 'create'])->name('form.create.donasi');
+    Route::post('/donasi/form/store',[DonasiController::class, 'store'])->name('form.store.donasi');
+    Route::get('/donasi/form/{id}/destroy',[DonasiController::class, 'destroy'])->name('form.destroy.donasi');
 
     //manaemen data_donasi
     Route::get('/data_donasi/view',[DataDonasiController::class, 'index'])->name('index.view.datadonasi');
@@ -81,10 +85,11 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/data_donasi/store',[DataDonasiController::class, 'store'])->name('index.store.datadonasi');
     Route::get('/data_donasi/{id}/edit',[DataDonasiController::class, 'edit'])->name('index.edit.datadonasi');
     Route::put('/data_donasi/{id}/update',[DataDonasiController::class, 'update'])->name('index.update.datadonasi');
-    Route::get('/data_donasi/{id}/destroy',[DataDonasiController::class, 'destroy'])->name('index.destroy.datadonasi');
+    Route::get('/data_donasi/{id_donasi}/destroy',[DataDonasiController::class, 'destroy'])->name('index.destroy.datadonasi');
 
     //manaemen data_user
     Route::get('/data_user/view',[DataUserController::class, 'index'])->name('index.view.datauser');
+    Route::get('/data_user/{id_users}/destroy',[DataUserController::class, 'destroy'])->name('index.destroy.datauser');
 
     //manajemen bukti_donasi
     Route::get('/bukti_donasi/view',[BuktiDonasiController::class, 'index'])->name('index.view.bukti');
@@ -93,6 +98,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
  
     //profile
     Route::get('/profile/view',[ProfileController::class, 'index'])->name('index.view.profile');
+    Route::put('/profile/update',[ProfileController::class, 'index'])->name('index.update.profile');
 
     //manajemen jenis arsip
     Route::get('/jenis_arsip/index',[JenisArsipController::class, 'index'])->name('index.view');

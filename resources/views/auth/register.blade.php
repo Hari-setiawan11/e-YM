@@ -45,6 +45,28 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="alamat">Alamat</label>
+                                                <input id="alamat" type="text" class="form-control" name="alamat"
+                                                    tabindex="1" required autofocus>
+                                                <div class="invalid-feedback">
+                                                    Please fill in your alamat.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="telephone">Telephone</label>
+                                                <input id="telephone" type="text" class="form-control" name="telephone"
+                                                    tabindex="2" required>
+                                                <div class="invalid-feedback">
+                                                    Please fill in your telephone.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="row">
                                         <div class="col-lg-6">
