@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('bukti_donasis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('datadonasi_id');
-            $table->foreign('datadonasi_id')->references('id')->on('data_donasis')->onDelete('cascade'); // Pastikan tabel ini benar ada di database
             $table->date('tanggal');
             $table->string('nominal');
             $table->string('deskripsi');

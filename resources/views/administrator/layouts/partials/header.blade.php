@@ -14,8 +14,9 @@
                 <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">Logged in 5 min ago</div>
-                <a href="{{ route('index.view.profile') }}" class="dropdown-item has-icon">
+                <div class="dropdown-title">Yatim Mandiri</div>
+                <a href="{{ route('index.view.profile', ['id_user' => Auth::user()->id]) }}"
+                    class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>

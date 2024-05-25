@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('rekaps', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('datadonasi_id')->nullable(false);
             $table->unsignedBigInteger('distribusi_id')->nullable(false);
-            $table->foreign('datadonasi_id')->references('id')->on('data_donasis')->onDelete('cascade');
             $table->foreign('distribusi_id')->references('id')->on('distribusis')->onDelete('cascade');
             $table->timestamps();
         });

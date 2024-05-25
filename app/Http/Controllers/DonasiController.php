@@ -106,17 +106,22 @@ class DonasiController extends Controller
      */
     public function destroy(string $id)
     {
-    $donasi = Donasi::findOrFail($id); // Temukan donasi berdasarkan ID
+        $donasi = Donasi::findOrFail($id); // Temukan donasi berdasarkan ID
 
-    // Hapus file terkait jika ada
-    if ($donasi->file) {
-        Storage::disk('public')->delete('donasis/' . $donasi->file);
+        // Ambil user_id sebelum menghapus donasi
+        $userId = $donasi->user_id;
+
+        // Hapus file terkait jika ada
+        if ($donasi->file) {
+            Storage::disk('public')->delete('donasis/' . $donasi->file);
+        }
+
+        // Hapus donasi dari database
+        $donasi->delete();
+
+        // Redirect ke halaman yang menampilkan donasi sesuai dengan user_id
+        return redirect()->route('form.show.donasi', ['user_id' => $userId])->with('toast_success', 'Data dokumen berhasil dihapus.');
     }
 
-    // Hapus donasi dari database
-    $donasi->delete();
-
-    return redirect()->route('form.index.donasi')->with('toast_success', 'Data dokumen berhasil dihapus.');
-    }
     
 }

@@ -42,7 +42,7 @@
                                 <h4>Jumlah Donatur</h4>
                             </div>
                             <div class="card-body">
-                                {{ $totalDonatur }}
+                                {{ $totalGuest }}
                             </div>
                         </div>
                     </div>

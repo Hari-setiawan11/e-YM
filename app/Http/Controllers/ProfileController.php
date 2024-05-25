@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+
 
 class ProfileController extends Controller
 {
@@ -14,16 +16,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::id(); // Mendapatkan user_id dari pengguna yang sedang login
-        $user = User::findOrFail($user_id); // Mencari pengguna berdasarkan user_id
-
-        // Menyiapkan data pengguna untuk ditampilkan di halaman
-        $data = [
-            'user' => $user,
-        ];
-
-        // Mengirim data ke view
-        return view('page.manajemen_profile.index');
+        //
     }
 
     /**
@@ -45,10 +38,19 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        // Memastikan hanya pengguna yang login dapat melihat profil mereka sendiri
+        if ($id != Auth::user()->id) {
+            return redirect()->back();
+        }
+
+        // Mengirim data pengguna ke view
+        $user = Auth::user();
+
+        return view('page.manajemen_profile.index', compact('user'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -61,36 +63,45 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+
+     public function update(Request $request, $id)
     {
-        $user_id = Auth::id(); // Mendapatkan user_id dari pengguna yang sedang login
-        $user = User::findOrFail($user_id); // Mencari pengguna berdasarkan user_id
-
-        // Memvalidasi data yang diterima dari form
-        $request->validate([
+        $user = User::findOrFail($id);
+    
+        // Validasi input
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'username' => 'required|string|max:255|unique:users,username,'.$user->id,
-            'alamat' => 'nullable|string',
-            'telephone' => 'nullable|string',
-            'password' => 'nullable|string|min:8|confirmed',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'alamat' => 'nullable|string|max:255',
+            'telephone' => 'nullable|string|max:15',
+            'password' => ['nullable', 'string', 'min:8', 'confirmed', Password::defaults()],
+            'password_confirmation' => 'nullable|min:8',
         ]);
-
-        // Memperbarui data pengguna dengan data yang diterima dari form
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->username = $request->username;
-        $user->alamat = $request->alamat;
-        $user->telephone = $request->telephone;
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
+    
+        // Persiapkan data untuk diupdate
+        $updateData = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'username' => $validated['username'],
+            'alamat' => $validated['alamat'],
+            'telephone' => $validated['telephone'],
+        ];
+    
+        // Pengecekan apakah ada input password
+        if (!empty($request->input('password'))) {
+            // Hash password
+            $updateData['password'] = Hash::make($request->input('password'));
         }
-        $user->save();
-
-        // Redirect ke halaman profil dengan pesan sukses
-        return redirect()->route('profile.index')->with('success', 'Profil berhasil diperbarui');
+    
+        // Update data user
+        $user->update($updateData);
+    
+        // Menampilkan pesan sukses menggunakan alert
+        // Alert::success('Success', 'Profil Berhasil Diupdate');
+    
+        return redirect()->back();
     }
-
     /**
      * Remove the specified resource from storage.
      */

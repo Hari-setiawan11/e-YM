@@ -10,15 +10,8 @@ class Rekap extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'datadonasi_id',
         'distribusi_id',
     ];
-
-
-     public function datadonasi()
-    {
-        return $this->belongsTo(DataDonasi::class, 'datadonasi_id', 'id');
-    }
 
     public function distribusi()
     {

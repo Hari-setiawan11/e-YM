@@ -24,54 +24,91 @@
                     </div>
                     <div class="col-12 col-md-12 col-lg-7">
                         <div class="card">
-                            <form method="post" action="{{ route('index.update.profile') }}" class="needs-validation"
-                                novalidate>
+                            <form method="post" action="{{ route('index.update.profile', $user->id) }}"
+                                class="needs-validation" novalidate>
                                 @csrf
                                 @method('PUT')
                                 <div class="card-header">
                                     <h4>Edit Profile</h4>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Nama</label>
-                                            <input type="text" class="form-control" name="name"
-                                                value="{{ Auth::user()->name }}" required>
-                                            <div class="invalid-feedback">
-                                                Please fill in the name
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Email</label>
-                                            <input type="email" class="form-control" name="email"
-                                                value="{{ Auth::user()->email }}" required>
-                                            <div class="invalid-feedback">
-                                                Please fill in the email
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Phone</label>
-                                            <input type="tel" class="form-control" name="telephone"
-                                                value="{{ Auth::user()->telephone }}">
-                                        </div>
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Password Baru</label>
-                                            <input type="password" class="form-control" name="password" required>
-                                            <div class="invalid-feedback">
-                                                Please fill in the password
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Konfirmasi Password Baru</label>
-                                            <input type="password" class="form-control" name="password_confirmation"
-                                                required>
-                                            <div class="invalid-feedback">
-                                                Please fill in the password confirmation
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input id="name" type="name"
+                                        class="form-control @error('name') is-invalid @enderror" name="name"
+                                        value="{{ old('name', $user->name) }}" required autocomplete="name">
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email', $user->email) }}" required autocomplete="email">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input id="username" type="text"
+                                        class="form-control @error('username') is-invalid @enderror" name="username"
+                                        value="{{ old('username', $user->username) }}" required autocomplete="username">
+                                    @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="alamat">Alamat</label>
+                                    <input id="alamat" type="text"
+                                        class="form-control @error('alamat') is-invalid @enderror" name="alamat"
+                                        value="{{ old('alamat', $user->alamat) }}">
+                                    @error('alamat')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telephone">Telephone</label>
+                                    <input id="telephone" type="text"
+                                        class="form-control @error('telephone') is-invalid @enderror" name="telephone"
+                                        value="{{ old('telephone', $user->telephone) }}">
+                                    @error('telephone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">New Password</label>
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        autocomplete="new-password">
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password-confirm">Confirm New Password</label>
+                                    <input id="password-confirm" type="password" class="form-control"
+                                        name="password_confirmation" autocomplete="new-password">
+                                </div>
+
                                 <div class="card-footer text-right">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>

@@ -91,14 +91,14 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('/data_user/view',[DataUserController::class, 'index'])->name('index.view.datauser');
     Route::get('/data_user/{id_users}/destroy',[DataUserController::class, 'destroy'])->name('index.destroy.datauser');
 
-    //manajemen bukti_donasi
-    Route::get('/bukti_donasi/view',[BuktiDonasiController::class, 'index'])->name('index.view.bukti');
-    Route::get('/bukti_donasi/create',[BuktiDonasiController::class, 'create'])->name('index.create.bukti');
-    Route::post('/bukti_donasi/store',[BuktiDonasiController::class, 'store'])->name('index.store.bukti');
+    // //manajemen bukti_donasi
+    // Route::get('/bukti_donasi/view',[BuktiDonasiController::class, 'index'])->name('index.view.bukti');
+    // Route::get('/bukti_donasi/create',[BuktiDonasiController::class, 'create'])->name('index.create.bukti');
+    // Route::post('/bukti_donasi/store',[BuktiDonasiController::class, 'store'])->name('index.store.bukti');
  
     //profile
-    Route::get('/profile/view',[ProfileController::class, 'index'])->name('index.view.profile');
-    Route::put('/profile/update',[ProfileController::class, 'index'])->name('index.update.profile');
+    Route::get('/profile/show/{id_user}',[ProfileController::class, 'show'])->name('index.view.profile');
+    Route::put('/ubah-profile/{id_user}/update',[ProfileController::class, 'update'])->name('index.update.profile');
 
     //manajemen jenis arsip
     Route::get('/jenis_arsip/index',[JenisArsipController::class, 'index'])->name('index.view');
