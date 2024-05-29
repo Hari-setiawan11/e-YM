@@ -3953,6 +3953,15 @@ body:not(.sidebar-mini)
     text-align: center; /* Agar teks berada di tengah secara horizontal */
 }
 
+.row_dashboard_card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 45vh; /* Mengatur tinggi agar sesuai dengan tinggi viewport */
+    margin-top: 10px;
+    text-align: center; /* Agar teks berada di tengah secara horizontal */
+}
+
 .card_dashboard {
     text-align: center;
     /* Optional: untuk mengatur posisi gambar di tengah secara horizontal */

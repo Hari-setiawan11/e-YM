@@ -9,7 +9,6 @@ class Program extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
         'nama',
         'deskripsi',
         'file',

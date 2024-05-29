@@ -24,13 +24,13 @@
                         <span>Form Donasi</span></a>
                 </li>
             @endcan
-
-            @can('read-rekap-donasi')
+            @can('read-form-donasi')
                 <li class="{{ \Route::is('form.index.donasi') ? 'active' : '' }}">
                     <a href="{{ route('form.index.donasi') }}" class="nav-link"><i class="far fa-file-alt"></i>
                         <span>Daftar Donasi</span></a>
                 </li>
             @endcan
+
 
             @php
                 $activeRoutes = [

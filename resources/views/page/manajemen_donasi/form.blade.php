@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Tambah Program</h4>
+                            <h4>Tambah Donasi</h4>
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('form.store.donasi') }}" enctype="multipart/form-data">
@@ -42,7 +42,7 @@
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">
-                                        Tambah Program
+                                        Tambah Donasi
                                     </button>
                                 </div>
 

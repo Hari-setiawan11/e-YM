@@ -72,14 +72,18 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::put('/arsip/{id}/update',[ArsipController::class, 'update'])->name('index.update.arsip');
     Route::get('/arsip/{id}/destroy',[ArsipController::class, 'destroy'])->name('index.destroy.arsip');
 
-    //form data donasi(guest)
-    Route::get('/donasi/view',[DonasiController::class, 'index'])->name('form.index.donasi');
+    //form data donasi(admin)
     Route::get('/donasi/{user_id}',[DonasiController::class, 'show'])->name('form.show.donasi');
-    Route::get('/donasi/form/create',[DonasiController::class, 'create'])->name('form.create.donasi');
-    Route::post('/donasi/form/store',[DonasiController::class, 'store'])->name('form.store.donasi');
     Route::get('/donasi/form/{id}/destroy',[DonasiController::class, 'destroy'])->name('form.destroy.donasi');
 
-    //manaemen data_donasi
+    //form data donasi(guest)
+    // Route::get('/donasi/view',[DonasiController::class, 'index'])->name('form.index.donasi');
+    Route::get('/apps/donasi/view', [DonasiController::class, 'index'])->name('form.index.donasi');
+
+    Route::get('/donasi/form/create',[DonasiController::class, 'create'])->name('form.create.donasi');
+    Route::post('/donasi/form/store',[DonasiController::class, 'store'])->name('form.store.donasi');
+
+    //manajemen data_donasi
     Route::get('/data_donasi/view',[DataDonasiController::class, 'index'])->name('index.view.datadonasi');
     Route::get('/data_donasi/create',[DataDonasiController::class, 'create'])->name('index.create.datadonasi');
     Route::post('/data_donasi/store',[DataDonasiController::class, 'store'])->name('index.store.datadonasi');
