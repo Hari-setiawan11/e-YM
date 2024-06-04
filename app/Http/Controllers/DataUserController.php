@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DataUserController extends Controller
 {
@@ -37,7 +39,7 @@ class DataUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.manajemen_data_user.create');
     }
 
     /**
@@ -45,7 +47,34 @@ class DataUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'alamat' => 'required',
+            'telephone' => 'required|digits_between:8,12',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+        ]);
+    
+        // Create the user with the validated data
+        $user = User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'alamat' => $request->alamat,
+            'telephone' => $request->telephone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+    
+        // Assign the 'Guest' role to the newly created user
+        $guestRole = Role::where('name', 'Guest')->first();
+        if ($guestRole) {
+            $user->assignRole($guestRole);
+        }
+    
+        // Redirect the user to the dashboard with a success message
+        return redirect()->route('index.view.datauser')->with('toast_success', 'User Berhasil Ditambahkan');
     }
 
     /**
@@ -61,15 +90,40 @@ class DataUserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = [
+            'dataUser' => User::findOrFail($id),
+        ];
+        return view('page.manajemen_data_user.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'alamat' => 'required',
+            'telephone' => 'required|digits_between:8,12',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->alamat = $request->alamat;
+        $user->telephone = $request->telephone;
+        $user->email = $request->email;
+        
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('index.view.datauser')->with('toast_success', 'User Berhasil Diperbarui');
     }
 
     /**

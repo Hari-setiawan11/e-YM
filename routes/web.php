@@ -95,7 +95,12 @@ Route::prefix('apps')->middleware('auth')->group( function() {
 
     //manaemen data_user
     Route::get('/data_user/view',[DataUserController::class, 'index'])->name('index.view.datauser');
+    Route::get('/data_user/create',[DataUserController::class, 'create'])->name('index.create.datauser');
+    Route::post('/data_user/store',[DataUserController::class, 'store'])->name('index.store.datauser');
+    Route::get('/data_user/{id_users}/edit',[DataUserController::class, 'edit'])->name('index.edit.datauser');
+    Route::put('/data_user/{id_users}/update',[DataUserController::class, 'update'])->name('index.update.datauser');
     Route::get('/data_user/{id_users}/destroy',[DataUserController::class, 'destroy'])->name('index.destroy.datauser');
+ 
 
     // //manajemen bukti_donasi
     // Route::get('/bukti_donasi/view',[BuktiDonasiController::class, 'index'])->name('index.view.bukti');
