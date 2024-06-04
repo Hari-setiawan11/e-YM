@@ -51,9 +51,12 @@
                                                         <td class="align-middle">{{ $data->created_at }}</td>
                                                         <td class="align-middle">{{ $data->deskripsi }}</td>
                                                         <td class="align-middle">
+<<<<<<< HEAD
                                                             Rp. {{ number_format(floatval($data->nominal), 0, ',', '.') }}
                                                         </td>
                                                         <td class="align-middle">
+=======
+>>>>>>> 6625c0982f85c4137b1ed3fdca9599e9ddf453b3
                                                             @if ($data->file)
                                                                 <a href="{{ asset('storage/donasis/' . $data->file) }}">
                                                                     <i class="fas fa-file-alt"
@@ -65,8 +68,14 @@
                                                             @endif
                                                         </td>
                                                         <td class="align-middle">
+<<<<<<< HEAD
                                                             <div class="d-flex justify-content-end">
                                                                 <a href="{{ route('form.edit.donasi_admin', $data->id) }}"
+=======
+                                                            <div class="d-flex justify-content-center">
+                                                                <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
+                                                                {{-- <a href="{{ route('index.edit.donasi', $data->id) }}"
+>>>>>>> 6625c0982f85c4137b1ed3fdca9599e9ddf453b3
                                                                     class="btn btn-primary ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>

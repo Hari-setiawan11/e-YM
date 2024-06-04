@@ -120,7 +120,7 @@
                 </div>
             </div>
 
-            {{-- <script>
+            <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     // Data contoh untuk pemasukan donasi per bulan
                     const donationData = @json($donationData);
@@ -143,13 +143,21 @@
                             responsive: true,
                             scales: {
                                 y: {
-                                    beginAtZero: true
+                                    beginAtZero: true,
+                                    min: 1000000, // Minimum 1 juta
+                                    max: 10000000, // Maksimum 10 juta
+                                    ticks: {
+                                        // Format nilai dengan titik sebagai pemisah ribuan
+                                        callback: function(value, index, values) {
+                                            return 'Rp' + value.toLocaleString('id-ID');
+                                        }
+                                    }
                                 }
                             }
                         }
                     });
                 });
-            </script> --}}
+            </script>
 
             {{-- <div class=" row row_dashboard">
                 <div class="col-lg-8 col-md-12 col-12 col-sm-12">
