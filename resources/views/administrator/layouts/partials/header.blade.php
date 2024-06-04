@@ -19,6 +19,9 @@
                     class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
+                <a href="{{ route('home', ['id_user' => Auth::user()->id]) }}" class="dropdown-item has-icon">
+                    <i class="fa fa-home"></i> Leanding Page
+                </a>
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
                     <i class="fas fa-sign-out-alt"></i> Logout

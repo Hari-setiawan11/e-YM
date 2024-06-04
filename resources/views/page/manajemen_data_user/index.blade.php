@@ -23,12 +23,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar User</h4>
+                                <h4>Data User</h4>
                                 <div class="card-header-form">
-                                    {{-- <div class="ml-auto mb-2">
-                                        <a href="{{ route('index.create') }}" style="float: right;"
+                                    <div class="ml-auto mb-2">
+                                        <a href="{{ route('index.create.datauser') }}" style="float: right;"
                                             class="btn btn-round btn-primary mb-3">Tambah</a>
-                                    </div> --}}
+                                    </div>
                                     <form>
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search">
@@ -45,7 +45,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Username</th>
+                                            {{-- <th>Username</th> --}}
                                             <th>Email</th>
                                             <th>Alamat</th>
                                             <th>No Telephone</th>
@@ -59,7 +59,7 @@
                                                     <tr>
                                                         <td class="align-middle">{{ $loop->iteration }}</td>
                                                         <td class="align-middle">{{ $data->name }}</td>
-                                                        <td class="align-middle">{{ $data->username }}</td>
+                                                        {{-- <td class="align-middle">{{ $data->username }}</td> --}}
                                                         <td class="align-middle">{{ $data->email }}</td>
                                                         <td class="align-middle">{{ $data->alamat }}</td>
                                                         <td class="align-middle">{{ $data->telephone }}</td>
@@ -72,11 +72,11 @@
                                                         <td class="align-middle">
                                                             <div class="d-flex justify-content-center">
                                                                 <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                                {{-- <a href="{{ route('index.edit.databarang', $data->id) }}"
+                                                                <a href="{{ route('index.edit.datauser', $data->id) }}"
                                                                     class="btn btn-primary ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>
-                                                                </a> --}}
+                                                                </a>
                                                                 <a href="{{ route('index.destroy.datauser', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
