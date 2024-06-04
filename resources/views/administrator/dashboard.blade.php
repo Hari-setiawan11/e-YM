@@ -120,7 +120,7 @@
                 </div>
             </div>
 
-            <script>
+            {{-- <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     // Data contoh untuk pemasukan donasi per bulan
                     const donationData = @json($donationData);
@@ -149,7 +149,7 @@
                         }
                     });
                 });
-            </script>
+            </script> --}}
 
             {{-- <div class=" row row_dashboard">
                 <div class="col-lg-8 col-md-12 col-12 col-sm-12">
@@ -186,7 +186,7 @@
                                 <h4>Jumlah Donatur</h4>
                             </div>
                             <div class="card-body">
-                                {{ $totalUser }}
+                                {{ $totalGuest }}
                             </div>
                         </div>
                     </div>

@@ -116,7 +116,7 @@
                                             class="img-thumbnail" width="500">
                                     </div>
                                     <h2>{{ $data->nama }}</h2>
-                                    <p class="partial-description">{{ substr($data->keterangan, 0, 50) }}...</p>
+                                    <p class="partial-description">{{ substr($data->keterangan, 0, 0) }}</p>
                                     <p class="full-description" style="display:none;">{{ $data->keterangan }}</p>
                                     <div class="read-more-btn-container">
                                         <button class="read-more-btn">Berita Selengkapnya</button>

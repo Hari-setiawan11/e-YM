@@ -54,6 +54,8 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('/distribusi_barang/view/{id_distribusi}',[DistribusiBarangController::class, 'index'])->name('index.view.distribusibarang');
     Route::get('/distribusi_barang/create/{id_distribusi}',[DistribusiBarangController::class, 'create'])->name('index.create.distribusibarang');
     Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
+    Route::get('/distribusi_barang/edit/{id_distribusi}',[DistribusiBarangController::class, 'edit'])->name('index.edit.distribusibarang');
+    Route::put('/distribusi_barang/update/{id_distribusi}',[DistribusiBarangController::class, 'update'])->name('index.update.distribusibarang');
     Route::get('/distribusi_barang/destroy/{id_distribusi}',[DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
 
     //manajemen program
