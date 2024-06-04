@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Donasi;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -41,6 +42,25 @@ class DashboardController extends Controller
             $totalDonasi = Donasi::where('user_id', $user->id)->count();
         }
 
-        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalBarang', 'totalGuest', 'totalDonasi'));
+        // Ambil semua data donasi
+        $donations = Donasi::all();
+
+        // Inisialisasi array untuk menampung data donasi per bulan
+        $donationData = array_fill(0, 12, 0);
+        $months = [];
+
+        // Iterasi melalui setiap donasi untuk mengelompokkan berdasarkan bulan
+        foreach ($donations as $donation) {
+            $month = Carbon::parse($donation->created_at)->month - 1;
+            $donationData[$month] += $donation->nominal; // Menggunakan kolom 'nominal' di tabel donasi
+        }
+
+        // Nama bulan dalam bahasa Indonesia
+        $months = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalBarang', 'totalGuest', 'totalDonasi','donationData','months'));
     }
 }

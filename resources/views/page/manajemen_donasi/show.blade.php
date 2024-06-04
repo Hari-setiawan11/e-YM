@@ -53,7 +53,6 @@
                                                         <td class="align-middle"> Rp.
                                                             {{ number_format($data->nominal, 0, ',', '.') }}</td>
                                                         <td class="align-middle">
-                                                        <td class="align-middle">
                                                             @if ($data->file)
                                                                 <a href="{{ asset('storage/donasis/' . $data->file) }}">
                                                                     <i class="fas fa-file-alt"
@@ -65,7 +64,7 @@
                                                             @endif
                                                         </td>
                                                         <td class="align-middle">
-                                                            <div class="d-flex justify-content-end">
+                                                            <div class="d-flex justify-content-center">
                                                                 <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
                                                                 {{-- <a href="{{ route('index.edit.donasi', $data->id) }}"
                                                                     class="btn btn-primary ml-2">
