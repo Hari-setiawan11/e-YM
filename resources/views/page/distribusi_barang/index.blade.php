@@ -23,7 +23,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>Daftar Data Barang : {{ $distribusi->program->nama }} -
-                                    {{ \carbon\carbon::parse($distribusi->tanggal)->format('d F Y') }}</h4>
+                                    {{ \carbon\carbon::parse($distribusi->tanggal)->translatedFormat('d F Y') }}</h4>
 
                                 <div class="card-header-form ">
 
@@ -61,18 +61,22 @@
                                                 @foreach ($distribusi_barang as $data)
                                                     <tr>
                                                         <td class="align-middle">{{ $loop->iteration }}</td>
-                                                        <td class="align-middle">{{ $data->data_barang->nama_barang }}</td>
-                                                        <td class="align-middle">{{ $data->data_barang->volume }}</td>
-                                                        <td class="align-middle">{{ $data->data_barang->satuan }}</td>
+                                                        <td class="align-middle">{{ $data->nama_barang }}</td>
+                                                        <td class="align-middle">{{ $data->volume }}</td>
+                                                        <td class="align-middle">{{ $data->satuan }}</td>
                                                         <td class="align-middle">
-                                                            {{ number_format($data->data_barang->harga_satuan, 0, ',', '.') }}
+                                                            {{ number_format($data->harga_satuan, 0, ',', '.') }}
                                                         </td>
                                                         <td class="align-middle">
-                                                            {{ number_format($data->data_barang->jumlah, 0, ',', '.') }}
+                                                            {{ number_format($data->jumlah, 0, ',', '.') }}
                                                         </td>
 
                                                         <td class="align-middle">
-                                                            <div class="d-flex justify-content-center">
+                                                            <div class="d-flex justify-content-end">
+                                                                <a href="{{ route('index.edit.distribusibarang', $data->id) }}"
+                                                                    class="btn btn-primary ml-2">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
                                                                 <a href="{{ route('index.destroy.distribusibarang', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
                                                                     <i class="fas fa-trash-alt"></i>

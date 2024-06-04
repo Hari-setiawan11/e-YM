@@ -2,7 +2,7 @@
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             {{-- <a href="index.html">e-YM</a> --}}
-            <img src="{{ asset('assets/img/e-ym.png') }}" width="120" class="img-fluid mb-2" alt="">
+            <img src="{{ asset('assets/img/e-ym/eym.png') }}" width="120" class="img-fluid mb-2" alt="">
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">YM</a>
@@ -20,8 +20,15 @@
 
             @can('read-form-donasi')
                 <li class="{{ \Route::is('form.view.donasi') ? 'active' : '' }}">
-                    <a href="{{ route('form.view.donasi') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                    <a href="{{ route('form.view.donasi') }}" class="nav-link"><i class="fas fa-donate"></i>
                         <span>Donasi</span></a>
+                </li>
+            @endcan
+
+            @can('read-form-donasi')
+                <li class="#">
+                    <a href="{{ route('form.view.donasi') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                        <span>Rekap Donasi</span></a>
                 </li>
             @endcan
 

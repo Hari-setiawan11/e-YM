@@ -3967,3 +3967,40 @@ img {
     max-width: 75%; /* Optional: agar gambar tidak melebihi lebar card */
     height: auto; /* Optional: agar gambar tetap proporsional */
 }
+
+.container_grafik {
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+.container_batang {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+canvas {
+    width: 1500px;
+    height: 600px; /* Atur tinggi canvas agar memanjang ke samping */
+}
+
+/* canvas {
+    width: 100% !important;
+    height: auto !important;
+} */
+
+.chart-container {
+    position: relative;
+}
+
+.chart-container canvas {
+    display: block;
+}
+
+.chart-container .chart-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+}

@@ -48,47 +48,42 @@
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                         <tbody>
-                                            @if ($users->count() > 0)
-                                                @foreach ($users as $index => $user)
-                                                    @if ($index >= 2)
-                                                        <tr>
-                                                            <td class="align-middle">{{ $index + 1 }}</td>
-                                                            <td class="align-middle">{{ $user->name }}</td>
-                                                            <td class="align-middle">{{ $user->alamat }}</td>
-                                                            <td class="align-middle">{{ $user->telephone }}</td>
-                                                            <td class="align-middle">{{ $user->email }}</td>
-                                                            <td class="align-middle">
-                                                                <div class="text-center">
-                                                                    <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                                    <a href="#" class="btn btn-primary ml-2">
-                                                                        <!-- Gunakan class ml-2 untuk margin kiri -->
-                                                                        <i class="fas fa-database"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                            <td class="align-middle">
-                                                                <div class="d-flex justify-content-center">
-                                                                    <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                                    <a href="#" class="btn btn-primary ml-2">
-                                                                        <!-- Gunakan class ml-2 untuk margin kiri -->
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </a>
+                                            @if ($dataDonasi->count() > 0)
+                                                @foreach ($dataDonasi as $index => $donasi)
+                                                    @php
+                                                        dd($dataDonasi);
+                                                        dd($donasi->user);
+                                                    @endphp
+                                                    <tr>
+                                                        <td>{{ $index + 1 }}</td>
+                                                        <td>{{ $donasi->user->name }}</td>
+                                                        <td>{{ $donasi->user->alamat }}</td>
+                                                        <td>{{ $donasi->user->telephone }}</td>
+                                                        <td>{{ $donasi->user->email }}</td>
+                                                        <td class="align-middle">
+                                                            <div class="text-center">
+                                                                <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
+                                                                <a href="#" class="btn btn-primary ml-2">
+                                                                    <!-- Gunakan class ml-2 untuk margin kiri -->
+                                                                    <i class="fas fa-database"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <div class="d-flex justify-content-center">
+                                                                <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
+                                                                <a href="#" class="btn btn-primary ml-2">
+                                                                    <!-- Gunakan class ml-2 untuk margin kiri -->
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
 
-                                                                    <!-- Form untuk menghapus data -->
-                                                                    <form
-                                                                        action="{{ route('index.destroy.datadonasi', $user->id) }}"
-                                                                        method="POST"
-                                                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit" class="btn btn-danger ml-2">
-                                                                            <i class="fas fa-trash-alt"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endif
+                                                                <a href="#" class="btn btn-danger ml-2">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </a>
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
                                             @else
                                                 <tr>

@@ -50,10 +50,18 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('/distribusi/{id_distribusi}/destroy',[DistribusiController::class, 'destroy'])->name('index.destroy.distribusi');
 
     //manajemen distribusi_barang
+    // Route::get('/distribusi_barang/view/{id_distribusi}',[DistribusiBarangController::class, 'index'])->name('index.view.distribusibarang');
+    // Route::get('/distribusi_barang/create/{id_distribusi}',[DistribusiBarangController::class, 'create'])->name('index.create.distribusibarang');
+    // Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
+    // Route::get('/distribusi_barang/destroy/{id_distribusi}',[DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
+
     Route::get('/distribusi_barang/view/{id_distribusi}',[DistribusiBarangController::class, 'index'])->name('index.view.distribusibarang');
     Route::get('/distribusi_barang/create/{id_distribusi}',[DistribusiBarangController::class, 'create'])->name('index.create.distribusibarang');
     Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
-    Route::get('/distribusi_barang/destroy/{id_distribusi}',[DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
+    Route::get('/distribusi_barang/edit/{id_distribusi}',[DistribusiBarangController::class, 'edit'])->name('index.edit.distribusibarang');
+    Route::put('/distribusi_barang/{id_distribusi}/update', [DistribusiBarangController::class, 'update'])->name('index.update.distribusibarang');
+    Route::get('/distribusi_barang/{id_distribusi}/destroy', [DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
+
 
     //manajemen program
     Route::get('/program/view',[ProgramController::class, 'index'])->name('index.view.program');
@@ -80,7 +88,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/data_donasi/store',[DataDonasiController::class, 'store'])->name('index.store.datadonasi');
     Route::get('/data_donasi/{id}/edit',[DataDonasiController::class, 'edit'])->name('index.edit.datadonasi');
     Route::put('/data_donasi/{id}/update',[DataDonasiController::class, 'update'])->name('index.update.datadonasi');
-    Route::delete('/data_donasi/{id}/destroy',[DataDonasiController::class, 'destroy'])->name('index.destroy.datadonasi');
+    Route::get('/data_donasi/{id}/destroy',[DataDonasiController::class, 'destroy'])->name('index.destroy.datadonasi');
 
     // Route::get('/datadonasi/{id}/destroy', [DataDonasiController::class, 'destroy'])->name('destroy.datadonasi');
 

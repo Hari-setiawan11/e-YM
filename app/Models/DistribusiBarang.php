@@ -8,11 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DistribusiBarang extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'id',
-        'data_barang_id',
-        'distribusi_id',
-    ];
+     protected $fillable = ['distribusi_id', 'nama_barang', 'volume', 'satuan', 'harga_satuan', 'jumlah'];
 
 
      public function data_barang()
@@ -24,4 +20,5 @@ class DistribusiBarang extends Model
     {
         return $this->belongsTo(Distribusi::class,'distribusi_id','id');
     }
+
 }

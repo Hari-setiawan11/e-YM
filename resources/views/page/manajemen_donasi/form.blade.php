@@ -28,19 +28,24 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="file">Bukti Transfer</label>
-                                    <div class="custom-file">
-                                        <input type="file" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
-                                    </div>
+                                    <label for="nominal">Nominal</label>
+                                    <input id="nominal" type="text"
+                                        class="form-control @error('nominal') is-invalid @enderror" name="nominal"
+                                        placeholder="Nominal Donasi">
+                                    @error('nominal')
+                                        <div id="nominal" class="form-text"></div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="file" class="form-label">Bukti Transfer</label>
+                                    <input type="file" class="form-control" id="file" name="file">
                                     @error('file')
-                                        <div id="file" class="form-text"></div>
+                                        <div id="file" class="form-file"></div>
                                     @enderror
                                 </div>
 
-
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                    <button type="submit" class="btn btn-primary">
                                         Kirim
                                     </button>
                                 </div>

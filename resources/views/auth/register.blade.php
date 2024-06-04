@@ -6,7 +6,10 @@
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
-                        <div class="card card-primary shadow-lg">
+                        <div class="login-brand" style="margin-top: -40px;">
+                            <img src="{{ asset('assets/img/e-ym/eym.png') }}" alt="logo" width="150">
+                        </div>
+                        <div class="card card-primary shadow-lg" style="margin-top: -20px;">
                             <div class="card-header">
                                 <h4>Register</h4>
                             </div>
@@ -52,7 +55,7 @@
                                                 <input id="alamat" type="text" class="form-control" name="alamat"
                                                     tabindex="1" required autofocus>
                                                 <div class="invalid-feedback">
-                                                    Please fill in your Alamat.
+                                                    Please fill in your alamat.
                                                 </div>
                                             </div>
                                         </div>
@@ -62,7 +65,7 @@
                                                 <input id="telephone" type="text" class="form-control" name="telephone"
                                                     tabindex="2" required>
                                                 <div class="invalid-feedback">
-                                                    Please fill in your Telephone.
+                                                    Please fill in your telephone.
                                                 </div>
                                             </div>
                                         </div>

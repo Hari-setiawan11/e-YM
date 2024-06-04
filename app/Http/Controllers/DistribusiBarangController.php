@@ -21,8 +21,9 @@ class DistribusiBarangController extends Controller
             'distribusi_barang' => DistribusiBarang::where('distribusi_id', $distribusi_id)->get(),
         ];
 
-        return view('page.manajemen_distribusi.distribusi_barang', $data);
+        return view('page.distribusi_barang.index', $data);
     }
+
 
    public function cetakPDF($distribusi_id)
 {
@@ -75,54 +76,83 @@ class DistribusiBarangController extends Controller
     //     return view('page.manajemen_distribusi.form_data_barang', $data);
     // }
 
-    public function create($distribusi_id)
-    {
-        $distribusi = Distribusi::findOrFail($distribusi_id);
+    // public function create($distribusi_id)
+    // {
+    //     $distribusi = Distribusi::findOrFail($distribusi_id);
 
-        $data_barang = DataBarang::whereDoesntHave('distribusibarang', function ($query) use ($distribusi_id) {
-            $query->where('distribusi_id', $distribusi_id);
-        })->get();
+    //     $data_barang = DataBarang::whereDoesntHave('distribusibarang', function ($query) use ($distribusi_id) {
+    //         $query->where('distribusi_id', $distribusi_id);
+    //     })->get();
 
-        $data = [
-            'distribusi_id' => $distribusi_id,
-            'data_barang' => $data_barang,
-        ];
-        // dd($data);
+    //     $data = [
+    //         'distribusi_id' => $distribusi_id,
+    //         'data_barang' => $data_barang,
+    //     ];
+    //     // dd($data);
 
-        return view('page.manajemen_distribusi.form_data_barang', $data);
-    }
+    //     return view('page.manajemen_distribusi.form_data_barang', $data);
+    // }
 
     /**
      * Store a newly created resource in storage.
      */
 
-public function store(Request $request, $distribusi_id)
+     public function create($distribusi_id)
+    {
+        return view('page.distribusi_barang.create', compact('distribusi_id'));
+    }
+
+// public function store(Request $request, $distribusi_id)
+// {
+//     // Validasi bahwa minimal satu checkbox dipilih dan setiap ID data_barang ada
+//     $validated = $request->validate([
+//         'data_barangs' => 'required|array|min:1',
+//         'data_barangs.*' => 'exists:data_barangs,id',
+//     ]);
+
+//     $data_barangIds = $validated['data_barangs'];
+
+//     // Lakukan penyimpanan hanya jika minimal satu checkbox dipilih
+//     if (count($data_barangIds) > 0) {
+//         foreach ($data_barangIds as $data_barangId) {
+//             DistribusiBarang::create([
+//                 'distribusi_id' => $distribusi_id,
+//                 'data_barang_id' => $data_barangId,
+//             ]);
+//         }
+
+//         return redirect()->route('index.view.distribusibarang', $distribusi_id)
+//             ->with('toast_success', 'Data barang berhasil ditambahkan.');
+//     } else {
+//         // Redirect kembali dengan pesan error jika tidak ada checkbox yang dipilih
+//         return redirect()->route('index.view.distribusibarang', $distribusi_id)
+//             ->with('error', 'Pilih setidaknya satu data barang.');
+//     }
+// }
+
+public function store(Request $request)
 {
-    // Validasi bahwa minimal satu checkbox dipilih dan setiap ID data_barang ada
-    $validated = $request->validate([
-        'data_barangs' => 'required|array|min:1',
-        'data_barangs.*' => 'exists:data_barangs,id',
+    $request->validate([
+        'distribusi_id' => 'required|exists:distribusis,id',
+        'nama_barang' => 'required',
+        'volume' => 'required|numeric',
+        'satuan' => 'required',
+        'harga_satuan' => 'required|numeric',
+        'jumlah' => 'required|integer',
     ]);
 
-    $data_barangIds = $validated['data_barangs'];
+    DistribusiBarang::create([
+        'distribusi_id' => $request->distribusi_id,
+        'nama_barang' => $request->nama_barang,
+        'volume' => $request->volume,
+        'satuan' => $request->satuan,
+        'harga_satuan' => $request->harga_satuan,
+        'jumlah' => $request->jumlah,
+    ]);
 
-    // Lakukan penyimpanan hanya jika minimal satu checkbox dipilih
-    if (count($data_barangIds) > 0) {
-        foreach ($data_barangIds as $data_barangId) {
-            DistribusiBarang::create([
-                'distribusi_id' => $distribusi_id,
-                'data_barang_id' => $data_barangId,
-            ]);
-        }
-
-        return redirect()->route('index.view.distribusibarang', $distribusi_id)
-            ->with('toast_success', 'Data barang berhasil ditambahkan.');
-    } else {
-        // Redirect kembali dengan pesan error jika tidak ada checkbox yang dipilih
-        return redirect()->route('index.view.distribusibarang', $distribusi_id)
-            ->with('error', 'Pilih setidaknya satu data barang.');
-    }
+    return redirect()->route('index.view.distribusibarang', $request->distribusi_id);
 }
+
 
 //    public function store(Request $request, $distribusi_id)
 // {
@@ -154,18 +184,43 @@ public function store(Request $request, $distribusi_id)
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $distribusiBarang = DistribusiBarang::findOrFail($id);
+        return view('page.distribusi_barang.edit', compact('distribusiBarang'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+   public function update(Request $request, $id)
+{
+    $request->validate([
+        'distribusi_id' => 'required|exists:distribusis,id',
+        'nama_barang' => 'required',
+        'volume' => 'required|numeric',
+        'satuan' => 'required',
+        'harga_satuan' => 'required|numeric',
+        'jumlah' => 'required|integer',
+    ]);
+
+    $distribusiBarang = DistribusiBarang::findOrFail($id);
+
+    // Debugging
+    // dd($request->all());
+
+    $distribusiBarang->update([
+        'distribusi_id' => $request->distribusi_id,
+        'nama_barang' => $request->nama_barang,
+        'volume' => $request->volume,
+        'satuan' => $request->satuan,
+        'harga_satuan' => $request->harga_satuan,
+        'jumlah' => $request->jumlah,
+    ]);
+
+    return redirect()->route('index.view.distribusibarang', $request->distribusi_id)->with('success', 'Data barang berhasil diupdate.');
+}
+
 
     /**
      * Remove the specified resource from storage.

@@ -19,6 +19,7 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/js/grafik.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
@@ -35,6 +36,12 @@
         gtag('config', 'UA-94034622-3');
     </script>
     <!-- /END GA -->
+
+    {{-- grafik dashboard --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 </head>
 
 <body>
@@ -64,6 +71,8 @@
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    @include('sweetalert::alert')
+
 </body>
 
 </html>
