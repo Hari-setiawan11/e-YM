@@ -53,15 +53,6 @@
                                                         <td class="align-middle">{{ $loop->iteration }}</td>
                                                         <td class="align-middle">{{ $data->nama }}</td>
                                                         <td class="align-middle">{{ $data->deskripsi }}</td>
-                                                        {{-- <td class="align-middle">
-                                                        @if ($data->file)
-                                                            <a
-                                                                href="{{ asset('storage/programs/' . $data->file) }}">{{ $data->file }}</a>
-                                                        @else
-                                                            <i>No file uploaded.</i>
-                                                        @endif
-                                                    </td> --}}
-
                                                         <td class="align-middle">
                                                             @if ($data->file)
                                                                 <a href="{{ asset('storage/programs/' . $data->file) }}">
@@ -74,7 +65,7 @@
                                                             @endif
                                                         </td>
                                                         <td class="align-middle">
-                                                            <div class="d-flex justify-content-end">
+                                                            <div class="d-flex justify-content-center">
                                                                 <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
                                                                 <a href="{{ route('index.edit.program', $data->id) }}"
                                                                     class="btn btn-primary ml-2">

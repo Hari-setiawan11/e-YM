@@ -41,6 +41,8 @@
                                             <th>Deskripsi</th>
                                             <th>Nominal</th>
                                             <th>File</th>
+                                            <th class="text-center">Aksi</th>
+
                                         </tr>
                                         <tbody>
                                             @if ($Donasi->count() > 0)
@@ -61,6 +63,16 @@
                                                             @else
                                                                 <i>No file uploaded.</i>
                                                             @endif
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <div class="d-flex justify-content-center">
+                                                                <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
+                                                                <a href="{{ route('form.edit.donasi', $data->id) }}"
+                                                                    class="btn btn-primary ml-2">
+                                                                    <!-- Gunakan class ml-2 untuk margin kiri -->
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach

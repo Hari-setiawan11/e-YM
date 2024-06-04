@@ -50,9 +50,9 @@
                                                         <td class="align-middle">{{ $loop->iteration }}</td>
                                                         <td class="align-middle">{{ $data->created_at }}</td>
                                                         <td class="align-middle">{{ $data->deskripsi }}</td>
-                                                        <td class="align-middle"> Rp.
-                                                            {{ number_format($data->nominal, 0, ',', '.') }}</td>
                                                         <td class="align-middle">
+                                                            Rp. {{ number_format(floatval($data->nominal), 0, ',', '.') }}
+                                                        </td>
                                                         <td class="align-middle">
                                                             @if ($data->file)
                                                                 <a href="{{ asset('storage/donasis/' . $data->file) }}">
@@ -66,12 +66,11 @@
                                                         </td>
                                                         <td class="align-middle">
                                                             <div class="d-flex justify-content-end">
-                                                                <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                                {{-- <a href="{{ route('index.edit.donasi', $data->id) }}"
+                                                                <a href="{{ route('form.edit.donasi_admin', $data->id) }}"
                                                                     class="btn btn-primary ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>
-                                                                </a> --}}
+                                                                </a>
                                                                 <a href="{{ route('form.destroy.donasi', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
