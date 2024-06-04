@@ -19,6 +19,15 @@
                                 @csrf
 
                                 <div class="form-group">
+                                    <label for="user_id">Pilih User</label>
+                                    <select class="form-control" id="user_id" name="user_id">
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                {{-- <div class="form-group">
                                     <label for="nama">Nama</label>
                                     <input id="nama" type="text"
                                         class="form-control @error('nama') is-invalid @enderror" name="nama"
@@ -53,10 +62,10 @@
                                     @error('email')
                                         <div id="email" class="form-text"></div>
                                     @enderror
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                    <button type="submit" class="btn btn-primary ">
                                         Tambah Data Donasi
                                     </button>
                                 </div>

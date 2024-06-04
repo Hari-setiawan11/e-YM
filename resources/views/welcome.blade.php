@@ -30,10 +30,18 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('landingpage/css/style.css') }}" rel="stylesheet">
 
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Your other head content -->
+
 
 </head>
 
 <body>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top ">
@@ -89,148 +97,166 @@
     </section>
     <!-- End Hero -->
 
-    <main id="main">
-        <!-- ======= Penyaluran Section ======= -->
-        <section id="penyaluran" class="penyaluran section-bg">
-            <div class="container" data-aos="fade-up">
+    {{-- <main id="main"> --}}
+    <!-- ======= Penyaluran Section ======= -->
+    <section id="penyaluran" class="penyaluran section-bg">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Penyaluran Bantuan Yatim Mandiri Cabang Banyuwangi</h2>
+            </div>
 
-                <div class="section-title">
-                    <h2>Penyaluran Bantuan Yatim Mandiri Cabang Banyuwangi</h2>
-                </div>
-
-                @if ($KontenPenyaluran->count() > 0)
+            @if ($KontenPenyaluran->count() > 0)
+                <div class="scrollable-content">
                     <div class="grid-container">
                         @foreach ($KontenPenyaluran as $data)
-                            <div class="grid-item" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="grid-item" data-aos="zoom-in" data-aos-delay="200" onclick="showDetail(this)">
                                 <div class="icon-box">
                                     <div class="icon">
                                         <img src="{{ asset('storage/' . $data->foto) }}" alt="Foto"
                                             class="img-thumbnail" width="500">
                                     </div>
                                     <h2>{{ $data->nama }}</h2>
-                                    <p>{{ $data->keterangan }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @else
-                    <div class="text-center">Konten Penyaluran Belum Diisi</div>
-                @endif
-
-            </div>
-        </section>
-        <!-- End Services Section -->
-
-        <!-- ======= About Us Section ======= -->
-        <section id="program" class="program section-bg" style="background-color: #37517e">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>Program Yatim Mandiri</h2>
-                </div>
-
-                @if ($KontenProgram->count() > 0)
-                    <div class="grid-container">
-                        @foreach ($KontenProgram as $data)
-                            <div class="grid-item" data-aos="zoom-in" data-aos-delay="200">
-                                <div class="icon-box">
-                                    <div class="icon">
-                                        <img src="{{ asset('storage/' . $data->foto) }}" alt="Foto"
-                                            class="img-thumbnail" width="500">
+                                    <p class="partial-description">{{ substr($data->keterangan, 0, 0) }}</p>
+                                    <p class="full-description" style="display:none;">{{ $data->keterangan }}</p>
+                                    <div class="read-more-btn-container">
+                                        <button class="read-more-btn">Berita Selengkapnya</button>
                                     </div>
-                                    <h2>{{ $data->nama }}</h2>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                @else
-                    <div class="text-center">Konten Program Belum Diisi</div>
-                @endif
-
-            </div>
-        </section><!-- End About Us Section -->
-
-        <!-- ======= Donasi Section ======= -->
-        <section id="donasi" class="donasi">
-            <div class="container" data-aos="fade-up">
-
-                <div class="row content">
-                    <div class="col-lg-6">
-                        <h2>Perumpamaan orang-orang yang menginfakkan
-                            hartanya di jalan Allah adalah seperti (orang-
-                            orang yang menabur) sebutir biji (benih) yang
-                            menumbuhkan tujuh tangkai, pada setiap
-                            tangkai ada seratus biji. Allah melipatgandakan
-                            (pahala) bagi siapa yang Dia kehendaki. Allah
-                            Mahaluas lagi Maha Mengetahui.
-                            (QS. Al-Baqarah 261)</h2>
-                    </div>
-                    <div class="col-lg-6 button-container">
-                        <a href="{{ route('auth') }}">
-                            <button class="rounded-button">Donasi</button>
-                        </a>
-
-                    </div>
                 </div>
+            @else
+                <div class="text-center text-white">Konten Penyaluran Belum Diisi</div>
+            @endif
 
+            <div id="detail-view" class="detail-view" onclick="hideDetail()">
+                <div class="detail-content" onclick="event.stopPropagation()">
+                    <span class="close-btn" onclick="hideDetail()">&times;</span>
+                    <img id="detail-image" src="" alt="Detail Foto" class="img-thumbnail mb-3"
+                        width="100%">
+                    <h2 id="detail-title"></h2>
+                    <p id="detail-description" class="full-description"></p>
+                </div>
             </div>
-        </section><!-- End Donas Section -->
+        </div>
+    </section>
 
-        <!-- ======= Atm Section ======= -->
-        <section id="rekening_donasi" class="atm" style="background-color: #37517e">
-            <div class="container" data-aos="fade-up">
 
-                <div class="row">
-                    <div class="col-lg-6 d-flex align-items-center justify-content-center" data-aos="fade-right"
-                        data-aos-delay="100">
-                        <img src="{{ asset('landingpage/img/barcode.png') }}" class="img-fluid" alt="">
-                    </div>
-                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-                        <h3>Rekening Donasi</h3>
 
-                        <div class="atm-content">
 
-                            <div class="atm-info">
-                                <div class="atm-logo">
-                                    <img src="{{ asset('landingpage/img/bsi.png') }}" alt="Logo ATM" width="150px">
+
+    <!-- End Services Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="program" class="program section-bg" style="background-color: #37517e">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Program Yatim Mandiri</h2>
+            </div>
+
+            @if ($KontenProgram->count() > 0)
+                <div class="grid-container">
+                    @foreach ($KontenProgram as $data)
+                        <div class="grid-item" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="icon-box">
+                                <div class="icon">
+                                    <img src="{{ asset('storage/' . $data->foto) }}" alt="Foto"
+                                        class="img-thumbnail" width="500">
                                 </div>
-                                <div class="account-number">
-                                    <p>7001201454</p>
-                                </div>
+                                <h2>{{ $data->nama }}</h2>
                             </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="text-center" style="color: white;">Konten Program Belum Diisi</div>
+            @endif
 
-                            <div class="atm-info mt-2">
-                                <div class="atm-logo">
-                                    <img src="{{ asset('landingpage/img/bca.png') }}" alt="Logo ATM" width="130px">
-                                </div>
-                                <div class="account-number">
-                                    <p>0101358363</p>
-                                </div>
+        </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Donasi Section ======= -->
+    <section id="donasi" class="donasi">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row content">
+                <div class="col-lg-6">
+                    <h2>Perumpamaan orang-orang yang menginfakkan
+                        hartanya di jalan Allah adalah seperti (orang-
+                        orang yang menabur) sebutir biji (benih) yang
+                        menumbuhkan tujuh tangkai, pada setiap
+                        tangkai ada seratus biji. Allah melipatgandakan
+                        (pahala) bagi siapa yang Dia kehendaki. Allah
+                        Mahaluas lagi Maha Mengetahui.
+                        (QS. Al-Baqarah 261)</h2>
+                </div>
+                <div class="col-lg-6 button-container">
+                    <a href="{{ route('auth') }}">
+                        <button class="rounded-button">Donasi</button>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Donas Section -->
+
+    <!-- ======= Atm Section ======= -->
+    <section id="rekening_donasi" class="atm" style="background-color: #37517e">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                <div class="col-lg-6 d-flex align-items-center justify-content-center" data-aos="fade-right"
+                    data-aos-delay="100">
+                    <img src="{{ asset('landingpage/img/barcode.png') }}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+                    <h3>Rekening Donasi</h3>
+
+                    <div class="atm-content">
+
+                        <div class="atm-info">
+                            <div class="atm-logo">
+                                <img src="{{ asset('landingpage/img/bsi.png') }}" alt="Logo ATM" width="150px">
                             </div>
-
-                            <div class="atm-info">
-                                <div class="atm-logo">
-                                    <img src="{{ asset('landingpage/img/mandiri.png') }}" alt="Logo ATM"
-                                        width="150px">
-                                </div>
-                                <div class="account-number">
-                                    <p>1400003117703</p>
-                                </div>
+                            <div class="account-number">
+                                <p>7001201454</p>
                             </div>
-
-                            <h4 class="mt-3">a.n Yayasan Yatim Mandiri
-                            </h4>
-
                         </div>
 
+                        <div class="atm-info mt-2">
+                            <div class="atm-logo">
+                                <img src="{{ asset('landingpage/img/bca.png') }}" alt="Logo ATM" width="130px">
+                            </div>
+                            <div class="account-number">
+                                <p>0101358363</p>
+                            </div>
+                        </div>
+
+                        <div class="atm-info">
+                            <div class="atm-logo">
+                                <img src="{{ asset('landingpage/img/mandiri.png') }}" alt="Logo ATM" width="150px">
+                            </div>
+                            <div class="account-number">
+                                <p>1400003117703</p>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-3">a.n Yayasan Yatim Mandiri
+                        </h4>
+
                     </div>
+
                 </div>
-
             </div>
-        </section><!-- End Atm Section -->
 
-        <!-- ======= Lokasi Section ======= -->
-        <section id="lokasi" class="lokasi">
+        </div>
+    </section><!-- End Atm Section -->
+
+    <!-- ======= Lokasi Section ======= -->
+    {{-- <section id="lokasi" class="lokasi">
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
@@ -252,7 +278,8 @@
                 </div>
 
             </div>
-        </section><!-- End Contact Section -->
+        </section> --}}
+    <!-- End Contact Section -->
 
     </main><!-- End #main -->
 
@@ -318,6 +345,52 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('landingpage/js/main.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+        function showDetail(element) {
+            var detailView = document.getElementById('detail-view');
+            var detailImage = document.getElementById('detail-image');
+            var detailTitle = document.getElementById('detail-title');
+            var detailDescription = document.getElementById('detail-description');
+
+            detailImage.src = element.querySelector('img').src;
+            detailTitle.innerText = element.querySelector('h2').innerText;
+            detailDescription.innerText = element.querySelector('.full-description').innerText;
+
+            // Hapus kelas partial-description agar keterangan ditampilkan penuh
+            detailDescription.classList.remove('partial-description');
+            detailDescription.classList.add('full-description');
+
+            detailView.classList.add('active');
+            document.body.classList.add('no-scroll');
+        }
+
+        function hideDetail() {
+            var detailView = document.getElementById('detail-view');
+            detailView.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+    </script>
+    <script>
+        function scrollToLeft() {
+            var container = document.querySelector('.grid-container');
+            container.scrollLeft -= 100; // Ubah nilai sesuai kebutuhan
+        }
+
+        function scrollToRight() {
+            var container = document.querySelector('.grid-container');
+            container.scrollLeft += 100; // Ubah nilai sesuai kebutuhan
+        }
+    </script>
+
+
+
+
 
 </body>
 

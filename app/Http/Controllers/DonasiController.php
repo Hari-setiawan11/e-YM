@@ -123,5 +123,5 @@ class DonasiController extends Controller
         return redirect()->route('form.show.donasi', ['user_id' => $userId])->with('toast_success', 'Data dokumen berhasil dihapus.');
     }
 
-    
+
 }

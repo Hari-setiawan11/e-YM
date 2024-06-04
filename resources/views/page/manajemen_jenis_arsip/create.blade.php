@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                    <button type="submit" class="btn btn-primary">
                                         Tambah Jenis Arsip
                                     </button>
                                 </div>

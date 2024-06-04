@@ -39,7 +39,7 @@ Route::middleware('guest')->group( function() {
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
 
-Route::prefix('apps')->middleware('auth')->group( function() { 
+Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('dashboard',[DashboardController::class, 'index'])->name('apps.dashboard')->middleware('can:read-dashboard');
 
     //manajemen distribusi
@@ -54,6 +54,8 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('/distribusi_barang/view/{id_distribusi}',[DistribusiBarangController::class, 'index'])->name('index.view.distribusibarang');
     Route::get('/distribusi_barang/create/{id_distribusi}',[DistribusiBarangController::class, 'create'])->name('index.create.distribusibarang');
     Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
+    Route::get('/distribusi_barang/edit/{id_distribusi}',[DistribusiBarangController::class, 'edit'])->name('index.edit.distribusibarang');
+    Route::put('/distribusi_barang/update/{id_distribusi}',[DistribusiBarangController::class, 'update'])->name('index.update.distribusibarang');
     Route::get('/distribusi_barang/destroy/{id_distribusi}',[DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
 
     //manajemen program
@@ -95,10 +97,15 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('/data_user/view',[DataUserController::class, 'index'])->name('index.view.datauser');
     Route::get('/data_user/{id_users}/destroy',[DataUserController::class, 'destroy'])->name('index.destroy.datauser');
  
+
+    // //manajemen bukti_donasi
+    // Route::get('/bukti_donasi/view',[BuktiDonasiController::class, 'index'])->name('index.view.bukti');
+    // Route::get('/bukti_donasi/create',[BuktiDonasiController::class, 'create'])->name('index.create.bukti');
+    // Route::post('/bukti_donasi/store',[BuktiDonasiController::class, 'store'])->name('index.store.bukti');
+
     //profile
     Route::get('/profile/show/{id_user}',[ProfileController::class, 'show'])->name('index.view.profile');
     Route::put('/ubah-profile/{id_user}/update',[ProfileController::class, 'update'])->name('index.update.profile');
-
     //manajemen jenis arsip
     Route::get('/jenis_arsip/index',[JenisArsipController::class, 'index'])->name('index.view');
     Route::get('/jenis_arsip/create',[JenisArsipController::class, 'create'])->name('index.create');

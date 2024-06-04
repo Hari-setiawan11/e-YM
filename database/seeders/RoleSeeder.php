@@ -41,6 +41,7 @@ class RoleSeeder extends Seeder
             'read-form-donasi',
             'read-rekap-donasi',
             'read-dashboard',
+            'read-form-donasi',
             'read-dashboard-user',
         ]);
     }

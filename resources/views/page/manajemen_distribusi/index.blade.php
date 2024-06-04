@@ -60,7 +60,7 @@
                                                         <td class="align-middle">{{ $data->program->nama }}</td>
                                                         {{-- <td class="align-middle">{{ $data->tanggal->format('d M Y') }}</td> --}}
                                                         <td class="align-middle">
-                                                            {{ \carbon\carbon::parse($data->tanggal)->format('d F Y') }}
+                                                            {{ \carbon\carbon::parse($data->tanggal)->translatedFormat('d F Y') }}
                                                         </td>
                                                         <td class="align-middle">{{ $data->tempat }}</td>
                                                         <td class="align-middle">{{ $data->penerima_manfaat }}</td>

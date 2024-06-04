@@ -106,7 +106,7 @@
             </td>
             <td style="width: 20%;">
                 <img style="float: right; width: 300px; height: auto; max-width: 100%;"
-                    src="{{ public_path('assets/img/eym.png') }}" alt="Gambar" />
+                    src="{{ public_path('assets/img/e-ym/eym.png') }}" alt="Gambar" />
             </td>
         </tr>
     </table>
@@ -119,7 +119,8 @@
                     @if ($firstItem)
                         <tr>
                             <td colspan="1" style="padding: 5px;">
-                                Tanggal : {{ \carbon\carbon::parse($barang->distribusi->tanggal)->format('d F Y') }}
+                                Tanggal :
+                                {{ \carbon\carbon::parse($barang->distribusi->tanggal)->translatedFormat('d F Y') }}
                             </td>
                         </tr>
                         <tr>
@@ -150,14 +151,14 @@
             @foreach ($distribusi_barang as $barang)
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
-                    <td class="text-center">{{ $barang->data_barang->nama_barang }}</td>
-                    <td class="text-center">{{ $barang->data_barang->volume }}</td>
-                    <td class="text-center">{{ $barang->data_barang->satuan }}</td>
-                    <td class="text-center">{{ number_format($barang->data_barang->harga_satuan, 0, ',', '.') }}
+                    <td class="text-center">{{ $barang->nama_barang }}</td>
+                    <td class="text-center">{{ $barang->volume }}</td>
+                    <td class="text-center">{{ $barang->satuan }}</td>
+                    <td class="text-center">{{ number_format($barang->harga_satuan, 0, ',', '.') }}
                     </td>
-                    <td class="text-center">{{ number_format($barang->data_barang->jumlah, 0, ',', '.') }}</td>
+                    <td class="text-center">{{ number_format($barang->jumlah, 0, ',', '.') }}</td>
                 </tr>
-                <?php $totalJumlah += $barang->data_barang->jumlah; ?> <!-- Tambahkan nilai jumlah ke totalJumlah -->
+                <?php $totalJumlah += $barang->jumlah; ?> <!-- Tambahkan nilai jumlah ke totalJumlah -->
             @endforeach
         </tbody>
     </table>
@@ -202,12 +203,17 @@
 
     <!-- Tanggal -->
 
-    <table class="tanggal">
+    {{-- <table class="tanggal">
         <div class="tanggal-box tanggal-right">
             Banyuwangi, {{ \carbon\carbon::parse($barang->distribusi->tanggal)->format('d F Y') }}
         </div>
-    </table>
+    </table> --}}
 
+    <table class="tanggal">
+        <div class="tanggal-box tanggal-right">
+            Banyuwangi, {{ \Carbon\Carbon::now()->format('d F Y') }}
+        </div>
+    </table>
     <!-- Tanda Tangan -->
 
 

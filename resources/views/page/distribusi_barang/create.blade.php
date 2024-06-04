@@ -15,8 +15,9 @@
                             <h4>Tambah Data Barang</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('index.store.databarang') }}">
+                            <form method="POST" action="{{ route('index.store.distribusibarang', $distribusi_id) }}">
                                 @csrf
+                                <input type="hidden" name="distribusi_id" value="{{ $distribusi_id }}">
 
                                 <div class="form-group">
                                     <label for="nama_barang">Nama Barang</label>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Exception;
 
 class AuthController extends Controller
 {
@@ -48,7 +49,7 @@ class AuthController extends Controller
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:6|confirmed',
             ]);
-    
+
             $user = User::create([
                 'name' => $request->name,
                 'username' => $request->username,
@@ -59,7 +60,11 @@ class AuthController extends Controller
             ]);
             $guestRole = Role::findByName('Guest');
             $user->assignRole($guestRole);
-    
+
+            Auth::login($user);
+            // Redirect user to dashboard after successful registration
+            return redirect()->route('apps.dashboard');
+
             Auth::login($user);
             // Redirect user to dashboard after successful registration
             return redirect()->route('apps.dashboard');

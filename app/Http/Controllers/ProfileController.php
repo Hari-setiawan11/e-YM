@@ -67,7 +67,7 @@ class ProfileController extends Controller
      public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-    
+
         // Validasi input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -78,7 +78,7 @@ class ProfileController extends Controller
             'password' => ['nullable', 'string', 'min:8', 'confirmed', Password::defaults()],
             'password_confirmation' => 'nullable|min:8',
         ]);
-    
+
         // Persiapkan data untuk diupdate
         $updateData = [
             'name' => $validated['name'],
@@ -87,19 +87,19 @@ class ProfileController extends Controller
             'alamat' => $validated['alamat'],
             'telephone' => $validated['telephone'],
         ];
-    
+
         // Pengecekan apakah ada input password
         if (!empty($request->input('password'))) {
             // Hash password
             $updateData['password'] = Hash::make($request->input('password'));
         }
-    
+
         // Update data user
         $user->update($updateData);
-    
+
         // Menampilkan pesan sukses menggunakan alert
         // Alert::success('Success', 'Profil Berhasil Diupdate');
-    
+
         return redirect()->back();
     }
     /**
