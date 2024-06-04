@@ -1,12 +1,11 @@
 @extends('administrator.layouts.app')
 
-
 @section('title')
     <title>Daftar Donasi | e-YM</title>
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/datatables.min.css') }} ">
+    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/datatables.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 @endsection
@@ -51,69 +50,34 @@
                                                         <td class="align-middle">{{ $data->created_at }}</td>
                                                         <td class="align-middle">{{ $data->deskripsi }}</td>
                                                         <td class="align-middle">
-<<<<<<< HEAD
                                                             Rp. {{ number_format(floatval($data->nominal), 0, ',', '.') }}
                                                         </td>
                                                         <td class="align-middle">
-=======
->>>>>>> 6625c0982f85c4137b1ed3fdca9599e9ddf453b3
                                                             @if ($data->file)
                                                                 <a href="{{ asset('storage/donasis/' . $data->file) }}">
-                                                                    <i class="fas fa-file-alt"
-                                                                        style="font-size:
-                                                                20px;"></i>
+                                                                    <i class="fas fa-file-alt" style="font-size: 20px;"></i>
                                                                 </a>
                                                             @else
                                                                 <i>No file uploaded.</i>
                                                             @endif
                                                         </td>
                                                         <td class="align-middle">
-<<<<<<< HEAD
                                                             <div class="d-flex justify-content-end">
                                                                 <a href="{{ route('form.edit.donasi_admin', $data->id) }}"
-=======
-                                                            <div class="d-flex justify-content-center">
-                                                                <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                                {{-- <a href="{{ route('index.edit.donasi', $data->id) }}"
->>>>>>> 6625c0982f85c4137b1ed3fdca9599e9ddf453b3
                                                                     class="btn btn-primary ml-2">
-                                                                    <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                                 <a href="{{ route('form.destroy.donasi', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
-                                                                    <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </a>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
-                                                {{-- <tr>
-
-                                                <td>1</td>
-                                                <td>Sedekah Pangan</td>
-                                                <td>Langkah terbaik kebaikan untuk yatim, dhuafa, dan keluarga yang
-                                                    membutuhkan. Memberi harapan dan kehangatan dalam setiap pangan yang
-                                                    kita sajikan.</td>
-                                                <td><i class="fas fa-file"></i></td>
-                                                <td class="align-middle">
-                                                    <div class="d-flex justify-content-end">
-                                                        <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                        <a href="#" class="btn btn-primary ml-2">
-                                                            <!-- Gunakan class ml-2 untuk margin kiri -->
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger ml-2">
-                                                            <!-- Gunakan class ml-2 untuk margin kiri -->
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr> --}}
                                             @else
                                                 <tr>
-                                                    <td class="text-center" colspan="5">Program Belum Diisi</td>
+                                                    <td class="text-center" colspan="6">Program Belum Diisi</td>
                                                 </tr>
                                             @endif
                                         </tbody>
@@ -123,7 +87,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
