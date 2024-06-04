@@ -22,6 +22,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
+
+
+                                {{-- <h4>Daftar Data Barang : {{ $distribusi->program->nama }} -
+                                    {{ \carbon\carbon::parse($distribusi->tanggal)->format('d F Y') }}</h4> --}}
                                 <h4>Daftar Data Barang : {{ $distribusi->program->nama }} -
                                     {{ \carbon\carbon::parse($distribusi->tanggal)->format('d F Y') }}</h4>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\DataBarangController;
@@ -50,18 +51,10 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('/distribusi/{id_distribusi}/destroy',[DistribusiController::class, 'destroy'])->name('index.destroy.distribusi');
 
     //manajemen distribusi_barang
-    // Route::get('/distribusi_barang/view/{id_distribusi}',[DistribusiBarangController::class, 'index'])->name('index.view.distribusibarang');
-    // Route::get('/distribusi_barang/create/{id_distribusi}',[DistribusiBarangController::class, 'create'])->name('index.create.distribusibarang');
-    // Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
-    // Route::get('/distribusi_barang/destroy/{id_distribusi}',[DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
-
     Route::get('/distribusi_barang/view/{id_distribusi}',[DistribusiBarangController::class, 'index'])->name('index.view.distribusibarang');
     Route::get('/distribusi_barang/create/{id_distribusi}',[DistribusiBarangController::class, 'create'])->name('index.create.distribusibarang');
     Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
-    Route::get('/distribusi_barang/edit/{id_distribusi}',[DistribusiBarangController::class, 'edit'])->name('index.edit.distribusibarang');
-    Route::put('/distribusi_barang/{id_distribusi}/update', [DistribusiBarangController::class, 'update'])->name('index.update.distribusibarang');
-    Route::get('/distribusi_barang/{id_distribusi}/destroy', [DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
-
+    Route::get('/distribusi_barang/destroy/{id_distribusi}',[DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
 
     //manajemen program
     Route::get('/program/view',[ProgramController::class, 'index'])->name('index.view.program');
@@ -79,27 +72,37 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::put('/arsip/{id}/update',[ArsipController::class, 'update'])->name('index.update.arsip');
     Route::get('/arsip/{id}/destroy',[ArsipController::class, 'destroy'])->name('index.destroy.arsip');
 
-    //form data donasi(guest)
-    Route::get('/donasi/form',[DonasiController::class, 'index'])->name('form.view.donasi');
+    //form data donasi(admin)
+    Route::get('/donasi/{user_id}',[DonasiController::class, 'show'])->name('form.show.donasi');
+    Route::get('/donasi/form/{id}/destroy',[DonasiController::class, 'destroy'])->name('form.destroy.donasi');
 
-    //manaemen data_donasi
+    //form data donasi(guest)
+    // Route::get('/donasi/view',[DonasiController::class, 'index'])->name('form.index.donasi');
+    Route::get('/apps/donasi/view', [DonasiController::class, 'index'])->name('form.index.donasi');
+
+    Route::get('/donasi/form/create',[DonasiController::class, 'create'])->name('form.create.donasi');
+    Route::post('/donasi/form/store',[DonasiController::class, 'store'])->name('form.store.donasi');
+
+    //manajemen data_donasi
     Route::get('/data_donasi/view',[DataDonasiController::class, 'index'])->name('index.view.datadonasi');
     Route::get('/data_donasi/create',[DataDonasiController::class, 'create'])->name('index.create.datadonasi');
     Route::post('/data_donasi/store',[DataDonasiController::class, 'store'])->name('index.store.datadonasi');
     Route::get('/data_donasi/{id}/edit',[DataDonasiController::class, 'edit'])->name('index.edit.datadonasi');
     Route::put('/data_donasi/{id}/update',[DataDonasiController::class, 'update'])->name('index.update.datadonasi');
-    Route::get('/data_donasi/{id}/destroy',[DataDonasiController::class, 'destroy'])->name('index.destroy.datadonasi');
+    Route::get('/data_donasi/{id_donasi}/destroy',[DataDonasiController::class, 'destroy'])->name('index.destroy.datadonasi');
 
-    // Route::get('/datadonasi/{id}/destroy', [DataDonasiController::class, 'destroy'])->name('destroy.datadonasi');
+    //manaemen data_user
+    Route::get('/data_user/view',[DataUserController::class, 'index'])->name('index.view.datauser');
+    Route::get('/data_user/{id_users}/destroy',[DataUserController::class, 'destroy'])->name('index.destroy.datauser');
 
-    //manajemen bukti_donasi
-    Route::get('/bukti_donasi/view',[BuktiDonasiController::class, 'index'])->name('index.view.bukti');
-    Route::get('/bukti_donasi/create',[BuktiDonasiController::class, 'create'])->name('index.create.bukti');
-    Route::post('/bukti_donasi/store',[BuktiDonasiController::class, 'store'])->name('index.store.bukti');
+    // //manajemen bukti_donasi
+    // Route::get('/bukti_donasi/view',[BuktiDonasiController::class, 'index'])->name('index.view.bukti');
+    // Route::get('/bukti_donasi/create',[BuktiDonasiController::class, 'create'])->name('index.create.bukti');
+    // Route::post('/bukti_donasi/store',[BuktiDonasiController::class, 'store'])->name('index.store.bukti');
 
     //profile
-    Route::get('/profile/view',[ProfileController::class, 'index'])->name('index.view.profile');
-
+    Route::get('/profile/show/{id_user}',[ProfileController::class, 'show'])->name('index.view.profile');
+    Route::put('/ubah-profile/{id_user}/update',[ProfileController::class, 'update'])->name('index.update.profile');
     //manajemen jenis arsip
     Route::get('/jenis_arsip/index',[JenisArsipController::class, 'index'])->name('index.view');
     Route::get('/jenis_arsip/create',[JenisArsipController::class, 'create'])->name('index.create');

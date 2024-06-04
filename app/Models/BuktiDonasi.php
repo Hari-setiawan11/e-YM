@@ -9,15 +9,15 @@ class BuktiDonasi extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'datadonasi_id',
-        'tanggal', 
-        'nominal', 
-        'Deskripsi', 
+        // 'datadonasi_id',
+        'tanggal',
+        'nominal',
+        'Deskripsi',
         'file',
     ];
 
-    public function datadonasi()
-    {
-        return $this->belongsTo(DataDonasi::class, 'datadonasi_id','id');
-    }
+    // public function datadonasi()
+    // {
+    //     return $this->belongsTo(DataDonasi::class, 'datadonasi_id','id');
+    // }
 }

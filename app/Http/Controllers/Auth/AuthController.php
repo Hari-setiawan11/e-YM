@@ -64,6 +64,10 @@ class AuthController extends Controller
             Auth::login($user);
             // Redirect user to dashboard after successful registration
             return redirect()->route('apps.dashboard');
+
+            Auth::login($user);
+            // Redirect user to dashboard after successful registration
+            return redirect()->route('apps.dashboard');
         } catch (Exception $e) {
             Log::error($e->getMessage());
             return redirect()->back();

@@ -49,21 +49,18 @@
                                         </tr>
                                         <tbody>
                                             @if ($dataDonasi->count() > 0)
-                                                @foreach ($dataDonasi as $index => $donasi)
-                                                    @php
-                                                        dd($dataDonasi);
-                                                        dd($donasi->user);
-                                                    @endphp
+                                                @foreach ($dataDonasi as $data)
                                                     <tr>
-                                                        <td>{{ $index + 1 }}</td>
-                                                        <td>{{ $donasi->user->name }}</td>
-                                                        <td>{{ $donasi->user->alamat }}</td>
-                                                        <td>{{ $donasi->user->telephone }}</td>
-                                                        <td>{{ $donasi->user->email }}</td>
+                                                        <td class="align-middle">{{ $loop->iteration }}</td>
+                                                        <td class="align-middle">{{ $data->nama }}</td>
+                                                        <td class="align-middle">{{ $data->alamat }}</td>
+                                                        <td class="align-middle">{{ $data->telephone }}</td>
+                                                        <td class="align-middle">{{ $data->email }}</td>
                                                         <td class="align-middle">
                                                             <div class="text-center">
                                                                 <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                                <a href="#" class="btn btn-primary ml-2">
+                                                                <a href="{{ route('index.view.bukti', $data->id) }}"
+                                                                    class="btn btn-primary ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-database"></i>
                                                                 </a>
@@ -72,15 +69,16 @@
                                                         <td class="align-middle">
                                                             <div class="d-flex justify-content-center">
                                                                 <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                                <a href="#" class="btn btn-primary ml-2">
+                                                                <a href="{{ route('index.edit.datadonasi', $data->id) }}"
+                                                                    class="btn btn-primary ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-
-                                                                <a href="#" class="btn btn-danger ml-2">
+                                                                <a href="{{ route('index.destroy.datadonasi', $data->id) }}"
+                                                                    class="btn btn-danger ml-2">
+                                                                    <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </a>
-
                                                             </div>
                                                         </td>
                                                     </tr>

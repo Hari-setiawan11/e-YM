@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bukti_donasis', function (Blueprint $table) {
+        Schema::create('donasis', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->text('deskripsi');
             $table->string('nominal');
-            $table->string('deskripsi');
-            $table->string('file')->nullable();
+            $table->string('file')->nullable(); // Menggunakan nullable() agar kolom bisa kosong
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bukti_donasis');
+        Schema::dropIfExists('donasis');
     }
 };

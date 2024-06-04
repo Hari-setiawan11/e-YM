@@ -5,9 +5,6 @@
     <!-- Main Content -->
     <div class="main-content">
         <section class="section">
-
-
-
             <div class="row pt-2">
                 <div class="col-12">
                     <div class="card">

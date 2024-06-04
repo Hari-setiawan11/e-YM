@@ -5,22 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Program extends Model
+class Donasi extends Model
 {
     use HasFactory;
     protected $fillable = [
         'id',
-        'nama',
+        'user_id',
         'deskripsi',
         'file',
+        'nominal',
     ];
-
-    public function arsips()
+    public function user()
     {
-        return $this->hasMany(Arsip::class);
-    }
-    public function distribusi()
-    {
-        return $this->hasMany(Distribusi::class);
+        return $this->belongsTo(User::class, 'user_id','id');
     }
 }

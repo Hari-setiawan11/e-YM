@@ -29,6 +29,8 @@ class RoleSeeder extends Seeder
             'read-program', 'create-program','update-program','delete-program',
             'read-arsip', 'create-arsip','update-arsip','delete-arsip',
             'read-data-donasi', 'create-data-donasi', 'update-data-donasi', 'delete-data-donasi',
+            'read-data-user',
+            'read-dashboard-admin',
             'read-jenis-arsip', 'create-jenis-arsip','update-jenis-arsip','delete-jenis-arsip',
             'read-data-barang', 'create-data-barang','update-data-barang','delete-data-barang',
             'read-lpj', 'create-lpj','update-lpj','delete-lpj',
@@ -36,8 +38,11 @@ class RoleSeeder extends Seeder
         ]);
 
         $guest->givePermissionTo([
+            'read-form-donasi',
+            'read-rekap-donasi',
             'read-dashboard',
             'read-form-donasi',
+            'read-dashboard-user',
         ]);
     }
 }

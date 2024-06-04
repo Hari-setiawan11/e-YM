@@ -68,18 +68,18 @@ class ProgramController extends Controller
     }
 
     public function destroy($id)
-{
-    $program = Program::findOrFail($id); // Temukan program berdasarkan ID
+    {
+        $program = Program::findOrFail($id); // Temukan program berdasarkan ID
 
-    // Hapus file terkait jika ada
-    if ($program->file) {
-        Storage::disk('public')->delete('programs/' . $program->file);
+        // Hapus file terkait jika ada
+        if ($program->file) {
+            Storage::disk('public')->delete('programs/' . $program->file);
+        }
+
+        // Hapus program dari database
+        $program->delete();
+
+        return redirect()->route('index.view.program')->with('toast_success', 'Data dokumen berhasil dihapus.');
     }
-
-    // Hapus program dari database
-    $program->delete();
-
-    return redirect()->route('index.view.program')->with('toast_success', 'Data dokumen berhasil dihapus.');
-}
 
 }

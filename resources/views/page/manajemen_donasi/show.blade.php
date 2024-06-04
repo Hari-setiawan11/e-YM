@@ -2,7 +2,7 @@
 
 
 @section('title')
-    <title>Daftar Program | e-YM</title>
+    <title>Daftar Donasi | e-YM</title>
 @endsection
 
 @section('css')
@@ -20,12 +20,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Program</h4>
+                                <h4>Daftar Donasi</h4>
                                 <div class="card-header-form">
-                                    <div class="ml-auto mb-2">
-                                        <a href="{{ route('index.create.program') }}" style="float: right;"
-                                            class="btn btn-round btn-primary mb-3">Tambah</a>
-                                    </div>
                                     <form>
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search">
@@ -41,30 +37,25 @@
                                     <table class="table table-striped">
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>Tanggal</th>
                                             <th>Deskripsi</th>
+                                            <th>Nominal</th>
                                             <th>File</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                         <tbody>
-                                            @if ($Program->count() > 0)
-                                                @foreach ($Program as $data)
+                                            @if ($donasi->count() > 0)
+                                                @foreach ($donasi as $data)
                                                     <tr>
                                                         <td class="align-middle">{{ $loop->iteration }}</td>
-                                                        <td class="align-middle">{{ $data->nama }}</td>
+                                                        <td class="align-middle">{{ $data->created_at }}</td>
                                                         <td class="align-middle">{{ $data->deskripsi }}</td>
-                                                        {{-- <td class="align-middle">
-                                                        @if ($data->file)
-                                                            <a
-                                                                href="{{ asset('storage/programs/' . $data->file) }}">{{ $data->file }}</a>
-                                                        @else
-                                                            <i>No file uploaded.</i>
-                                                        @endif
-                                                    </td> --}}
-
+                                                        <td class="align-middle"> Rp.
+                                                            {{ number_format($data->nominal, 0, ',', '.') }}</td>
+                                                        <td class="align-middle">
                                                         <td class="align-middle">
                                                             @if ($data->file)
-                                                                <a href="{{ asset('storage/programs/' . $data->file) }}">
+                                                                <a href="{{ asset('storage/donasis/' . $data->file) }}">
                                                                     <i class="fas fa-file-alt"
                                                                         style="font-size:
                                                                 20px;"></i>
@@ -76,12 +67,12 @@
                                                         <td class="align-middle">
                                                             <div class="d-flex justify-content-end">
                                                                 <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                                <a href="{{ route('index.edit.program', $data->id) }}"
+                                                                {{-- <a href="{{ route('index.edit.donasi', $data->id) }}"
                                                                     class="btn btn-primary ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>
-                                                                </a>
-                                                                <a href="{{ route('index.destroy.program', $data->id) }}"
+                                                                </a> --}}
+                                                                <a href="{{ route('form.destroy.donasi', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-trash-alt"></i>

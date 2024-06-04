@@ -21,15 +21,16 @@ class User extends Authenticatable
 
      protected $guarded = [];
 
-    //  protected $fillable = [
-    //     'id',
-    //     'name',
-    //     'email',
-    //     'username',
-    //     'alamat',
-    //     'telephone',
-    //     'password',
-    // ];
+     protected $fillable = [
+        'id',
+        'name',
+        'email',
+        'username',
+        'alamat',
+        'telephone',
+        'password',
+    ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -50,10 +51,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function dataDonasi()
+    public function donasi()
     {
-        return $this->hasMany(DataDonasi::class, 'user_id');
+        return $this->hasMany(Donasi::class);
     }
-
-
 }

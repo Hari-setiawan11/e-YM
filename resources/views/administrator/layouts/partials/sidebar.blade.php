@@ -6,6 +6,7 @@
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">YM</a>
+            <a href="index.html">YM</a>
         </div>
         <ul class="sidebar-menu">
             @can('read-dashboard')
@@ -80,11 +81,11 @@
                 </li>
             @endcan
 
-            @can('read-data-donasi')
+            @can('read-data-user')
                 <li
-                    class="{{ \Route::is('index.view.datadonasi') || \Route::is('index.create.datadonasi') || \Route::is('index.edit.datadonasi') ? 'active' : '' }}">
-                    <a href="{{ route('index.view.datadonasi') }}" class="nav-link"><i class="fas fa-donate"></i>
-                        <span>Data Donasi</span></a>
+                    class="{{ \Route::is('index.view.datauser') || \Route::is('index.create.datauser') || \Route::is('index.edit.datauser') ? 'active' : '' }}">
+                    <a href="{{ route('index.view.datauser') }}" class="nav-link"><i class="fas fa-donate"></i>
+                        <span>Data Donatur</span></a>
                 </li>
             @endcan
 
@@ -96,24 +97,78 @@
                         <span>Data Barang</span>
                     </a>
                 </li>
-            @endcan
+                @can('read-program')
+                    <li
+                        class="{{ \Route::is('index.view.program') || \Route::is('index.create.program') || \Route::is('index.edit.program') ? 'active' : '' }}">
+                        <a href="{{ route('index.view.program') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                            <span>Program</span></a>
+                    </li>
+                @endcan
+                @can('read-jenis-arsip')
+                    <li
+                        class="{{ \Route::is('index.view') || \Route::is('index.create') || \Route::is('index.edit') ? 'active' : '' }}">
+                        <a href="{{ route('index.view') }}" class="nav-link"><i class="fas fa-folder-open"></i>
+                            <span>Jenis Arsip</span></a>
+                    </li>
+                @endcan
 
-            @can('read-kelola-konten')
-                <li class="dropdown{{ \Route::is(...$activeRoutesDropdown) ? ' active' : '' }}">
-                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                        <span>Kelola Konten</span></a>
-                    <ul class="dropdown-menu">
-                        <li
-                            class="{{ \Route::is('index.view.penyaluran') || \Route::is('index.create.penyaluran') || \Route::is('index.edit.penyaluran') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('index.view.penyaluran') }}">Konten Penyaluran</a>
-                        </li>
-                        <li
-                            class="{{ \Route::is('index.view.kprogram') || \Route::is('index.create.kprogram') || \Route::is('index.edit.kprogram') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('index.view.kprogram') }}">Konten Program</a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
-        </ul>
-    </aside>
-</div>
+                @can('read-arsip')
+                    <li
+                        class="{{ \Route::is('index.view.arsip') || \Route::is('index.create.arsip') || \Route::is('index.edit.arsip') ? 'active' : '' }}">
+                        <a href="{{ route('index.view.arsip') }}" class="nav-link"><i class="fas fa-folder"></i></i>
+                            <span>Arsip</span></a>
+                    </li>
+                @endcan
+
+                @can('read-data-donasi')
+                    <li
+                        class="{{ \Route::is('index.view.datadonasi') || \Route::is('index.create.datadonasi') || \Route::is('index.edit.datadonasi') ? 'active' : '' }}">
+                        <a href="{{ route('index.view.datadonasi') }}" class="nav-link"><i class="fas fa-donate"></i>
+                            <span>Data Donasi</span></a>
+                    </li>
+                @endcan
+
+                @can('read-data-barang')
+                    <li
+                        class="{{ \Route::is('index.view.databarang') || \Route::is('index.create.databarang') || \Route::is('index.edit.databarang') ? 'active' : '' }}">
+                        <a href="{{ route('index.view.databarang') }}" class="nav-link">
+                            <i class="fas fa-shopping-basket"></i>
+                            <span>Data Barang</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('read-kelola-konten')
+                    <li class="dropdown{{ \Route::is(...$activeRoutesDropdown) ? ' active' : '' }}">
+                        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                            <span>Kelola Konten</span></a>
+                        <ul class="dropdown-menu">
+                            <li
+                                class="{{ \Route::is('index.view.penyaluran') || \Route::is('index.create.penyaluran') || \Route::is('index.edit.penyaluran') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('index.view.penyaluran') }}">Konten Penyaluran</a>
+                                @can('read-kelola-konten')
+                                <li class="dropdown{{ \Route::is(...$activeRoutesDropdown) ? ' active' : '' }}">
+                                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                            class="fas fa-columns"></i>
+                                        <span>Kelola Konten</span></a>
+                                    <ul class="dropdown-menu">
+                                        <li
+                                            class="{{ \Route::is('index.view.penyaluran') || \Route::is('index.create.penyaluran') || \Route::is('index.edit.penyaluran') ? 'active' : '' }}">
+                                            <a class="nav-link" href="{{ route('index.view.penyaluran') }}">Konten Penyaluran</a>
+                                        </li>
+                                        <li
+                                            class="{{ \Route::is('index.view.kprogram') || \Route::is('index.create.kprogram') || \Route::is('index.edit.kprogram') ? 'active' : '' }}">
+                                            <a class="nav-link" href="{{ route('index.view.kprogram') }}">Konten Program</a>
+                                        <li
+                                            class="{{ \Route::is('index.view.kprogram') || \Route::is('index.create.kprogram') || \Route::is('index.edit.kprogram') ? 'active' : '' }}">
+                                            <a class="nav-link" href="{{ route('index.view.kprogram') }}">Konten Program</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+            </ul>
+        </aside>
+    </div>
