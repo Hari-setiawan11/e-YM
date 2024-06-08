@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DataBarang;
 use App\Models\Distribusi;
 use App\Models\DistribusiBarang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; // Pastikan ini ada
+use Carbon\Carbon;
+
 use TCPDF;
+
 
 class DistribusiBarangController extends Controller
 {
@@ -28,14 +31,16 @@ class DistribusiBarangController extends Controller
    public function cetakPDF($distribusi_id)
 {
     $distribusi_barang = DistribusiBarang::where('distribusi_id', $distribusi_id)->get();
-    $program = $distribusi_barang->first()->distribusi->program;
-    $tanggal = \Carbon\Carbon::parse($program->tanggal)->format('d F Y');
+    $distribusi = Distribusi::find($distribusi_id); // Mengambil data distribusi berdasarkan ID
+    $program = $distribusi->program; // Mengakses relasi program dari distribusi
+    // $tanggal = \Carbon\Carbon::parse($distribusi->tanggal)->translatedFormat('d F Y'); // Menggunakan tanggal dari tabel distribusi
+    $tanggal = Carbon::now()->translatedFormat('d F Y');
     $namaProgram = $program->nama;
 
     $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
     $pdf->SetCreator('Creator');
     $pdf->SetAuthor('Author');
-    $pdf->SetTitle($namaProgram. '-'. $tanggal);
+    $pdf->SetTitle($namaProgram . ' - ' . $tanggal);
     $pdf->setPrintHeader(false);
 
     $pdf->AddPage();
@@ -131,27 +136,43 @@ class DistribusiBarangController extends Controller
 // }
 
 public function store(Request $request)
-{
-    $request->validate([
-        'distribusi_id' => 'required|exists:distribusis,id',
-        'nama_barang' => 'required',
-        'volume' => 'required|numeric',
-        'satuan' => 'required',
-        'harga_satuan' => 'required|numeric',
-        'jumlah' => 'required|integer',
-    ]);
+    {
+        $request->validate([
+            'distribusi_id' => 'required|exists:distribusis,id',
+            'nama_barang' => 'required',
+            'volume' => 'required|numeric',
+            'satuan' => 'required',
+            'harga_satuan' => 'required|numeric',
+        ]);
 
-    DistribusiBarang::create([
-        'distribusi_id' => $request->distribusi_id,
-        'nama_barang' => $request->nama_barang,
-        'volume' => $request->volume,
-        'satuan' => $request->satuan,
-        'harga_satuan' => $request->harga_satuan,
-        'jumlah' => $request->jumlah,
-    ]);
+        // Hitung total harga barang baru
+        $harga_barang = $request->volume * $request->harga_satuan;
+
+        // Ambil data distribusi dan anggarannya
+        $distribusi = Distribusi::find($request->distribusi_id);
+        $pengeluaran = $distribusi->pengeluaran;
+
+        // Hitung total harga barang yang sudah ada di distribusi ini
+        $total_harga_barang_sekarang = DistribusiBarang::where('distribusi_id', $request->distribusi_id)->sum(DB::raw('volume * harga_satuan'));
+
+        // Periksa apakah total harga barang melebihi pengeluaran
+        if (($total_harga_barang_sekarang + $harga_barang) > $pengeluaran) {
+            return back()->withErrors(['total_harga' => 'Total Harga Barang Melebihi Pengeluaran Yang Tertulis.'])->withInput();
+        }
+
+        // Jika validasi lolos, simpan data
+        DistribusiBarang::create([
+            'distribusi_id' => $request->distribusi_id,
+            'nama_barang' => $request->nama_barang,
+            'volume' => $request->volume,
+            'satuan' => $request->satuan,
+            'harga_satuan' => $request->harga_satuan,
+            'jumlah' => $harga_barang,
+        ]);
 
     return redirect()->route('index.view.distribusibarang', $request->distribusi_id);
 }
+
 
 
 //    public function store(Request $request, $distribusi_id)
@@ -201,7 +222,6 @@ public function store(Request $request)
         'volume' => 'required|numeric',
         'satuan' => 'required',
         'harga_satuan' => 'required|numeric',
-        'jumlah' => 'required|integer',
     ]);
 
     $distribusiBarang = DistribusiBarang::findOrFail($id);
@@ -215,7 +235,7 @@ public function store(Request $request)
         'volume' => $request->volume,
         'satuan' => $request->satuan,
         'harga_satuan' => $request->harga_satuan,
-        'jumlah' => $request->jumlah,
+        'jumlah' => $request->volume * $request->harga_satuan,
     ]);
 
     return redirect()->route('index.view.distribusibarang', $request->distribusi_id)->with('success', 'Data barang berhasil diupdate.');

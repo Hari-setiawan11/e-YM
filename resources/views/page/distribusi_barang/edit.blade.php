@@ -36,39 +36,56 @@
                                         <div id="volume" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="form-group">
                                     <label for="satuan">Satuan</label>
-                                    <input id="satuan" type="text"
-                                        class="form-control @error('satuan') is-invalid @enderror" name="satuan"
-                                        placeholder="Satuan" value="{{ $distribusiBarang->satuan }}">
+                                    <select id="satuan" class="form-control @error('satuan') is-invalid @enderror"
+                                        name="satuan">
+                                        <option value="">Pilih Satuan</option>
+                                        <option value="Nota" {{ $distribusiBarang->satuan == 'Nota' ? 'selected' : '' }}>
+                                            Nota</option>
+                                        <option value="Kwitansi"
+                                            {{ $distribusiBarang->satuan == 'Kwitansi' ? 'selected' : '' }}>Kwitansi
+                                        </option>
+                                    </select>
                                     @error('satuan')
                                         <div id="satuan" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="harga_satuan">Harga_satuan</label>
-                                    <input id="harga_satuan" type="text"
-                                        class="form-control @error('harga_satuan') is-invalid @enderror" name="harga_satuan"
-                                        placeholder="Harga Satuan" value="{{ $distribusiBarang->harga_satuan }}">
+                                    <label for="harga_satuan_display">Harga Satuan</label>
+                                    <input id="harga_satuan_display" type="text"
+                                        class="form-control @error('harga_satuan') is-invalid @enderror"
+                                        name="harga_satuan_display" placeholder="Harga Satuan"
+                                        value="{{ number_format($distribusiBarang->harga_satuan, 0, ',', '.') }}">
+                                    <input id="harga_satuan" type="hidden" name="harga_satuan"
+                                        value="{{ $distribusiBarang->harga_satuan }}">
                                     @error('harga_satuan')
-                                        <div id="harga_satuan" class="form-text">{{ $message }}</div>
+                                        <div id="harga_satuan_error" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="jumlah">Jumlah</label>
-                                    <input id="jumlah" type="text"
-                                        class="form-control @error('jumlah') is-invalid @enderror" name="jumlah"
-                                        placeholder="Jumlah" value="{{ $distribusiBarang->jumlah }}">
-                                    @error('jumlah')
-                                        <div id="jumlah" class="form-text">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-lg btn-block">
                                         Simpan Data Barang
                                     </button>
                                 </div>
+                                <script>
+                                    document.getElementById('harga_satuan_display').addEventListener('input', function(e) {
+                                        let displayValue = e.target.value.replace(/\D/g, ''); // Hapus semua karakter non-digit
+                                        let formattedValue = displayValue.replace(/\B(?=(\d{3})+(?!\d))/g,
+                                        '.'); // Tambahkan titik setiap 3 angka
+                                        e.target.value = formattedValue;
+
+                                        // Set nilai asli tanpa format ke hidden input
+                                        document.getElementById('harga_satuan').value = displayValue;
+                                    });
+
+                                    document.querySelector('form').addEventListener('submit', function(e) {
+                                        let displayValue = document.getElementById('harga_satuan_display').value;
+                                        let actualValue = displayValue.replace(/\./g, ''); // Hapus titik sebelum submit
+                                        document.getElementById('harga_satuan').value = actualValue;
+                                    });
+                                </script>
                             </form>
                         </div>
                     </div>

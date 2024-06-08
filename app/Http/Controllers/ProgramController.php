@@ -23,7 +23,7 @@ class ProgramController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+            'deskripsi' => 'required|string',
             'file' => 'nullable|file|max:2048',
         ]);
 
@@ -50,7 +50,7 @@ class ProgramController extends Controller
     {
     $validated = $request->validate([
         'nama' => 'required|string|max:255',
-        'deskripsi' => 'nullable|string',
+        'deskripsi' => 'required|string',
         'file' => 'nullable|file|max:2048',
     ]);
 

@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Administrator\Dashboard;
 
 use App\Models\Arsip;
-use App\Models\DataBarang;
-use App\Models\DataDonasi;
 use App\Models\Distribusi;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Donasi;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\Program;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -21,6 +20,7 @@ class DashboardController extends Controller
         $totalDistribusi = Distribusi::count();
         $totalArsip = Arsip::count();
         $totalDonatur = User::count();
+        $totalProgram = Program::count();
 
         // Mengambil peran "guest"
         $guestRole = Role::where('name', 'guest')->first();
@@ -33,7 +33,6 @@ class DashboardController extends Controller
             })->count();
         }
 
-        $totalBarang = DataBarang::count();
 
         // Menghitung total donasi sesuai dengan pengguna yang login
         $user = auth()->user();
@@ -61,6 +60,6 @@ class DashboardController extends Controller
             'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
         ];
 
-        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalBarang', 'totalGuest', 'totalDonasi','donationData','months'));
+        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalProgram', 'totalGuest', 'totalDonasi','donationData','months'));
     }
 }
