@@ -53,15 +53,6 @@
                                                         <td class="align-middle">{{ $loop->iteration }}</td>
                                                         <td class="align-middle">{{ $data->nama }}</td>
                                                         <td class="align-middle">{{ $data->deskripsi }}</td>
-                                                        {{-- <td class="align-middle">
-                                                        @if ($data->file)
-                                                            <a
-                                                                href="{{ asset('storage/programs/' . $data->file) }}">{{ $data->file }}</a>
-                                                        @else
-                                                            <i>No file uploaded.</i>
-                                                        @endif
-                                                    </td> --}}
-
                                                         <td class="align-middle">
                                                             @if ($data->file)
                                                                 <a href="{{ asset('storage/programs/' . $data->file) }}">
