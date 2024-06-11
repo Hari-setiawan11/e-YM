@@ -68,31 +68,25 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="anggaran">Anggaran</label>
-                                    <input id="anggaran" type="text"
-                                        class="form-control @error('anggaran') is-invalid @enderror" name="anggaran"
+                                    <input id="anggaran_display" type="text"
+                                        class="form-control @error('anggaran') is-invalid @enderror" name="anggaran_display"
                                         placeholder="Anggaran">
+                                    <input id="anggaran" type="hidden" name="anggaran">
                                     @error('anggaran')
-                                        <div id="anggaran" class="form-text"></div>
+                                        <div id="anggaran_error" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="form-group">
                                     <label for="pengeluaran">Pengeluaran</label>
-                                    <input id="pengeluaran" type="text"
-                                        class="form-control @error('pengeluaran') is-invalid @enderror" name="pengeluaran"
-                                        placeholder="Pengeluaran">
+                                    <input id="pengeluaran_display" type="text"
+                                        class="form-control @error('pengeluaran') is-invalid @enderror"
+                                        name="pengeluaran_display" placeholder="Pengeluaran">
+                                    <input id="pengeluaran" type="hidden" name="pengeluaran">
                                     @error('pengeluaran')
-                                        <div id="pengeluaran" class="form-text"></div>
+                                        <div id="pengeluaran_error" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label for="sisa">Sisa</label>
-                                    <input id="sisa" type="text"
-                                        class="form-control @error('sisa') is-invalid @enderror" name="sisa"
-                                        placeholder="Sisa">
-                                    @error('sisa')
-                                        <div id="sisa" class="form-text"></div>
-                                    @enderror
-                                </div> --}}
                                 <div class="form-group">
                                     <label for="file" class="form-label">file</label>
                                     <input type="file" class="form-control" id="file" name="file">
@@ -106,6 +100,34 @@
                                         Tambah Distribusi
                                     </button>
                                 </div>
+                                <script>
+                                    function formatRupiah(input) {
+                                        let displayValue = input.value.replace(/\D/g, ''); // Hapus semua karakter non-digit
+                                        let formattedValue = displayValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Tambahkan titik setiap 3 angka
+                                        input.value = formattedValue;
+
+                                        // Set nilai asli tanpa format ke hidden input yang sesuai
+                                        let hiddenInputId = input.id.replace('_display', '');
+                                        document.getElementById(hiddenInputId).value = displayValue;
+                                    }
+
+                                    document.getElementById('anggaran_display').addEventListener('input', function(e) {
+                                        formatRupiah(e.target);
+                                    });
+
+                                    document.getElementById('pengeluaran_display').addEventListener('input', function(e) {
+                                        formatRupiah(e.target);
+                                    });
+
+                                    document.querySelector('form').addEventListener('submit', function(e) {
+                                        let anggaranDisplayValue = document.getElementById('anggaran_display').value;
+                                        let pengeluaranDisplayValue = document.getElementById('pengeluaran_display').value;
+
+                                        // Hapus titik sebelum submit
+                                        document.getElementById('anggaran').value = anggaranDisplayValue.replace(/\./g, '');
+                                        document.getElementById('pengeluaran').value = pengeluaranDisplayValue.replace(/\./g, '');
+                                    });
+                                </script>
                             </form>
                         </div>
                     </div>

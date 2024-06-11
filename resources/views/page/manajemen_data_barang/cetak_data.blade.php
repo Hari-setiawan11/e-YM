@@ -101,7 +101,7 @@
         <tr>
             <td style="width: 80%;">
                 <p style="text-align: center;">
-                    LAPORAN PERTANGGUNGJAWABAN KEGIATAN PROGRAM <br> YATIM MANDIRI CABANG BANYUWANAGI
+                    LAPORAN PERTANGGUNGJAWABAN KEGIATAN PROGRAM <br> YATIM MANDIRI CABANG BANYUWANGI
                 </p>
             </td>
             <td style="width: 20%;">
@@ -211,16 +211,15 @@
 
     <table class="tanggal">
         <div class="tanggal-box tanggal-right">
-            Banyuwangi, {{ \Carbon\Carbon::now()->format('d F Y') }}
+            Banyuwangi, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
         </div>
     </table>
     <!-- Tanda Tangan -->
 
-
-
     <table style="width: 100%; text-align: center;">
         <tr>
             <td style="text-align: center;">
+                <br><br>
                 Admin LPP,<br>
                 <div class="tanda-tangan-line" style="margin: 0 auto;"></div>
                 <div class="tanda-tangan-line" style="margin: 0 auto;"></div>
@@ -247,14 +246,12 @@
                 Kasir,<br>
                 <div class="tanda-tangan-line" style="margin: 0 auto;"></div>
                 <div class="tanda-tangan-line" style="margin: 0 auto;"></div>
-                (Muhammad Arif)
+                (Khusnul Ma'arif)
                 <div class="tanda_tangan_line">__________________</div>
                 Admin Keuangan
             </td>
         </tr>
     </table>
-
-
 </body>
 
 </html>
