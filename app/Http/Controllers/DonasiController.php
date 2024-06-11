@@ -121,6 +121,46 @@ class DonasiController extends Controller
         return view('page.manajemen_donasi.show', $data);
     }
 
+    public function createform($user_id)
+    {
+        return view('page.manajemen_donasi.formadmin', compact('user_id'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function storeform(Request $request)
+    {
+        // Validasi input dari request
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'deskripsi' => 'nullable|string',
+            'nominal' => 'nullable|string',
+            'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:2048',
+        ]);
+
+        $fileName = null;
+        if ($request->hasFile('file')) {
+            $fileName = $request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('public/donasis', $fileName);
+        }
+
+        // Membuat entri baru pada tabel Donasi
+        Donasi::create([
+            'user_id' => $validated['user_id'],
+            'deskripsi' => $validated['deskripsi'],
+            'nominal' => $validated['nominal'],
+            'file' => $fileName,
+        ]);
+
+        return redirect()->route('form.show.donasi', $request->user_id)->with('toast_success', 'Data dokumen berhasil ditambahkan.');
+    }
+
+   
+
+
+
+
     /**
      * Show the form for editing the specified resource.
      */

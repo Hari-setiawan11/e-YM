@@ -74,8 +74,13 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::put('/arsip/{id}/update',[ArsipController::class, 'update'])->name('index.update.arsip');
     Route::get('/arsip/{id}/destroy',[ArsipController::class, 'destroy'])->name('index.destroy.arsip');
 
+    Route::get('/distribusi_barang/create/{id_distribusi}',[DistribusiBarangController::class, 'create'])->name('index.create.distribusibarang');
+    Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
+
     //form data donasi(admin)
     Route::get('/donasi/{user_id}',[DonasiController::class, 'show'])->name('form.show.donasi');
+    Route::get('/donasi/create/{user_id}',[DonasiController::class, 'createform'])->name('form.create.donasi_admin');
+    Route::post('/donasi/store/{user_id}',[DonasiController::class, 'storeform'])->name('form.store.donasi_admin');
     Route::get('/donasi/form/{id}/editform',[DonasiController::class, 'editform'])->name('form.edit.donasi_admin');
     Route::put('/donasi/form/{id}/updateform',[DonasiController::class, 'updateform'])->name('form.update.donasi_admin');
     Route::get('/donasi/form/{id}/destroy',[DonasiController::class, 'destroy'])->name('form.destroy.donasi');
