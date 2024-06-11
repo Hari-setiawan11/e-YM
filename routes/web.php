@@ -100,7 +100,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::put('/data_donasi/{id}/update',[DataDonasiController::class, 'update'])->name('index.update.datadonasi');
     Route::get('/data_donasi/{id_donasi}/destroy',[DataDonasiController::class, 'destroy'])->name('index.destroy.datadonasi');
 
-    //manaemen data_user
+    //manajemen data_user
     Route::get('/data_user/view',[DataUserController::class, 'index'])->name('index.view.datauser');
     Route::get('/data_user/create',[DataUserController::class, 'create'])->name('index.create.datauser');
     Route::post('/data_user/store',[DataUserController::class, 'store'])->name('index.store.datauser');
