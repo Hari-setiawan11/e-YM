@@ -2,7 +2,7 @@
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             {{-- <a href="index.html">e-YM</a> --}}
-            <img src="{{ asset('assets/img/e-ym.png') }}" width="120" class="img-fluid mb-2" alt="">
+            <img src="{{ asset('assets/img/e-ym/eym.png') }}" width="120" class="img-fluid mb-2" alt="">
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">YM</a>
@@ -85,16 +85,6 @@
                     class="{{ \Route::is('index.view.datauser') || \Route::is('index.create.datauser') || \Route::is('index.edit.datauser') ? 'active' : '' }}">
                     <a href="{{ route('index.view.datauser') }}" class="nav-link"><i class="fas fa-donate"></i>
                         <span>Data Donatur</span></a>
-                </li>
-            @endcan
-
-            @can('read-data-barang')
-                <li
-                    class="{{ \Route::is('index.view.databarang') || \Route::is('index.create.databarang') || \Route::is('index.edit.databarang') ? 'active' : '' }}">
-                    <a href="{{ route('index.view.databarang') }}" class="nav-link">
-                        <i class="fas fa-shopping-basket"></i>
-                        <span>Data Barang</span>
-                    </a>
                 </li>
             @endcan
 

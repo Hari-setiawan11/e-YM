@@ -8,11 +8,9 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\HomeController;
-use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\DataDonasiController;
 use App\Http\Controllers\DistribusiController;
 use App\Http\Controllers\JenisArsipController;
-use App\Http\Controllers\BuktiDonasiController;
 use App\Http\Controllers\KontenProgramController;
 use App\Http\Controllers\DistribusiBarangController;
 use App\Http\Controllers\KontenPenyaluranController;
@@ -64,7 +62,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/program/store',[ProgramController::class, 'store'])->name('index.store.program');
     Route::get('/program/{id_program}/edit',[ProgramController::class, 'edit'])->name('index.edit.program');
     Route::put('/program/{id_program}/update',[ProgramController::class, 'update'])->name('index.update.program');
-    Route::get('/program/{id_program}/destroy',[ProgramController::class, 'destroy'])->name('index.destroy.program');
+    Route::delete('/program/{id_program}/destroy',[ProgramController::class, 'destroy'])->name('index.destroy.program');
 
     //manajemen arsip
     Route::get('/arsip/view',[ArsipController::class, 'index'])->name('index.view.arsip');
@@ -102,12 +100,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('/data_user/{id_users}/edit',[DataUserController::class, 'edit'])->name('index.edit.datauser');
     Route::put('/data_user/{id_users}/update',[DataUserController::class, 'update'])->name('index.update.datauser');
     Route::get('/data_user/{id_users}/destroy',[DataUserController::class, 'destroy'])->name('index.destroy.datauser');
- 
 
-    // //manajemen bukti_donasi
-    // Route::get('/bukti_donasi/view',[BuktiDonasiController::class, 'index'])->name('index.view.bukti');
-    // Route::get('/bukti_donasi/create',[BuktiDonasiController::class, 'create'])->name('index.create.bukti');
-    // Route::post('/bukti_donasi/store',[BuktiDonasiController::class, 'store'])->name('index.store.bukti');
 
     //profile
     Route::get('/profile/show/{id_user}',[ProfileController::class, 'show'])->name('index.view.profile');
@@ -119,14 +112,6 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('/jenis_arsip/{id_jenisArsip}/edit',[JenisArsipController::class, 'edit'])->name('index.edit');
     Route::put('/jenis_arsip/{id_jenisArsip}/update',[JenisArsipController::class, 'update'])->name('index.update');
     Route::get('/jenis_arsip/{id_jenisArsip}/destroy',[JenisArsipController::class, 'destroy'])->name('index.destroy');
-
-    //manajemen data_barang
-    Route::get('/data_barang/index',[DataBarangController::class, 'index'])->name('index.view.databarang');
-    Route::get('/data_barang/create',[DataBarangController::class, 'create'])->name('index.create.databarang');
-    Route::post('/data_barang/store',[DataBarangController::class, 'store'])->name('index.store.databarang');
-    Route::get('/data_barang/{id_dataBarang}/edit',[DataBarangController::class, 'edit'])->name('index.edit.databarang');
-    Route::put('/data_barang/{id_dataBarang}/update',[DataBarangController::class, 'update'])->name('index.update.databarang');
-    Route::get('/data_barang/{id_dataBarang}/destroy',[DataBarangController::class, 'destroy'])->name('index.destroy.databarang');
 
     //cetak lpj
     Route::get('/cetak/{distribusi_id}', [DistribusiBarangController::class, 'cetakPDF'])->name('cetak.pdf');

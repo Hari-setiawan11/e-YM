@@ -33,7 +33,7 @@
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Your other head content -->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 
@@ -58,7 +58,9 @@
                     <li><a class="nav-link scrollto" href="#donasi">Donasi</a></li>
                     <li><a class="nav-link scrollto" href="#rekening_donasi">Rekening Donasi</a></li>
                     <li><a class="nav-link scrollto" href="#footer">Tentang Kita</a></li>
-                    <li><a class="getstarted scrollto" href="{{ route('auth') }}">Login</a></li>
+                    <li><a class="getstarted scrollto" href="{{ route('auth') }}">Login <i
+                                class="fas fa-sign-in-alt"></i></a></li>
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -67,11 +69,10 @@
     </header><!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
-
+    <section id="hero" class="d-flex align-items-center" style="margin-top: 20px;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+                <div class="col-lg-7 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
                     <h1>Elektronik Yatim Mandiri</h1>
                     <h2>Selamat Datang di Website e-YM Cabang Banyuwangi. Yatim
@@ -80,14 +81,14 @@
                         sosial kemanusiaan yatim dhuafa dengan dana ZISWAF (Zakat,
                         Infaq, Shadaqah, Wakaf) serta dana lainnya yang halal dan legal,
                         dari perorangan, kelompok, perusahaan/lembaga.</h2>
-                    <div class="d-flex justify-content-center justify-content-lg-start">
+                    <div class="d-flex justify-content-center justify-content-lg-start" style="margin-top: -40px;">
                         <a href="#about" class="btn-get-started scrollto">Get Started</a>
                         <a href="https://www.youtube.com/watch?v=tyY9uldxdEk&t=160s"
                             class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch
                                 Video</span></a>
                     </div>
                 </div>
-                <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex align-items-center justify-content-center"
+                <div class="col-lg-5 order-1 order-lg-2 hero-img d-flex align-items-center justify-content-center"
                     data-aos="zoom-in" data-aos-delay="200">
                     <img src="{{ asset('landingpage/img/hero-img.png') }}" class="img-fluid animated" alt="">
                 </div>
@@ -97,7 +98,6 @@
     </section>
     <!-- End Hero -->
 
-    {{-- <main id="main"> --}}
     <!-- ======= Penyaluran Section ======= -->
     <section id="penyaluran" class="penyaluran section-bg">
         <div class="container" data-aos="fade-up">
@@ -110,7 +110,7 @@
                     <div class="grid-container">
                         @foreach ($KontenPenyaluran as $data)
                             <div class="grid-item" data-aos="zoom-in" data-aos-delay="200" onclick="showDetail(this)">
-                                <div class="icon-box">
+                                <div class="icon-box rounded-4">
                                     <div class="icon">
                                         <img src="{{ asset('storage/' . $data->foto) }}" alt="Foto"
                                             class="img-thumbnail" width="500">
@@ -127,7 +127,7 @@
                     </div>
                 </div>
             @else
-                <div class="text-center text-white">Konten Penyaluran Belum Diisi</div>
+                <div class="text-center" style="color:#ffffff;">Konten Penyaluran Belum Diisi</div>
             @endif
 
             <div id="detail-view" class="detail-view" onclick="hideDetail()">
@@ -141,15 +141,10 @@
             </div>
         </div>
     </section>
-
-
-
-
-
     <!-- End Services Section -->
 
     <!-- ======= About Us Section ======= -->
-    <section id="program" class="program section-bg" style="background-color: #37517e">
+    <section id="program" class="program section-bg" style="background-color: #ffffff">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -160,7 +155,7 @@
                 <div class="grid-container">
                     @foreach ($KontenProgram as $data)
                         <div class="grid-item" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="icon-box">
+                            <div class="icon-box rounded-4">
                                 <div class="icon">
                                     <img src="{{ asset('storage/' . $data->foto) }}" alt="Foto"
                                         class="img-thumbnail" width="500">
@@ -171,14 +166,14 @@
                     @endforeach
                 </div>
             @else
-                <div class="text-center" style="color: white;">Konten Program Belum Diisi</div>
+                <div class="text-center" style="color: rgb(0, 0, 0);">Konten Program Belum Diisi</div>
             @endif
 
         </div>
     </section><!-- End About Us Section -->
 
     <!-- ======= Donasi Section ======= -->
-    <section id="donasi" class="donasi">
+    <section id="donasi" class="donasi" style="background-color: #37517e">
         <div class="container" data-aos="fade-up">
 
             <div class="row content">
@@ -204,7 +199,7 @@
     </section><!-- End Donas Section -->
 
     <!-- ======= Atm Section ======= -->
-    <section id="rekening_donasi" class="atm" style="background-color: #37517e">
+    <section id="rekening_donasi" class="atm" style="background-color: #ffffff">
         <div class="container" data-aos="fade-up">
 
             <div class="row">
@@ -321,7 +316,7 @@
             </div>
         </div>
 
-        <div class="container footer-bottom clearfix">
+        <div class="container footer-bottom clearfix" style="margin-top: -30px;">
             <div class="copyright">
                 &copy; Copyright <strong><span>e-YM</span></strong>. All Rights Reserved
             </div>

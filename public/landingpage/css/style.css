@@ -111,7 +111,12 @@ h6 {
     transition: all 0.5s;
     z-index: 997;
     padding: 15px 0;
+    background-color: #eb8f67;
 }
+
+/* #navbar {
+    background-color: #eb8f67;
+} */
 
 #header.header-scrolled,
 #header.header-inner-pages {
@@ -187,13 +192,14 @@ h6 {
 
 .navbar .getstarted,
 .navbar .getstarted:focus {
-    padding: 8px 20px;
-    margin-left: 30px;
-    border-radius: 50px;
+    padding: 5px 10px; /* Mengurangi padding untuk memperkecil tombol */
+    margin-left: 15px; /* Mengurangi margin untuk memperkecil jarak antar elemen */
+    border-radius: 50px; /* Mengubah ukuran border-radius menjadi lebih kecil */
     color: #fff;
-    font-size: 14px;
+    font-size: 14px; /* Mengurangi ukuran font */
     border: 2px solid #37517e;
     font-weight: 600;
+    background-color: #37517e;
 }
 
 .navbar .getstarted:hover,
@@ -388,7 +394,7 @@ h6 {
 #hero {
     width: 100%;
     height: 80vh;
-    background: #37517e;
+    background: #ffffff;
 }
 
 #hero .container {
@@ -400,11 +406,11 @@ h6 {
     font-size: 48px;
     font-weight: 700;
     line-height: 56px;
-    color: #fff;
+    color: #000000;
 }
 
 #hero h2 {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
     margin-bottom: 50px;
     font-size: 24px;
     text-align: justify;
@@ -434,13 +440,13 @@ h6 {
     align-items: center;
     transition: 0.5s;
     margin: 10px 0 0 25px;
-    color: #fff;
+    color: #000000;
     line-height: 1;
 }
 
 #hero .btn-watch-video i {
     line-height: 0;
-    color: #fff;
+    color: #000000;
     font-size: 32px;
     transition: 0.3s;
     margin-right: 8px;
@@ -520,7 +526,7 @@ section {
 }
 
 .section-bg {
-    background-color: #f3f5fa;
+    background-color: #37517e;
 }
 
 .section-title {
@@ -535,7 +541,7 @@ section {
     margin-bottom: 20px;
     padding-bottom: 20px;
     position: relative;
-    color: #37517e;
+    color: #ffffff;
 }
 
 .section-title h2::before {
@@ -599,6 +605,10 @@ section {
     font-size: 26px;
 }
 
+.donasi .content h2 {
+    color: #ffffff;
+}
+
 .donasi h2 {
     text-align: justify;
 }
@@ -613,11 +623,15 @@ section {
 .atm .content h3 {
     font-weight: 700;
     font-size: 32px;
-    color: #ffffff;
+    color: #060404;
     font-family: "Poppins", sans-serif;
 }
 .atm .content h4 {
-    color: #ffffff;
+    color: #000000;
+    font-family: "Poppins", sans-serif;
+}
+.atm .content p {
+    color: #000000;
     font-family: "Poppins", sans-serif;
 }
 
@@ -917,7 +931,8 @@ section {
 # program
 --------------------------------------------------------------*/
 .program h2 {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    text-align: center;
     /* margin-bottom: 50px;
     font-size: 24px;
     text-align: justify; */

@@ -72,11 +72,17 @@
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-                                                                <a href="{{ route('index.destroy.program', $data->id) }}"
-                                                                    class="btn btn-danger ml-2">
-                                                                    <!-- Gunakan class ml-2 untuk margin kiri -->
+                                                                <a href="#" class="btn btn-danger ml-2"
+                                                                    onclick="confirmDelete({{ $data->id }})">
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </a>
+
+                                                                <form id="delete-form-{{ $data->id }}"
+                                                                    action="{{ route('index.destroy.program', $data->id) }}"
+                                                                    method="POST" style="display: none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -108,6 +114,28 @@
                                                     <td class="text-center" colspan="5">Program Belum Diisi</td>
                                                 </tr>
                                             @endif
+                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                                            <script>
+                                                function confirmDelete(id) {
+                                                    Swal.fire({
+                                                        title: 'Anda yakin?',
+                                                        text: "Data yang dihapus tidak dapat dikembalikan!",
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#6777ef',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'Ya, hapus data!',
+                                                        cancelButtonText: 'Batal'
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            document.getElementById('delete-form-' + id).submit();
+                                                        }
+                                                    });
+                                                }
+                                            </script>
+
+                                            @include('sweetalert::alert')
+
                                         </tbody>
                                     </table>
                                 </div>

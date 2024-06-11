@@ -19,37 +19,28 @@
                                     <label for="nama">Nama</label>
                                     <input id="nama" type="text"
                                         class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                        placeholder="Nama Program">
+                                        value="{{ old('nama') }}" placeholder="Nama Program">
                                     @error('nama')
-                                        <div id="nama" class="form-text"></div>
+                                        <div id="nama" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="deskripsi">Deskripsi</label>
                                     <input id="deskripsi" type="text"
                                         class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
-                                        placeholder="Deskripsi">
+                                        value="{{ old('deskripsi') }}" placeholder="Deskripsi">
                                     @error('deskripsi')
-                                        <div id="deskripsi" class="form-text"></div>
+                                        <div id="deskripsi" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label for="file">File</label>
-                                    <div class="custom-file">
-                                        <input type="file" id="file">
-                                        <label class="custom-file-label" for="file">Choose file</label>
-                                    </div>
-                                    @error('file')
-                                        <div id="file" class="form-text"></div>
-                                    @enderror
-                                </div> --}}
                                 <div class="form-group">
                                     <label for="file" class="form-label">file</label>
                                     <input type="file" class="form-control" id="file" name="file">
                                     @error('file')
-                                        <div id="file" class="form-file"></div>
+                                        <div id="file" class="form-file">{{ $message }}</div>
                                     @enderror
                                 </div>
+
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">
