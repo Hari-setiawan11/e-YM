@@ -65,6 +65,13 @@
                 </div>
             </div> --}}
             <div class="row_dashboard" style="margin-top: -80px;">
+<<<<<<< HEAD
+                @can('read-dashboard-user')
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-danger">
+                                <i class="far fa-file"></i>
+=======
                 <div class="col-lg-3 col-12 mb-4">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-danger">
@@ -73,12 +80,26 @@
                         <div class="card-wrap">
                             <div class="card-header">
                                 <h4>Jumlah Distribusi</h4>
+>>>>>>> 05e9546356dd06199185adc2b531251a5e18affe
                             </div>
-                            <div class="card-body">
-                                {{ $totalDistribusi }}
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Jumlah Donasi</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $totalDonasi }}
+                                </div>
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
+                @endcan
+                @can('read-dashboard-admin')
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-danger">
+                                <i class="fas fa-box-open"></i>
+=======
                 </div>
                 <div class="col-lg-3 col-12 mb-4">
                     <div class="card card-statistic-1">
@@ -88,12 +109,26 @@
                         <div class="card-wrap">
                             <div class="card-header">
                                 <h4>Jumlah Donatur</h4>
+>>>>>>> 05e9546356dd06199185adc2b531251a5e18affe
                             </div>
-                            <div class="card-body">
-                                {{ $totalGuest }}
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Jumlah Distribusi</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $totalDistribusi }}
+                                </div>
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
+                @endcan
+                @can('read-dashboard-admin')
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-primary">
+                                <i class="far fa-user"></i>
+=======
                 </div>
                 <div class="col-lg-3 col-12 mb-4">
                     <div class="card card-statistic-1">
@@ -103,12 +138,34 @@
                         <div class="card-wrap">
                             <div class="card-header">
                                 <h4>Jumlah Arsip</h4>
+>>>>>>> 05e9546356dd06199185adc2b531251a5e18affe
                             </div>
-                            <div class="card-body">
-                                {{ $totalArsip }}
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Jumlah Donatur</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $totalGuest }}
+                                </div>
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
+                @endcan
+                @can('read-dashboard-admin')
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-warning">
+                                <i class="far fa-file"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Jummlah Arsip</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $totalArsip }}
+                                </div>
+=======
                 </div>
                 <div class="col-lg-3 col-12 mb-4">
                     <div class="card card-statistic-1">
@@ -121,10 +178,28 @@
                             </div>
                             <div class="card-body">
                                 {{ $totalProgram }}
+>>>>>>> 05e9546356dd06199185adc2b531251a5e18affe
                             </div>
                         </div>
                     </div>
-                </div>
+                @endcan
+                @can('read-dashboard-admin')
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-success">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Jumlah Barang</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $totalBarang }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endcan
             </div>
         </section>
     </div>

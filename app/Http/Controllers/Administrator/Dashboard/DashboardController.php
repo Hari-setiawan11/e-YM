@@ -20,7 +20,11 @@ class DashboardController extends Controller
         $totalDistribusi = Distribusi::count();
         $totalArsip = Arsip::count();
         $totalDonatur = User::count();
+<<<<<<< HEAD
+        $totalDonasi = Donasi::count();
+=======
         $totalProgram = Program::count();
+>>>>>>> 05e9546356dd06199185adc2b531251a5e18affe
 
         // Mengambil peran "guest"
         $guestRole = Role::where('name', 'guest')->first();

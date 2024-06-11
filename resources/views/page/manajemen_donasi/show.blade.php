@@ -21,6 +21,10 @@
                             <div class="card-header">
                                 <h4>Daftar Donasi</h4>
                                 <div class="card-header-form">
+                                    <div class="ml-auto mb-2">
+                                        <a href="{{ route('form.create.donasi_admin', ['user_id' => Auth::id()]) }}"
+                                            style="float: right;" class="btn btn-round btn-primary mb-3">Tambah</a>
+                                    </div>
                                     <form>
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search">
