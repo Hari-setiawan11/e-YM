@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Distribusi;
-use App\Models\Program;
 use Carbon\Carbon;
+use App\Models\Program;
+use App\Models\Distribusi;
 use Illuminate\Http\Request;
+use App\Models\DistribusiBarang;
 
 class DistribusiController extends Controller
 {
@@ -39,16 +40,18 @@ class DistribusiController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+{
     $request->validate([
         'programs_id' => 'required|exists:programs,id',
         'tanggal' => 'required|date',
         'tempat' => 'required',
         'penerima_manfaat' => 'required',
         'anggaran' => 'required|numeric',
-        'pengeluaran' => 'required|numeric',
         'file' => 'required|file|mimes:pdf|max:2048',
     ]);
+
+    // Mengambil total pengeluaran dari distribusi_barang
+    $totalPengeluaran = DistribusiBarang::where('distribusi_id', $request->distribusi_id)->sum('jumlah');
 
     $fileName = null;
     if ($request->hasFile('file')) {
@@ -56,20 +59,22 @@ class DistribusiController extends Controller
         $request->file('file')->storeAs('distribusis', $fileName, 'public');
     }
 
-        $distribusi = new Distribusi();
-        $distribusi->programs_id = $request->programs_id;
-        $distribusi->tanggal = $request->tanggal;
-        $distribusi->tempat = $request->tempat;
-        $distribusi->penerima_manfaat = $request->penerima_manfaat;
-        $distribusi->anggaran = $request->anggaran;
-        $distribusi->pengeluaran = $request->pengeluaran;
-        $distribusi->sisa = $request->anggaran - $request->pengeluaran;
-        $distribusi->file = $fileName;
+    $distribusi = new Distribusi();
+    $distribusi->programs_id = $request->programs_id;
+    $distribusi->tanggal = $request->tanggal;
+    $distribusi->tempat = $request->tempat;
+    $distribusi->penerima_manfaat = $request->penerima_manfaat;
+    $distribusi->anggaran = $request->anggaran;
+    $distribusi->pengeluaran = $totalPengeluaran;  // Menggunakan total pengeluaran dari DistribusiBarang
+    $distribusi->sisa = $request->anggaran - $totalPengeluaran;  // Menghitung sisa anggaran
+    $distribusi->file = $fileName;
 
     $distribusi->save();
 
     return redirect()->route('index.view.distribusi')->with('toast_success', 'Data distribusi berhasil ditambahkan');
 }
+
+
 
     /**
      * Display the specified resource.

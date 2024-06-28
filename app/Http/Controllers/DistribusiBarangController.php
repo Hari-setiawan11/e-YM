@@ -135,7 +135,7 @@ class DistribusiBarangController extends Controller
 //     }
 // }
 
-public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'distribusi_id' => 'required|exists:distribusis,id',
@@ -170,8 +170,8 @@ public function store(Request $request)
             'jumlah' => $harga_barang,
         ]);
 
-    return redirect()->route('index.view.distribusibarang', $request->distribusi_id);
-}
+        return redirect()->route('index.view.distribusibarang', $request->distribusi_id);
+    }
 
 
 

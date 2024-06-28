@@ -16,7 +16,7 @@ class Distribusi extends Model
         'tempat',
         'penerima_manfaat',
         'anggaran',
-        'pengeluaran',
+        // 'pengeluaran',
         'sisa',
         'file',
     ];
@@ -27,7 +27,7 @@ class Distribusi extends Model
 
     public function distribusibarang()
     {
-        return $this->belongsTo(DistribusiBarang::class, 'distribusi_id','id');
+        return $this->hasMany(DistribusiBarang::class);
     }
 
     public function rekap()

@@ -65,7 +65,7 @@
                                                         <td class="align-middle">{{ $data->telephone }}</td>
                                                         <td class="align-middle">
                                                             <a class="btn btn-primary btn-sm"
-                                                                href="{{ route('form.show.donasi', ['user_id' => $data->id]) }}">
+                                                                href="{{ route('form.show.donasi_admin', ['user_id' => $data->id]) }}">
                                                                 Rekap
                                                             </a>
                                                         </td>
