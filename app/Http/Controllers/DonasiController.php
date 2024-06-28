@@ -41,7 +41,7 @@ class DonasiController extends Controller
         $validated = $request->validate([
             'deskripsi' => 'nullable|string',
             'nominal' => 'nullable|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => 'nullable|file|mimes:pdf,png,jpg,jpeg|max:2048',
         ]);
 
         // Mengecek apakah file di-upload dan menyimpannya
@@ -84,7 +84,7 @@ class DonasiController extends Controller
         $validated = $request->validate([
             'deskripsi' => 'nullable|string',
             'nominal' => 'nullable|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => 'nullable|file|mimes:pdf,png,jpg,jpeg|max:2048',
         ]);
 
         $donasi = Donasi::findOrFail($id);
@@ -175,7 +175,7 @@ class DonasiController extends Controller
         $validated = $request->validate([
             'deskripsi' => 'nullable|string',
             'nominal' => 'nullable|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => 'nullable|file|mimes:pdf,png,jpg,jpeg|max:2048',
         ]);
 
         $donasi = Donasi::findOrFail($id);

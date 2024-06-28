@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-lg-8">
                                 <!-- Grafik Batang Total Donasi Admin -->
-                                <canvas id="totalDonasiAdminChart" width="1500" height="710">></canvas>
+                                <canvas id="donationChart" width="1500" height="710">></canvas>
                             </div>
                             <div class="col-lg-4">
                                 <!-- Jumlah donasi -->
@@ -41,14 +41,14 @@
                 @can('read-dashboard-user')
                     <div class="card justify-content-start">
                         <div class="row">
-                            <div class="col-lg-9">
+                            <div class="col-lg-8">
                                 <h2 class="text-center">Jumlah Pemasukan Uang Donasi Per Bulan</h2>
                                 <!-- Grafik pemasukan uang donasi per bulan -->
                                 <div class="card card-statistic-1">
                                     <canvas id="donationBarChart" width="1500" height="600"></canvas>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <!-- Jumlah donasi -->
                                 <div class="card card-statistic-1">
                                     <div class="card-icon bg-danger">
@@ -146,9 +146,26 @@
                 const months = {!! json_encode($months) !!};
                 const totalDonasiAdmin = {!! json_encode($totalDonasiAdmin) !!};
             </script>
+            <script>
+                // Data dari PHP ke JavaScript untuk Grafik Bar
+                window.donationLabels = [
+                    @foreach ($months as $month)
+                        "{{ $month }}",
+                    @endforeach
+                ];
+
+                window.donationDataAdmin = [
+                    @foreach ($donationDataAdmin as $data)
+                        {{ $data }},
+                    @endforeach
+                ];
+                console.log(window.donationLabels); // Cek data labels
+                console.log(window.donationDataAdmin); // Cek data donations
+            </script>
 
             <!-- Sertakan file JavaScript eksternal Anda -->
             <script src="{{ asset('js/chart.js') }}"></script>
+            <script src="{{ asset('js/grafikadmin.js') }}"></script>
         </section>
     </div>
 @endsection
