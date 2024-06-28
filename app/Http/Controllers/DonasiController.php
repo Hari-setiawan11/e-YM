@@ -64,7 +64,7 @@ class DonasiController extends Controller
     }
 
 
-    
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -86,20 +86,20 @@ class DonasiController extends Controller
             'nominal' => 'nullable|string',
             'file' => 'nullable|file|mimes:pdf|max:2048',
         ]);
-    
-        $donasi = Donasi::findOrFail($id); 
-        
+
+        $donasi = Donasi::findOrFail($id);
+
         if ($request->hasFile('file')) {
             $fileName = $request->file('file')->getClientOriginalName();
             $request->file('file')->storeAs('public/donasis', $fileName);
             $validated['file'] = $fileName;
         }
-        
-        $donasi->update($validated); 
-        
+
+        $donasi->update($validated);
+
         return redirect()->route('form.index.donasi')->with('toast_success', 'Data dokumen berhasil diperbarui.');
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -155,12 +155,6 @@ class DonasiController extends Controller
 
         return redirect()->route('form.show.donasi', $request->user_id)->with('toast_success', 'Data dokumen berhasil ditambahkan.');
     }
-
-   
-
-
-
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -177,27 +171,27 @@ class DonasiController extends Controller
      */
     public function updateform(Request $request, string $id)
     {
-        
+
         $validated = $request->validate([
             'deskripsi' => 'nullable|string',
             'nominal' => 'nullable|string',
             'file' => 'nullable|file|mimes:pdf|max:2048',
         ]);
-        
-        $donasi = Donasi::findOrFail($id); 
-        
+
+        $donasi = Donasi::findOrFail($id);
+
         if ($request->hasFile('file')) {
             $fileName = $request->file('file')->getClientOriginalName();
             $request->file('file')->storeAs('public/donasis', $fileName);
             $validated['file'] = $fileName;
         }
-        
-        $donasi->update($validated); 
+
+        $donasi->update($validated);
         $user_id = $donasi->user->id;
-        
+
         return redirect()->route('form.show.donasi',['user_id' => $user_id])->with('toast_success', 'Data dokumen berhasil diperbarui.');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */

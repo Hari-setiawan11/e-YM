@@ -81,7 +81,7 @@
                                                 @endforeach
                                             @else
                                                 <tr>
-                                                    <td class="text-center" colspan="6">Program Belum Diisi</td>
+                                                    <td class="text-center" colspan="6">Daftar Donasi Belum Ada</td>
                                                 </tr>
                                             @endif
                                         </tbody>

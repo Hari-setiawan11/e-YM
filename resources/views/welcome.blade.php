@@ -115,7 +115,7 @@
                                         <img src="{{ asset('storage/' . $data->foto) }}" alt="Foto"
                                             class="img-thumbnail" width="500">
                                     </div>
-                                    <h2>{{ $data->nama }}</h2>
+                                    <h2 class="nama">{{ $data->nama }}</h2>
                                     <p class="partial-description">{{ substr($data->keterangan, 0, 0) }}</p>
                                     <p class="full-description" style="display:none;">{{ $data->keterangan }}</p>
                                     <div class="read-more-btn-container">

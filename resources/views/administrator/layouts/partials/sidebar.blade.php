@@ -20,14 +20,14 @@
 
             @can('read-form-donasi')
                 <li class="{{ \Route::is('form.create.donasi') ? 'active' : '' }}">
-                    <a href="{{ route('form.create.donasi') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                    <a href="{{ route('form.create.donasi') }}" class="nav-link"><i class="fas fa-hand-holding-heart"></i>
                         <span>Form Donasi</span></a>
                 </li>
             @endcan
 
             @can('read-rekap-donasi')
                 <li class="{{ \Route::is('form.index.donasi') ? 'active' : '' }}">
-                    <a href="{{ route('form.index.donasi') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                    <a href="{{ route('form.index.donasi') }}" class="nav-link"><i class="fas fa-list"></i>
                         <span>Daftar Donasi</span></a>
                 </li>
             @endcan
