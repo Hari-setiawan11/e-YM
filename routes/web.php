@@ -11,11 +11,7 @@ use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\DataDonasiController;
 use App\Http\Controllers\DistribusiController;
 use App\Http\Controllers\JenisArsipController;
-<<<<<<< HEAD
 use App\Http\Controllers\AdminDonasiController;
-use App\Http\Controllers\BuktiDonasiController;
-=======
->>>>>>> 3dde7fb3ccd5a4f3a01d4e1d8749ccad4bd36ad1
 use App\Http\Controllers\KontenProgramController;
 use App\Http\Controllers\DistribusiBarangController;
 use App\Http\Controllers\KontenPenyaluranController;
