@@ -83,17 +83,17 @@ class DonasiController extends Controller
             'nominal' => 'nullable|string',
             'file' => 'nullable|file|mimes:pdf|max:2048',
         ]);
-    
-        $donasi = Donasi::findOrFail($id); 
-        
+
+        $donasi = Donasi::findOrFail($id);
+
         if ($request->hasFile('file')) {
             $fileName = $request->file('file')->getClientOriginalName();
             $request->file('file')->storeAs('public/donasis', $fileName);
             $validated['file'] = $fileName;
         }
-        
-        $donasi->update($validated); 
-        
+
+        $donasi->update($validated);
+
         return redirect()->route('form.index.donasi')->with('toast_success', 'Data dokumen berhasil diperbarui.');
     }
 }

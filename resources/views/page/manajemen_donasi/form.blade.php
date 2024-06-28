@@ -26,8 +26,9 @@
                                 <div class="form-group">
                                     <label for="nominal">Nominal</label>
                                     <input id="nominal" type="text"
-                                        class="form-control @error('nominal') is-invalid @enderror" name="nominal"
-                                        placeholder="Nominal">
+                                        class="form-control @error('nominal') is-invalid @enderror" name="formatted_nominal"
+                                        placeholder="Nominal" oninput="formatNominal(this)">
+                                    <input id="hidden_nominal" type="hidden" name="nominal">
                                     @error('nominal')
                                         <div id="nominal" class="form-text"></div>
                                     @enderror
@@ -45,7 +46,22 @@
                                         Tambah Donasi
                                     </button>
                                 </div>
+                                <script>
+                                    function formatNominal(input) {
+                                        let value = input.value.replace(/\D/g, ''); // Hanya menyisakan angka
+                                        document.getElementById('hidden_nominal').value = value; // Simpan nilai asli tanpa titik
+                                        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Menambahkan titik setiap 3 angka
+                                        input.value = value;
+                                    }
 
+                                    // Tambahkan event listener untuk mengonversi nilai ke format Rupiah sebelum form disubmit
+                                    document.querySelector('form').addEventListener('submit', function() {
+                                        let formattedNominal = document.getElementById('nominal').value;
+                                        let nominalValue = formattedNominal.replace(/\./g,
+                                        ''); // Hapus semua titik untuk mendapatkan nilai numerik asli
+                                        document.getElementById('hidden_nominal').value = nominalValue; // Update nilai hidden input
+                                    });
+                                </script>
 
                             </form>
                         </div>

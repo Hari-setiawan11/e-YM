@@ -37,26 +37,37 @@ class DashboardController extends Controller
             })->count();
         }
 
-
-        // Menghitung total donasi sesuai dengan pengguna yang login
         $user = auth()->user();
-        $totalDonasi = 0;
+        $donasiPerBulan = collect();
+
+        $totalDonasiPerBulan = Donasi::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(nominal) as total')
+        ->groupBy('year', 'month')
+        ->orderBy('year', 'asc')
+        ->orderBy('month', 'asc')
+        ->get();
+
+    // Menghitung total donasi keseluruhan admin
+        $totalDonasiAdmin = Donasi::sum('nominal');
+        $totalDonasiAdminFormatted = number_format($totalDonasiAdmin, 0, ',', '.');
+
         if ($user) {
-            $totalDonasi = Donasi::where('user_id', $user->id)->count();
+            // Menghitung total donasi per bulan untuk user yang login
+            $donasiPerBulan = Donasi::where('user_id', $user->id)
+                ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(nominal) as total')
+                ->groupBy('year', 'month')
+                ->orderBy('year', 'asc')
+                ->orderBy('month', 'asc')
+                ->get()
+                ->keyBy(function ($item) {
+                    return $item->year . '-' . str_pad($item->month, 2, '0', STR_PAD_LEFT);
+                });
+
+            // Menghitung total donasi keseluruhan untuk user yang login
+            $totalDonasi = Donasi::where('user_id', $user->id)->sum('nominal');
         }
 
-        // Ambil semua data donasi
-        $donations = Donasi::all();
-
-        // Inisialisasi array untuk menampung data donasi per bulan
-        $donationData = array_fill(0, 12, 0);
-        $months = [];
-
-        // Iterasi melalui setiap donasi untuk mengelompokkan berdasarkan bulan
-        foreach ($donations as $donation) {
-            $month = Carbon::parse($donation->created_at)->month - 1;
-            $donationData[$month] += $donation->nominal; // Menggunakan kolom 'nominal' di tabel donasi
-        }
+        // Format total donasi ke format rupiah
+        $totalDonasiFormatted = number_format($totalDonasi, 0, ',', '.');
 
         // Nama bulan dalam bahasa Indonesia
         $months = [
@@ -64,6 +75,14 @@ class DashboardController extends Controller
             'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
         ];
 
-        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalProgram', 'totalGuest', 'totalDonasi','donationData','months'));
+        // Menyusun data untuk setiap bulan dalam setahun
+        $currentYear = Carbon::now()->year;
+        $donationData = [];
+        foreach (range(1, 12) as $month) {
+            $key = $currentYear . '-' . str_pad($month, 2, '0', STR_PAD_LEFT);
+            $donationData[] = isset($donasiPerBulan[$key]) ? $donasiPerBulan[$key]->total : 0;
+        }
+
+        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalProgram', 'totalGuest', 'totalDonasiFormatted', 'donationData', 'months','totalDonasiAdmin','totalDonasiAdminFormatted'));
     }
-}
+ }

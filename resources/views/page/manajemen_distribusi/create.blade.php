@@ -24,54 +24,53 @@
                                         name="programs_id">
                                         <option value="" selected disabled>Pilih Program</option>
                                         @foreach ($program as $data)
-                                            <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                            <option value="{{ $data->id }}"
+                                                {{ old('programs_id') == $data->id ? 'selected' : '' }}>{{ $data->nama }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('programs_id')
                                         <div id="programs_id" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label for="tanggal">Tanggal</label>
-                                    <input id="tanggal" type="text"
-                                        class="form-control @error('tanggal') is-invalid @enderror" name="tanggal"
-                                        placeholder="Tanggal">
-                                    @error('tanggal')
-                                        <div id="tanggal" class="form-text"></div>
-                                    @enderror
-                                </div> --}}
+
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal</label>
                                     <input id="tanggal" type="date"
-                                        class="form-control @error('tanggal') is-invalid @enderror" name="tanggal">
+                                        class="form-control @error('tanggal') is-invalid @enderror" name="tanggal"
+                                        value="{{ old('tanggal') }}">
                                     @error('tanggal')
                                         <div id="tanggal" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="form-group">
                                     <label for="tempat">Tempat</label>
                                     <input id="tempat" type="text"
                                         class="form-control @error('tempat') is-invalid @enderror" name="tempat"
-                                        placeholder="Tempat">
+                                        value="{{ old('tempat') }}" placeholder="Tempat">
                                     @error('tempat')
-                                        <div id="tempat" class="form-text"></div>
+                                        <div id="tempat" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="form-group">
                                     <label for="penerima_manfaat">Penerima Manfaat</label>
                                     <input id="penerima_manfaat" type="text"
                                         class="form-control @error('penerima_manfaat') is-invalid @enderror"
-                                        name="penerima_manfaat" placeholder="Penerima Manfaat">
+                                        name="penerima_manfaat" value="{{ old('penerima_manfaat') }}"
+                                        placeholder="Penerima Manfaat">
                                     @error('penerima_manfaat')
-                                        <div id="penerima_manfaat" class="form-text"></div>
+                                        <div id="penerima_manfaat" class="form-text">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="form-group">
                                     <label for="anggaran">Anggaran</label>
                                     <input id="anggaran_display" type="text"
                                         class="form-control @error('anggaran') is-invalid @enderror" name="anggaran_display"
-                                        placeholder="Anggaran">
-                                    <input id="anggaran" type="hidden" name="anggaran">
+                                        value="{{ old('anggaran_display') }}" placeholder="Anggaran">
+                                    <input id="anggaran" type="hidden" name="anggaran" value="{{ old('anggaran') }}">
                                     @error('anggaran')
                                         <div id="anggaran_error" class="form-text">{{ $message }}</div>
                                     @enderror
@@ -81,8 +80,10 @@
                                     <label for="pengeluaran">Pengeluaran</label>
                                     <input id="pengeluaran_display" type="text"
                                         class="form-control @error('pengeluaran') is-invalid @enderror"
-                                        name="pengeluaran_display" placeholder="Pengeluaran">
-                                    <input id="pengeluaran" type="hidden" name="pengeluaran">
+                                        name="pengeluaran_display" value="{{ old('pengeluaran_display') }}"
+                                        placeholder="Pengeluaran">
+                                    <input id="pengeluaran" type="hidden" name="pengeluaran"
+                                        value="{{ old('pengeluaran') }}">
                                     @error('pengeluaran')
                                         <div id="pengeluaran_error" class="form-text">{{ $message }}</div>
                                     @enderror

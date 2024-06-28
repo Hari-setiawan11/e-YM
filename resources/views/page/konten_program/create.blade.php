@@ -20,7 +20,7 @@
                                     <label for="nama">Nama</label>
                                     <input id="nama" type="text"
                                         class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                        placeholder="Nama ">
+                                        value="{{ old('nama') }}" placeholder="Nama ">
                                     @error('nama')
                                         <div id="nama" class="form-text"></div>
                                     @enderror

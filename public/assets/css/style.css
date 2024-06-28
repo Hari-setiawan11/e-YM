@@ -3978,15 +3978,16 @@ img {
     margin: auto;
     text-align: center;
 }
-canvas {
-    width: 1500px;
-    height: 600px; /* Atur tinggi canvas agar memanjang ke samping */
-}
-
 /* canvas {
-    width: 100% !important;
-    height: auto !important;
+    width: 1500px;
+    height: 600px;
 } */
+
+canvas {
+    display: block;
+    width: 100vw; /* Lebar canvas mengikuti lebar viewport */
+    height: 100vh; /* Tinggi canvas mengikuti tinggi viewport */
+}
 
 .chart-container {
     position: relative;

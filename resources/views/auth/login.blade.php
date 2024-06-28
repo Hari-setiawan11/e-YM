@@ -9,7 +9,7 @@
                         <div class="login-brand mt-6">
                             <img src="{{ asset('assets/img/e-ym/eym.png') }}" alt="logo" width="150">
                         </div>
-                        <div class="card card-primary shadow-lg">
+                        <div class="card card-primary shadow-lg" style="margin-top: -25px;">
                             <div class="card-header">
                                 <h4>Login</h4>
                             </div>
