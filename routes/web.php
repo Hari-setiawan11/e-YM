@@ -11,6 +11,7 @@ use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\DataDonasiController;
 use App\Http\Controllers\DistribusiController;
 use App\Http\Controllers\JenisArsipController;
+use App\Http\Controllers\AdminDonasiController;
 use App\Http\Controllers\KontenProgramController;
 use App\Http\Controllers\DistribusiBarangController;
 use App\Http\Controllers\KontenPenyaluranController;
@@ -77,12 +78,12 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
 
     //form data donasi(admin)
-    Route::get('/donasi/{user_id}',[DonasiController::class, 'show'])->name('form.show.donasi');
-    Route::get('/donasi/create/{user_id}',[DonasiController::class, 'createform'])->name('form.create.donasi_admin');
-    Route::post('/donasi/store/{user_id}',[DonasiController::class, 'storeform'])->name('form.store.donasi_admin');
-    Route::get('/donasi/form/{id}/editform',[DonasiController::class, 'editform'])->name('form.edit.donasi_admin');
-    Route::put('/donasi/form/{id}/updateform',[DonasiController::class, 'updateform'])->name('form.update.donasi_admin');
-    Route::get('/donasi/form/{id}/destroy',[DonasiController::class, 'destroy'])->name('form.destroy.donasi');
+    Route::get('/donasi/{user_id}', [AdminDonasiController::class, 'show'])->name('form.show.donasi_admin');
+    Route::get('/donasi/{user_id}/create', [AdminDonasiController::class, 'createform'])->name('form.create.donasi_admin');
+    Route::post('/donasi/{user_id}/store', [AdminDonasiController::class, 'storeform'])->name('form.store.donasi_admin');
+    Route::get('/donasi/form/{id}/editform',[AdminDonasiController::class, 'editform'])->name('form.edit.donasi_admin');
+    Route::put('/donasi/form/{id}/updateform',[AdminDonasiController::class, 'updateform'])->name('form.update.donasi_admin');
+    Route::get('/donasi/form/{id}/destroy',[AdminDonasiController::class, 'destroy'])->name('form.destroy.donasi_admin');
 
     //form data donasi(guest)
     Route::get('/apps/donasi/view', [DonasiController::class, 'index'])->name('form.index.donasi');

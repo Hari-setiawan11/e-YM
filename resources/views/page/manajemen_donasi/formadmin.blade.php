@@ -8,10 +8,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Tambah Donasi</h4>
+                            <h4>Tambah Donasi untuk </h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('form.store.donasi_admin', $user_id) }}"
+                            <form method="POST" action="{{ route('form.store.donasi_admin', ['user_id' => $user_id]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $user_id }}">
@@ -21,7 +21,7 @@
                                         class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
                                         placeholder="Titipan Do'a">
                                     @error('deskripsi')
-                                        <div id="deskripsi" class="form-text"></div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
@@ -30,14 +30,15 @@
                                         class="form-control @error('nominal') is-invalid @enderror" name="nominal"
                                         placeholder="Nominal">
                                     @error('nominal')
-                                        <div id="nominal" class="form-text"></div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="file" class="form-label">File</label>
-                                    <input type="file" class="form-control" id="file" name="file">
+                                    <input type="file" class="form-control @error('file') is-invalid @enderror"
+                                        id="file" name="file">
                                     @error('file')
-                                        <div id="file" class="form-file"></div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">

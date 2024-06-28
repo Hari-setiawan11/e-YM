@@ -19,10 +19,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Donasi</h4>
+                                <h4>Daftar Donasi {{ $user->name }}</h4>
                                 <div class="card-header-form">
                                     <div class="ml-auto mb-2">
-                                        <a href="{{ route('form.create.donasi_admin', ['user_id' => Auth::id()]) }}"
+                                        <a href="{{ route('form.create.donasi_admin', ['user_id' => $user->id]) }}"
                                             style="float: right;" class="btn btn-round btn-primary mb-3">Tambah</a>
                                     </div>
                                     <form>
@@ -71,7 +71,7 @@
                                                                     class="btn btn-primary ml-2">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-                                                                <a href="{{ route('form.destroy.donasi', $data->id) }}"
+                                                                <a href="{{ route('form.destroy.donasi_admin', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </a>
