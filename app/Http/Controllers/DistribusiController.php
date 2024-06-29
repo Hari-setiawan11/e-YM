@@ -51,7 +51,7 @@ class DistribusiController extends Controller
     ]);
 
     // Mengambil total pengeluaran dari distribusi_barang
-    $totalPengeluaran = DistribusiBarang::where('distribusi_id', $request->distribusi_id)->sum('jumlah');
+    // $totalPengeluaran = DistribusiBarang::where('distribusi_id', $request->distribusi_id)->sum('jumlah');
 
     $fileName = null;
     if ($request->hasFile('file')) {
@@ -65,8 +65,8 @@ class DistribusiController extends Controller
     $distribusi->tempat = $request->tempat;
     $distribusi->penerima_manfaat = $request->penerima_manfaat;
     $distribusi->anggaran = $request->anggaran;
-    $distribusi->pengeluaran = $totalPengeluaran;  // Menggunakan total pengeluaran dari DistribusiBarang
-    $distribusi->sisa = $request->anggaran - $totalPengeluaran;  // Menghitung sisa anggaran
+    $distribusi->pengeluaran =$request->pengeluaran;  // Menggunakan total pengeluaran dari DistribusiBarang
+    $distribusi->sisa = $request->anggaran - $request->pengeluaran;  // Menghitung sisa anggaran
     $distribusi->file = $fileName;
 
     $distribusi->save();

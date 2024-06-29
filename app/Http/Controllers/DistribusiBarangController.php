@@ -159,6 +159,7 @@ class DistribusiBarangController extends Controller
         if (($total_harga_barang_sekarang + $harga_barang) > $pengeluaran) {
             return back()->withErrors(['total_harga' => 'Total Harga Barang Melebihi Pengeluaran Yang Tertulis.'])->withInput();
         }
+        
 
         // Jika validasi lolos, simpan data
         DistribusiBarang::create([

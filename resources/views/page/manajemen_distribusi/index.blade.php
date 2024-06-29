@@ -68,6 +68,8 @@
                                                             {{ number_format($data->anggaran, 0, ',', '.') }}</td>
                                                         <td class="align-middle">
                                                             {{ number_format($data->pengeluaran, 0, ',', '.') }}</td>
+                                                        {{-- <td class="align-middle">
+                                                            {{ number_format($data->totalbarang, 0, ',', '.') }}</td> --}}
                                                         <td class="align-middle">
                                                             {{ number_format($data->sisa, 0, ',', '.') }}</td>
                                                         <td class="align-middle">
