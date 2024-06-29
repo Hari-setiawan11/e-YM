@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('tempat');
             $table->string('penerima_manfaat');
             $table->decimal('anggaran', 10, 0);
-            // $table->decimal('pengeluaran', 10, 0)->default(0);
+            $table->decimal('pengeluaran', 10, 0)->default(0);
             $table->decimal('sisa', 10, 0)->default(0);
             $table->string('file')->nullable();
             $table->timestamps();

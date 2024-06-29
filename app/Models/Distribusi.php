@@ -16,7 +16,7 @@ class Distribusi extends Model
         'tempat',
         'penerima_manfaat',
         'anggaran',
-        // 'pengeluaran',
+        'pengeluaran',
         'sisa',
         'file',
     ];
