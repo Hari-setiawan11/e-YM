@@ -40,6 +40,7 @@ Route::get('/',[HomeController::class, 'index'])->name('home');
 
 Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('dashboard',[DashboardController::class, 'index'])->name('apps.dashboard')->middleware('can:read-dashboard');
+    // Route::get('dashboard/admin',[DashboardController::class, 'indexdashboard'])->name('apps.dashboard.admin')->middleware('can:read-dashboard');
 
     //manajemen distribusi
     Route::get('/distribusi/view',[DistribusiController::class, 'index'])->name('index.view.distribusi');

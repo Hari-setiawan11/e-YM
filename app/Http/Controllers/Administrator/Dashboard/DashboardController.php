@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -40,11 +41,20 @@ class DashboardController extends Controller
         $user = auth()->user();
         $donasiPerBulan = collect();
 
-        $totalDonasiPerBulan = Donasi::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(nominal) as total')
-        ->groupBy('year', 'month')
-        ->orderBy('year', 'asc')
-        ->orderBy('month', 'asc')
-        ->get();
+        // $totalDonasiPerBulan = Donasi::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(nominal) as total')
+        // ->groupBy('year', 'month')
+        // ->orderBy('year', 'asc')
+        // ->orderBy('month', 'asc')
+        // ->get();
+
+        // $monthlyDonations = DB::table('donasis')
+        // ->select(
+        //     DB::raw('SUM(nominal) as total'),
+        //     DB::raw('MONTH(created_at) as month')
+        // )
+        // ->groupBy('month')
+        // ->orderBy('month')
+        // ->get();
 
     // Menghitung total donasi keseluruhan admin
         $totalDonasiAdmin = Donasi::sum('nominal');
@@ -83,6 +93,44 @@ class DashboardController extends Controller
             $donationData[] = isset($donasiPerBulan[$key]) ? $donasiPerBulan[$key]->total : 0;
         }
 
-        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalProgram', 'totalGuest', 'totalDonasiFormatted', 'donationData', 'months','totalDonasiAdmin','totalDonasiAdminFormatted'));
+        //GRAFIK ADMIN
+        // Ambil semua bulan dalam setahun
+        $year = date('Y'); // Ambil tahun saat ini
+        $allMonths = range(1, 12);
+
+        // Ambil data total donasi per bulan dari database untuk tahun ini
+        $monthlyDonations = Donasi::selectRaw('COALESCE(SUM(nominal), 0) as total, MONTH(created_at) as month')
+            ->whereYear('created_at', $year)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        // Indeks ulang array $monthlyDonations berdasarkan bulan
+        $monthlyDonationsIndexed = $monthlyDonations->keyBy('month');
+
+        // Persiapkan array untuk menyimpan total donasi per bulan
+        $monthlyDonationsFinal = [];
+
+        // Loop melalui semua bulan dalam setahun
+        foreach ($allMonths as $month) {
+            // Cek apakah data untuk bulan ini ada dalam $monthlyDonationsIndexed
+            if (isset($monthlyDonationsIndexed[$month])) {
+                $monthlyDonationsFinal[] = $monthlyDonationsIndexed[$month]->total;
+            } else {
+                // Jika tidak ada data untuk bulan ini, masukkan nilai 0
+                $monthlyDonationsFinal[] = 0;
+            }
+        }
+
+        // Format total donasi per bulan ke format rupiah
+        $monthlyDonationsFormatted = collect($monthlyDonationsFinal)->map(function ($donation) {
+            return number_format($donation, 0, ',', '.');
+        });
+
+        // Siapkan data untuk dimasukkan ke dalam grafik
+        $donationDataAdmin = $monthlyDonationsFinal;
+
+        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalProgram', 'totalGuest', 'totalDonasiFormatted', 'donationData', 'months','totalDonasiAdmin','totalDonasiAdminFormatted','monthlyDonations','donationDataAdmin'));
     }
+
  }
