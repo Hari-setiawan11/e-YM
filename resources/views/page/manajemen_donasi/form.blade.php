@@ -45,8 +45,6 @@
                                         Tambah Donasi
                                     </button>
                                 </div>
-
-
                             </form>
                         </div>
                     </div>
@@ -55,3 +53,4 @@
         </section>
     </div>
 @endsection
+
