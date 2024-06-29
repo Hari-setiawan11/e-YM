@@ -62,7 +62,8 @@ class DonasiController extends Controller
         // Mengarahkan ke halaman dashboard dengan pesan sukses
         return redirect()->route('form.index.donasi')->with('toast_success', 'Data dokumen berhasil ditambahkan.');
     }
-     /**
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
@@ -87,7 +88,7 @@ class DonasiController extends Controller
         $donasi = Donasi::findOrFail($id);
 
         if ($request->hasFile('file')) {
-            $fileName = $request->file('file')->getClientOriginalName();
+            $fileName = time() . '_' . $request->file('file')->getClientOriginalName();
             $request->file('file')->storeAs('public/donasis', $fileName);
             $validated['file'] = $fileName;
         }

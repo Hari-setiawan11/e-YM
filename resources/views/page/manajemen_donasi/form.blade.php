@@ -58,7 +58,7 @@
                                     document.querySelector('form').addEventListener('submit', function() {
                                         let formattedNominal = document.getElementById('nominal').value;
                                         let nominalValue = formattedNominal.replace(/\./g,
-                                        ''); // Hapus semua titik untuk mendapatkan nilai numerik asli
+                                            ''); // Hapus semua titik untuk mendapatkan nilai numerik asli
                                         document.getElementById('hidden_nominal').value = nominalValue; // Update nilai hidden input
                                     });
                                 </script>
