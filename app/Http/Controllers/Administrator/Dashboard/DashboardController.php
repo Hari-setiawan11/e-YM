@@ -41,21 +41,6 @@ class DashboardController extends Controller
         $user = auth()->user();
         $donasiPerBulan = collect();
 
-        // $totalDonasiPerBulan = Donasi::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(nominal) as total')
-        // ->groupBy('year', 'month')
-        // ->orderBy('year', 'asc')
-        // ->orderBy('month', 'asc')
-        // ->get();
-
-        // $monthlyDonations = DB::table('donasis')
-        // ->select(
-        //     DB::raw('SUM(nominal) as total'),
-        //     DB::raw('MONTH(created_at) as month')
-        // )
-        // ->groupBy('month')
-        // ->orderBy('month')
-        // ->get();
-
     // Menghitung total donasi keseluruhan admin
         $totalDonasiAdmin = Donasi::sum('nominal');
         $totalDonasiAdminFormatted = number_format($totalDonasiAdmin, 0, ',', '.');
