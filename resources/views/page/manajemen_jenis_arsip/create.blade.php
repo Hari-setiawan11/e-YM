@@ -15,7 +15,7 @@
                             <h4>Tambah Jenis Arsip</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('index.store') }}">
+                            <form id="jenisArsipForm" method="POST" action="{{ route('index.store') }}">
                                 @csrf
 
                                 <div class="form-group">
@@ -42,6 +42,8 @@
                                         Tambah Jenis Arsip
                                     </button>
                                 </div>
+                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                                <script src="{{ asset('js/jenis_arsip.js') }}"></script>
                             </form>
                         </div>
                     </div>

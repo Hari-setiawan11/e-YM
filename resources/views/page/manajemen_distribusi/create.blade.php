@@ -15,7 +15,8 @@
                             <h4>Tambah Distribusi</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('index.store.distribusi') }}" enctype="multipart/form-data">
+                            <form id="distribusiForm" method="POST" action="{{ route('index.store.distribusi') }}"
+                                enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group">
@@ -76,7 +77,7 @@
                                     @enderror
                                 </div>
 
-                                {{-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="pengeluaran">Pengeluaran</label>
                                     <input id="pengeluaran_display" type="text"
                                         class="form-control @error('pengeluaran') is-invalid @enderror"
@@ -87,7 +88,8 @@
                                     @error('pengeluaran')
                                         <div id="pengeluaran_error" class="form-text">{{ $message }}</div>
                                     @enderror
-                                </div> --}}
+                                </div>
+
                                 <div class="form-group">
                                     <label for="file" class="form-label">file</label>
                                     <input type="file" class="form-control" id="file" name="file">
@@ -101,34 +103,8 @@
                                         Tambah Distribusi
                                     </button>
                                 </div>
-                                <script>
-                                    function formatRupiah(input) {
-                                        let displayValue = input.value.replace(/\D/g, ''); // Hapus semua karakter non-digit
-                                        let formattedValue = displayValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Tambahkan titik setiap 3 angka
-                                        input.value = formattedValue;
-
-                                        // Set nilai asli tanpa format ke hidden input yang sesuai
-                                        let hiddenInputId = input.id.replace('_display', '');
-                                        document.getElementById(hiddenInputId).value = displayValue;
-                                    }
-
-                                    document.getElementById('anggaran_display').addEventListener('input', function(e) {
-                                        formatRupiah(e.target);
-                                    });
-
-                                    document.getElementById('pengeluaran_display').addEventListener('input', function(e) {
-                                        formatRupiah(e.target);
-                                    });
-
-                                    document.querySelector('form').addEventListener('submit', function(e) {
-                                        let anggaranDisplayValue = document.getElementById('anggaran_display').value;
-                                        let pengeluaranDisplayValue = document.getElementById('pengeluaran_display').value;
-
-                                        // Hapus titik sebelum submit
-                                        document.getElementById('anggaran').value = anggaranDisplayValue.replace(/\./g, '');
-                                        document.getElementById('pengeluaran').value = pengeluaranDisplayValue.replace(/\./g, '');
-                                    });
-                                </script>
+                                <script src="{{ asset('js/distribusi.js') }}"></script>
+                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
                             </form>
                         </div>
                     </div>

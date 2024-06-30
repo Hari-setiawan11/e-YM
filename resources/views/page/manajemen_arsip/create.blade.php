@@ -13,7 +13,8 @@
                             <h4>Tambah Arsip</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('index.store.arsip') }}" enctype="multipart/form-data">
+                            <form id="arsipForm" method="POST" action="{{ route('index.store.arsip') }}"
+                                enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group">
@@ -63,6 +64,8 @@
                                         Tambah Arsip
                                     </button>
                                 </div>
+                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                                <script src="{{ asset('js/arsip.js') }}"></script>
                             </form>
                         </div>
                     </div>
