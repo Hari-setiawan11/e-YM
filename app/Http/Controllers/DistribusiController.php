@@ -65,8 +65,8 @@ class DistribusiController extends Controller
     $distribusi->tempat = $request->tempat;
     $distribusi->penerima_manfaat = $request->penerima_manfaat;
     $distribusi->anggaran = $request->anggaran;
-    $distribusi->pengeluaran =$request->pengeluaran;  // Menggunakan total pengeluaran dari DistribusiBarang
-    $distribusi->sisa = $request->anggaran - $request->pengeluaran;  // Menghitung sisa anggaran
+    $distribusi->pengeluaran = $request->pengeluaran;
+    $distribusi->sisa = $request->anggaran - $request->pengeluaran; // Menghitung sisa anggaran
     $distribusi->file = $fileName;
 
     $distribusi->save();
