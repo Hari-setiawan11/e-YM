@@ -1169,6 +1169,6 @@ section {
     align-items: stretch;
 }
 
-.icon-box {
-    /* Style icon box sesuai kebutuhan Anda */
+.single-item {
+    text-align: center; /* center alignment */
 }

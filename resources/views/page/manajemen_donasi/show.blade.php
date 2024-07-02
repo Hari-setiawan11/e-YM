@@ -71,10 +71,23 @@
                                                                     class="btn btn-primary ml-2">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-                                                                <a href="{{ route('form.destroy.donasi_admin', $data->id) }}"
+                                                                {{-- <a href="{{ route('form.destroy.donasi_admin', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
                                                                     <i class="fas fa-trash-alt"></i>
+                                                                </a> --}}
+
+                                                                <a href="#" class="btn btn-danger ml-2"
+                                                                    onclick="confirmDelete({{ $data->id }})">
+                                                                    <i class="fas fa-trash-alt"></i>
                                                                 </a>
+
+                                                                <form id="delete-form-{{ $data->id }}"
+                                                                    action="{{ route('form.destroy.donasi_admin', $data->id) }}"
+                                                                    method="POST" style="display: none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
+
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -84,6 +97,10 @@
                                                     <td class="text-center" colspan="6">Daftar Donasi Belum Ada</td>
                                                 </tr>
                                             @endif
+                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                                            <script src="{{ asset('js/hapus.js') }}"></script>
+
+                                            @include('sweetalert::alert')
                                         </tbody>
                                     </table>
                                 </div>

@@ -50,7 +50,7 @@ class KontenProgramController extends Controller
         KontenProgram::create($input);
 
         return redirect()->route('index.view.kprogram')
-            ->with('success', 'Konten berhasil ditambahkan');
+            ->with('toast_success', 'Konten berhasil ditambahkan');
     }
 
     /**
@@ -99,7 +99,7 @@ class KontenProgramController extends Controller
         $kontenProgram->update($input);
 
         return redirect()->route('index.view.kprogram')
-            ->with('success', 'Konten berhasil ditambahkan');
+            ->with('toast_success', 'Konten berhasil ditambahkan');
     }
 
     /**
@@ -111,6 +111,6 @@ class KontenProgramController extends Controller
         $kontenProgram->delete();
 
         return redirect()->route('index.view.kprogram')
-            ->with('success', 'Konten berhasil dihapus');
+            ->with('toast_success', 'Konten berhasil dihapus');
     }
 }

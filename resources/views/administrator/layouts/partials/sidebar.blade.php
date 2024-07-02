@@ -39,6 +39,8 @@
                     'index.edit.distribusi',
                     'index.view.distribusibarang',
                     'index.create.distribusibarang',
+                    'index.edit.distribusibarang',
+                    'index.search.distribusi',
                 ];
                 $activeRoutesDropdown = [
                     'index.view.penyaluran',
@@ -47,6 +49,14 @@
                     'index.edit.penyaluran',
                     'index.create.kprogram',
                     'index.edit.kprogram',
+                ];
+                $activeRoutesDonatur = [
+                    'index.view.datauser',
+                    'index.create.datauser',
+                    'index.edit.datauser',
+                    'form.show.donasi_admin',
+                    'form.create.donasi_admin',
+                    'form.edit.donasi_admin',
                 ];
             @endphp
             @can('read-distribusi')
@@ -81,8 +91,7 @@
             @endcan
 
             @can('read-data-user')
-                <li
-                    class="{{ \Route::is('index.view.datauser') || \Route::is('index.create.datauser') || \Route::is('index.edit.datauser') ? 'active' : '' }}">
+                <li class="{{ in_array(\Route::currentRouteName(), $activeRoutesDonatur) ? 'active' : '' }}">
                     <a href="{{ route('index.view.datauser') }}" class="nav-link"><i class="fas fa-donate"></i>
                         <span>Data Donatur</span></a>
                 </li>
