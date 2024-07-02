@@ -87,52 +87,13 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
-                                                {{-- <tr>
-
-                                                <td>1</td>
-                                                <td>Sedekah Pangan</td>
-                                                <td>Langkah terbaik kebaikan untuk yatim, dhuafa, dan keluarga yang
-                                                    membutuhkan. Memberi harapan dan kehangatan dalam setiap pangan yang
-                                                    kita sajikan.</td>
-                                                <td><i class="fas fa-file"></i></td>
-                                                <td class="align-middle">
-                                                    <div class="d-flex justify-content-end">
-                                                        <!-- Menggunakan flexbox untuk membuat ikon sejajar -->
-                                                        <a href="#" class="btn btn-primary ml-2">
-                                                            <!-- Gunakan class ml-2 untuk margin kiri -->
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger ml-2">
-                                                            <!-- Gunakan class ml-2 untuk margin kiri -->
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr> --}}
                                             @else
                                                 <tr>
                                                     <td class="text-center" colspan="5">Program Belum Diisi</td>
                                                 </tr>
                                             @endif
                                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-                                            <script>
-                                                function confirmDelete(id) {
-                                                    Swal.fire({
-                                                        title: 'Anda yakin?',
-                                                        text: "Data yang dihapus tidak dapat dikembalikan!",
-                                                        icon: 'warning',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#6777ef',
-                                                        cancelButtonColor: '#d33',
-                                                        confirmButtonText: 'Ya, hapus data!',
-                                                        cancelButtonText: 'Batal'
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            document.getElementById('delete-form-' + id).submit();
-                                                        }
-                                                    });
-                                                }
-                                            </script>
+                                            <script src="{{ asset('js/hapus.js') }}"></script>
 
                                             @include('sweetalert::alert')
 

@@ -25,14 +25,26 @@
                                         <a href="{{ route('index.create.distribusi') }}" style="float: right;"
                                             class="btn btn-round btn-primary mb-3">Tambah</a>
                                     </div>
-                                    <form>
+                                    {{-- <form>
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
                                         </div>
+                                    </form> --}}
+                                    <form method="GET" action="{{ route('index.search.distribusi') }}">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="q" placeholder="Search"
+                                                value="{{ isset($query) ? $query : '' }}">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary" type="submit"><i
+                                                        class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
                                     </form>
+
+
                                 </div>
                             </div>
                             <div class="card-body p-0">
@@ -102,11 +114,23 @@
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-                                                                <a href="{{ route('index.destroy.distribusi', $data->id) }}"
+                                                                {{-- <a href="{{ route('index.destroy.distribusi', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-trash-alt"></i>
+                                                                </a> --}}
+
+                                                                <a href="#" class="btn btn-danger ml-2"
+                                                                    onclick="confirmDelete({{ $data->id }})">
+                                                                    <i class="fas fa-trash-alt"></i>
                                                                 </a>
+
+                                                                <form id="delete-form-{{ $data->id }}"
+                                                                    action="{{ route('index.destroy.distribusi', $data->id) }}"
+                                                                    method="POST" style="display: none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -116,6 +140,10 @@
                                                     <td class="text-center" colspan="10">Data Distribusi Belum Diisi</td>
                                                 </tr>
                                             @endif
+                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                                            <script src="{{ asset('js/hapus.js') }}"></script>
+
+                                            @include('sweetalert::alert')
                                         </tbody>
 
                                     </table>

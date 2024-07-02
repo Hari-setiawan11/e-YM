@@ -17,14 +17,48 @@ class DistribusiController extends Controller
     // {
     //     return Carbon::createFromFormat('Y-m-d', $date)->format($format);
     // }
+    // public function index()
+    // {
+    //     // $data['distribusi']=Distribusi::all();
+    //     $distribusis = Distribusi::with('program')->paginate();
+
+    //     return view('page.manajemen_distribusi.index', compact('distribusis'));
+
+    // }
+
     public function index()
     {
-        // $data['distribusi']=Distribusi::all();
         $distribusis = Distribusi::with('program')->paginate();
 
         return view('page.manajemen_distribusi.index', compact('distribusis'));
-
     }
+    /**
+ * Search for distribusi based on keyword.
+ */
+    public function search(Request $request)
+    {
+        $keyword = $request->input('q');
+
+        // Lakukan pencarian jika terdapat kata kunci pencarian
+        if (!empty($keyword)) {
+            $distribusis = Distribusi::where('file', 'like', '%'.$keyword.'%')
+                                    ->orWhere('tempat', 'like', '%'.$keyword.'%')
+                                    ->orWhere('penerima_manfaat', 'like', '%'.$keyword.'%')
+                                    ->orWhereHas('program', function($query) use ($keyword) {
+                                        $query->where('nama', 'like', '%'.$keyword.'%');
+                                    })
+                                    ->paginate();
+        } else {
+            // Tampilkan semua data jika tidak ada kata kunci pencarian
+            $distribusis = Distribusi::with('program')->paginate();
+        }
+
+        // Jika ingin menjaga nilai input pencarian tetap ada
+        $query = $keyword;
+
+        return view('page.manajemen_distribusi.index', compact('distribusis', 'query'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -145,4 +179,5 @@ class DistribusiController extends Controller
 
         return redirect()->route('index.view.distribusi')->with('toast_success', 'Data distribusi berhasil dihapus');
     }
+
 }

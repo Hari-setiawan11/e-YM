@@ -17,6 +17,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
+         $years = Donasi::selectRaw('YEAR(created_at) as year')
+                    ->groupBy('year')
+                    ->orderBy('year', 'desc')
+                    ->pluck('year');
+
+
         // Mengambil data yang ada
         $totalDistribusi = Distribusi::count();
         $totalArsip = Arsip::count();
@@ -115,7 +121,8 @@ class DashboardController extends Controller
         // Siapkan data untuk dimasukkan ke dalam grafik
         $donationDataAdmin = $monthlyDonationsFinal;
 
-        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalProgram', 'totalGuest', 'totalDonasiFormatted', 'donationData', 'months','totalDonasiAdmin','totalDonasiAdminFormatted','monthlyDonations','donationDataAdmin'));
+
+        return view('administrator.dashboard', compact('totalDistribusi', 'totalDonatur', 'totalArsip', 'totalProgram', 'totalGuest', 'totalDonasiFormatted', 'donationData', 'months','totalDonasiAdmin','totalDonasiAdminFormatted','monthlyDonations','donationDataAdmin','years'));
     }
 
  }

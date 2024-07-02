@@ -49,15 +49,21 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="file" class="form-label">file</label>
-                                    <input type="file" class="form-control" id="file" name="file"
-                                        placeholder="{{ $arsip->file ? $arsip->file : 'Tidak ada file yang diunggah' }}"
-                                        value="{{ $arsip->file }}">
+                                    <label for="file" class="form-label">File</label>
+                                    <input type="file" class="form-control @error('file') is-invalid @enderror"
+                                        id="file" name="file">
                                     @error('file')
                                         <div id="file" class="form-file">{{ $message }}</div>
                                     @enderror
-
+                                    @if ($arsip->file)
+                                        <small id="fileHelp" class="form-text text-muted">File yang diunggah:
+                                            {{ $arsip->file }}</small>
+                                    @else
+                                        <small id="fileHelp" class="form-text text-muted">Tidak ada file yang
+                                            diunggah</small>
+                                    @endif
                                 </div>
+
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">

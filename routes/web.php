@@ -40,7 +40,6 @@ Route::get('/',[HomeController::class, 'index'])->name('home');
 
 Route::prefix('apps')->middleware('auth')->group( function() {
     Route::get('dashboard',[DashboardController::class, 'index'])->name('apps.dashboard')->middleware('can:read-dashboard');
-    // Route::get('dashboard/admin',[DashboardController::class, 'indexdashboard'])->name('apps.dashboard.admin')->middleware('can:read-dashboard');
 
     //manajemen distribusi
     Route::get('/distribusi/view',[DistribusiController::class, 'index'])->name('index.view.distribusi');
@@ -48,7 +47,9 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/distribusi/store',[DistribusiController::class, 'store'])->name('index.store.distribusi');
     Route::get('/distribusi/{id_distribusi}/edit',[DistribusiController::class, 'edit'])->name('index.edit.distribusi');
     Route::put('/distribusi/{id_distribusi}/update',[DistribusiController::class, 'update'])->name('index.update.distribusi');
-    Route::get('/distribusi/{id_distribusi}/destroy',[DistribusiController::class, 'destroy'])->name('index.destroy.distribusi');
+    Route::delete('/distribusi/{id_distribusi}/destroy',[DistribusiController::class, 'destroy'])->name('index.destroy.distribusi');
+    Route::get('/distribusi/search', [DistribusiController::class, 'search'])->name('index.search.distribusi');
+
 
     //manajemen distribusi_barang
     Route::get('/distribusi_barang/view/{id_distribusi}',[DistribusiBarangController::class, 'index'])->name('index.view.distribusibarang');
@@ -56,7 +57,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
     Route::get('/distribusi_barang/edit/{id_distribusi}',[DistribusiBarangController::class, 'edit'])->name('index.edit.distribusibarang');
     Route::put('/distribusi_barang/update/{id_distribusi}',[DistribusiBarangController::class, 'update'])->name('index.update.distribusibarang');
-    Route::get('/distribusi_barang/destroy/{id_distribusi}',[DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
+    Route::delete('/distribusi_barang/destroy/{id_distribusi}',[DistribusiBarangController::class, 'destroy'])->name('index.destroy.distribusibarang');
 
     //manajemen program
     Route::get('/program/view',[ProgramController::class, 'index'])->name('index.view.program');
@@ -72,10 +73,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/arsip/store',[ArsipController::class, 'store'])->name('index.store.arsip');
     Route::get('/arsip/{id}/edit',[ArsipController::class, 'edit'])->name('index.edit.arsip');
     Route::put('/arsip/{id}/update',[ArsipController::class, 'update'])->name('index.update.arsip');
-    Route::get('/arsip/{id}/destroy',[ArsipController::class, 'destroy'])->name('index.destroy.arsip');
-
-    Route::get('/distribusi_barang/create/{id_distribusi}',[DistribusiBarangController::class, 'create'])->name('index.create.distribusibarang');
-    Route::post('/distribusi_barang/store/{id_distribusi}',[DistribusiBarangController::class, 'store'])->name('index.store.distribusibarang');
+    Route::delete('/arsip/{id}/destroy',[ArsipController::class, 'destroy'])->name('index.destroy.arsip');
 
     //form data donasi(admin)
     Route::get('/donasi/{user_id}', [AdminDonasiController::class, 'show'])->name('form.show.donasi_admin');
@@ -83,7 +81,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/donasi/{user_id}/store', [AdminDonasiController::class, 'storeform'])->name('form.store.donasi_admin');
     Route::get('/donasi/form/{id}/editform',[AdminDonasiController::class, 'editform'])->name('form.edit.donasi_admin');
     Route::put('/donasi/form/{id}/updateform',[AdminDonasiController::class, 'updateform'])->name('form.update.donasi_admin');
-    Route::get('/donasi/form/{id}/destroy',[AdminDonasiController::class, 'destroy'])->name('form.destroy.donasi_admin');
+    Route::delete('/donasi/form/{id}/destroy',[AdminDonasiController::class, 'destroy'])->name('form.destroy.donasi_admin');
 
     //form data donasi(guest)
     Route::get('/donasi/user/view', [DonasiController::class, 'index'])->name('form.index.donasi');
@@ -107,7 +105,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/data_user/store',[DataUserController::class, 'store'])->name('index.store.datauser');
     Route::get('/data_user/{id_users}/edit',[DataUserController::class, 'edit'])->name('index.edit.datauser');
     Route::put('/data_user/{id_users}/update',[DataUserController::class, 'update'])->name('index.update.datauser');
-    Route::get('/data_user/{id_users}/destroy',[DataUserController::class, 'destroy'])->name('index.destroy.datauser');
+    Route::delete('/data_user/{id_users}/destroy',[DataUserController::class, 'destroy'])->name('index.destroy.datauser');
 
 
     //profile
@@ -119,7 +117,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/jenis_arsip/store',[JenisArsipController::class, 'store'])->name('index.store');
     Route::get('/jenis_arsip/{id_jenisArsip}/edit',[JenisArsipController::class, 'edit'])->name('index.edit');
     Route::put('/jenis_arsip/{id_jenisArsip}/update',[JenisArsipController::class, 'update'])->name('index.update');
-    Route::get('/jenis_arsip/{id_jenisArsip}/destroy',[JenisArsipController::class, 'destroy'])->name('index.destroy');
+    Route::delete('/jenis_arsip/{id_jenisArsip}/destroy',[JenisArsipController::class, 'destroy'])->name('index.destroy');
 
     //cetak lpj
     Route::get('/cetak/{distribusi_id}', [DistribusiBarangController::class, 'cetakPDF'])->name('cetak.pdf');
@@ -130,7 +128,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/konten_penyaluran/store',[KontenPenyaluranController::class, 'store'])->name('index.store.penyaluran');
     Route::get('/konten_penyaluran/{id}/edit',[KontenPenyaluranController::class, 'edit'])->name('index.edit.penyaluran');
     Route::put('/konten_penyaluran/{id}/update',[KontenPenyaluranController::class, 'update'])->name('index.update.penyaluran');
-    Route::get('/konten_penyaluran/{id}/destroy',[KontenPenyaluranController::class, 'destroy'])->name('index.destroy.penyaluran');
+    Route::delete('/konten_penyaluran/{id}/destroy',[KontenPenyaluranController::class, 'destroy'])->name('index.destroy.penyaluran');
 
     //konten program
     Route::get('/konten_program/index',[KontenProgramController::class, 'index'])->name('index.view.kprogram');
@@ -138,7 +136,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::post('/konten_program/store',[KontenProgramController::class, 'store'])->name('index.store.kprogram');
     Route::get('/konten_program/{id}/edit',[KontenProgramController::class, 'edit'])->name('index.edit.kprogram');
     Route::put('/konten_program/{id}/update',[KontenProgramController::class, 'update'])->name('index.update.kprogram');
-    Route::get('/konten_program/{id}/destroy',[KontenProgramController::class, 'destroy'])->name('index.destroy.kprogram');
+    Route::delete('/konten_program/{id}/destroy',[KontenProgramController::class, 'destroy'])->name('index.destroy.kprogram');
 
     //logout
     Route::get('logout',[AuthController::class, 'logout'])->name('logout');

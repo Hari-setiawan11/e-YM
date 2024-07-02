@@ -154,7 +154,7 @@
             @if ($KontenProgram->count() > 0)
                 <div class="grid-container">
                     @foreach ($KontenProgram as $data)
-                        <div class="grid-item" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="grid-item single-item" data-aos="zoom-in" data-aos-delay="200">
                             <div class="icon-box rounded-4">
                                 <div class="icon">
                                     <img src="{{ asset('storage/' . $data->foto) }}" alt="Foto"

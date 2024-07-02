@@ -72,11 +72,23 @@
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-                                                                <a href="{{ route('index.destroy', $data->id) }}"
+                                                                {{-- <a href="{{ route('index.destroy', $data->id) }}"
                                                                     class="btn btn-danger ml-2">
                                                                     <!-- Gunakan class ml-2 untuk margin kiri -->
                                                                     <i class="fas fa-trash-alt"></i>
+                                                                </a> --}}
+
+                                                                <a href="#" class="btn btn-danger ml-2"
+                                                                    onclick="confirmDelete({{ $data->id }})">
+                                                                    <i class="fas fa-trash-alt"></i>
                                                                 </a>
+
+                                                                <form id="delete-form-{{ $data->id }}"
+                                                                    action="{{ route('index.destroy', $data->id) }}"
+                                                                    method="POST" style="display: none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -86,6 +98,10 @@
                                                     <td class="text-center" colspan="4">Jenis Arsip Belum Diisi</td>
                                                 </tr>
                                             @endif
+                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                                            <script src="{{ asset('js/hapus.js') }}"></script>
+
+                                            @include('sweetalert::alert')
                                         </tbody>
 
                                     </table>

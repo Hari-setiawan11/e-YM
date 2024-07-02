@@ -51,7 +51,7 @@ class KontenPenyaluranController extends Controller
         KontenPenyaluran::create($input);
 
         return redirect()->route('index.view.penyaluran')
-            ->with('success', 'Konten berhasil ditambahkan');
+            ->with('toast_success', 'Konten berhasil ditambahkan');
     }
 
 
@@ -102,7 +102,7 @@ class KontenPenyaluranController extends Controller
         $konten->update($input);
 
         return redirect()->route('index.view.penyaluran')
-            ->with('success', 'Konten berhasil ditambahkan');
+            ->with('toast_success', 'Konten berhasil ditambahkan');
     }
 
     /**
@@ -114,6 +114,6 @@ class KontenPenyaluranController extends Controller
         $konten->delete();
 
         return redirect()->route('index.view.penyaluran')
-            ->with('success', 'Konten berhasil dihapus');
+            ->with('toast_success', 'Konten berhasil dihapus');
     }
 }
